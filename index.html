@@ -37,7 +37,7 @@
                 <div id="schoolSelectWrapper">
                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Pilih Sekolah Anda</label>
                     <select id="loginSchool" class="w-full text-xs font-semibold p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-600 focus:outline-none">
-                        <optgroup label="🟢 SEKOLAH MENENGAH (17)">
+                        <optgroup label="🟢 SEKOLAH MENENGAH (16)">
                             <option value="SEKOLAH MENENGAH KEBANGSAAN TUNKU PUTERA">SEKOLAH MENENGAH KEBANGSAAN TUNKU PUTERA</option>
                             <option value="SEKOLAH MENENGAH KEBANGSAAN TELOI KANAN">SEKOLAH MENENGAH KEBANGSAAN TELOI KANAN</option>
                             <option value="SEKOLAH MENENGAH KEBANGSAAN TANJONG PUTERI">SEKOLAH MENENGAH KEBANGSAAN TANJONG PUTERI</option>
@@ -54,7 +54,6 @@
                             <option value="SEKOLAH MENENGAH AGAMA (ARAB) ANNAJAH">SEKOLAH MENENGAH AGAMA (ARAB) ANNAJAH</option>
                             <option value="SEKOLAH MODEL KHAS BALING">SEKOLAH MODEL KHAS BALING</option>
                             <option value="MAKTAB MAHMUD BALING">MAKTAB MAHMUD BALING</option>
-                            <option value="SEKOLAH MENENGAH KEBANGSAAN KUPANG">SEKOLAH MENENGAH KEBANGSAAN KUPANG</option>
                         </optgroup>
                         <optgroup label="🔵 SEKOLAH RENDAH (54)">
                             <option value="SJKC CHIN HWA">SJKC CHIN HWA</option>
@@ -80,9 +79,9 @@
                             <option value="SK KAMPUNG SADEK">SK KAMPUNG SADEK</option>
                             <option value="SK KAMPUNG SELARONG">SK KAMPUNG SELARONG</option>
                             <option value="SK KAMPUNG SERA">SK KAMPUNG SERA</option>
+                            <option value="SEKOLAH KEBANGSAAN KUPANG">SEKOLAH KEBANGSAAN KUPANG</option>
                             <option value="SK KUALA KETIL">SK KUALA KETIL</option>
                             <option value="SK KUALA KUANG">SK KUALA KUANG</option>
-                            <option value="SK KUALA KUPANG">SK KUALA KUPANG</option>
                             <option value="SK KUALA MERAH">SK KUALA MERAH</option>
                             <option value="SK KUALA PEGANG">SK KUALA PEGANG</option>
                             <option value="SK KUALA SAMAK">SK KUALA SAMAK</option>
@@ -197,7 +196,7 @@
                 </div>
                 <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
                     <span class="text-xs font-bold text-slate-400 uppercase">Sekolah Menengah</span>
-                    <span id="countSM" class="text-3xl font-extrabold text-blue-700 block mt-1">17</span>
+                    <span id="countSM" class="text-3xl font-extrabold text-blue-700 block mt-1">16</span>
                     <span class="text-[10px] text-slate-400 block mt-1">SMK / SABK / SMKA</span>
                 </div>
                 <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
@@ -392,7 +391,7 @@
                 <div class="flex space-x-2 font-bold text-xs">
                     <button onclick="switchSchoolCategory('MENENGAH')" id="btn-cat-menengah" class="py-3 px-6 border-b-2 border-emerald-800 text-emerald-800 flex items-center space-x-2">
                         <span class="w-3 h-3 rounded-full bg-blue-600 inline-block"></span>
-                        <span>🟢 SEKOLAH MENENGAH (<span id="badgeSMCount">17</span>)</span>
+                        <span>🟢 SEKOLAH MENENGAH (<span id="badgeSMCount">16</span>)</span>
                     </button>
                     <button onclick="switchSchoolCategory('RENDAH')" id="btn-cat-rendah" class="py-3 px-6 border-b-2 border-transparent text-slate-500 hover:text-slate-800 flex items-center space-x-2">
                         <span class="w-3 h-3 rounded-full bg-emerald-600 inline-block"></span>
@@ -598,7 +597,7 @@
             { id: 7, tajuk: "RPH KSSM Sejarah Tingkatan 2 (Lengkap)", kat: "RPH", sumber: "JU Sejarah Baling", tarikh: "2026-02-01", fileUrl: null },
             { id: 8, tajuk: "Contoh RPH Tingkatan 5 (Integrasi KBAT)", kat: "CONTOH_RPH", sumber: "Muat Naik: SMK TUNKU PUTERA", tarikh: "2026-03-02", fileUrl: null },
             { id: 9, tajuk: "Perealisasian Item & Soalan Ujian Mac Sejarah T4", kat: "ITEM", sumber: "Muat Naik: SMK BALING", tarikh: "2026-02-28", fileUrl: null },
-            { id: 10, tajuk: "Panduan Laporan Contoh Kajian Kes KSSM T3", kat: "KAJIAN", sumber: "Muat Naik: SK BALING", tarikh: "2026-02-20", fileUrl: null },
+            { id: 10, tajuk: "Panduan Laporan Contoh Kajian Kes KSSM T3", kat: "KAJIAN", sumber: "Muat Naik: SEKOLAH KEBANGSAAN KUPANG", tarikh: "2026-02-20", fileUrl: null },
             { id: 11, tajuk: "Modul Sesi Perbincangan PLC Panitia Bil 1/2026", kat: "PLC", sumber: "Panitia Daerah", tarikh: "2026-01-15", fileUrl: null },
             { id: 12, tajuk: "Panduan & Contoh RPH Pendekatan Terbeza Aras Cemerlang/Weak", kat: "TERBEZA", sumber: "SISC+ PPD Baling", tarikh: "2026-02-10", fileUrl: null },
             { id: 13, tajuk: "Amalan Terbaik: Inovasi Peta Minda Digital Sejarah", kat: "AMALAN", sumber: "SMK KUALA KETIL", tarikh: "2026-01-25", fileUrl: null },
@@ -621,7 +620,7 @@
         ];
 
         const schoolDatabase = [
-            // --- 17 SEKOLAH MENENGAH ---
+            // --- 16 SEKOLAH MENENGAH ---
             { 
                 nama: "SEKOLAH MENENGAH KEBANGSAAN TUNKU PUTERA", 
                 kat: "MENENGAH", 
@@ -813,13 +812,6 @@
                     { nama: "MOHD SHAHIR B ISMAIL", kelas: "T4 & T5" }
                 ] 
             },
-            { 
-                nama: "SEKOLAH MENENGAH KEBANGSAAN KUPANG", 
-                kat: "MENENGAH", 
-                guru: [
-                    { nama: "FARIDAH BT ZAKARIA", kelas: "T4 & T5" }
-                ] 
-            },
 
             // --- 54 SEKOLAH RENDAH ---
             { nama: "SJKC CHIN HWA", kat: "RENDAH", guru: [{ nama: "LIEW WEI HWA", kelas: "Tahun 4-6" }] },
@@ -845,6 +837,7 @@
             { nama: "SK KAMPUNG SADEK", kat: "RENDAH", guru: [{ nama: "NOR HAZIMAH BINTI ISMAIL", kelas: "Tahun 4" }, { nama: "WAN SALLEHUDIN BIN W ISMAIL", kelas: "Tahun 5" }, { nama: "NUR ARINA BINTI MOHAMAD", kelas: "Tahun 6" }, { nama: "NIK AZIRA BINTI NIK IBRAHIM", kelas: "Tahun 4-6" }] },
             { nama: "SK KAMPUNG SELARONG", kat: "RENDAH", guru: [{ nama: "HAMDAN BIN MAT DAUT", kelas: "Tahun 4-6" }] },
             { nama: "SK KAMPUNG SERA", kat: "RENDAH", guru: [{ nama: "NUR ATIQAH BINTI MOHD MANSOR", kelas: "Tahun 4-5" }, { nama: "NORAINA BT ABU MANSOR MATARDIAH", kelas: "Tahun 6" }] },
+            { nama: "SEKOLAH KEBANGSAAN KUPANG", kat: "RENDAH", guru: [{ nama: "FARIDAH BT ZAKARIA", kelas: "Tahun 4-6" }] },
             { nama: "SK KUALA KETIL", kat: "RENDAH", guru: [{ nama: "MAZWIN BINTI MAT ZEN", kelas: "Tahun 6" }, { nama: "ZAIZA BINTI MD JUSOFF", kelas: "Tahun 5" }, { nama: "SABANI BINTI ABDUL RAHIM", kelas: "Tahun 4" }, { nama: "MOHD AZIZAN BIN ISA", kelas: "Tahun 5" }, { nama: "SANIAH BINTI AHMAD RAZALY", kelas: "Tahun 4" }, { nama: "MOHD FAUZI BIN ZAKARIA", kelas: "Tahun 6" }, { nama: "ROSLINA BINTI AHMAD", kelas: "Tahun 4-6" }] },
             { nama: "SK KUALA KUANG", kat: "RENDAH", guru: [{ nama: "SHAHRIZAT BT RAHAMAN", kelas: "Tahun 4" }, { nama: "MOHAMAD AMINUDDIN BIN ABDUL WAHAB", kelas: "Tahun 5" }, { nama: "RODZIAH BINTI ABD. RAHMAN", kelas: "Tahun 6" }, { nama: "MARIAM BINTI GHAZALI", kelas: "Tahun 4-6" }] },
             { nama: "SK KUALA KUPANG", kat: "RENDAH", guru: [{ nama: "ZAHIMI BIN RAMLI", kelas: "Tahun 4-6" }] },
