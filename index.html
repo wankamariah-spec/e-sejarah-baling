@@ -7,99 +7,151 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-<body class="bg-slate-50 font-sans text-slate-800">
+<body class="bg-slate-100 font-sans text-slate-800">
+
     <!-- Header Navigation -->
     <nav class="bg-emerald-800 text-white p-4 shadow-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-3">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('dashboard')">
                 <i class="fa-solid fa-landmark text-2xl text-amber-400"></i>
                 <div>
                     <h1 class="font-bold text-lg leading-tight">e-SEJARAH BALING</h1>
                     <p class="text-xs text-emerald-200">Pusat Digital Panitia Sejarah Daerah Baling</p>
                 </div>
             </div>
-            <span class="bg-emerald-900 text-emerald-200 text-xs px-3 py-1 rounded-full font-semibold border border-emerald-700">Modul Utama</span>
+            
+            <!-- Menu Navigation Buttons -->
+            <div class="flex space-x-2">
+                <button onclick="switchTab('dashboard')" id="btn-dashboard" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-900 text-amber-400 border border-emerald-700">
+                    <i class="fa-solid fa-chart-pie mr-1"></i> Dashboard
+                </button>
+                <button onclick="switchTab('opr')" id="btn-opr" class="px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-emerald-700 text-emerald-100">
+                    <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Jana OPR
+                </button>
+                <button onclick="switchTab('sumber')" id="btn-sumber" class="px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-emerald-700 text-emerald-100">
+                    <i class="fa-solid fa-book mr-1"></i> Bank Sumber
+                </button>
+            </div>
         </div>
     </nav>
 
-    <!-- Main Container -->
-    <div class="max-w-7xl mx-auto p-6 space-y-6">
-        <!-- Welcome Banner -->
-        <div class="bg-gradient-to-r from-emerald-800 to-teal-700 text-white rounded-2xl p-6 shadow-xl relative overflow-hidden">
-            <div class="relative z-10 space-y-2">
+    <!-- Main Content Area -->
+    <div class="max-w-7xl mx-auto p-6">
+
+        <!-- TAB 1: DASHBOARD UTAMA -->
+        <div id="tab-dashboard" class="space-y-6">
+            <div class="bg-gradient-to-r from-emerald-800 to-teal-700 text-white rounded-2xl p-6 shadow-xl">
                 <h2 class="text-2xl font-bold">Selamat Datang ke e-SEJARAH BALING</h2>
-                <p class="text-emerald-100 text-sm max-w-2xl">
-                    Sistem Pengurusan, Dokumentasi Program, PLC, Analisis dan Penjanaan OPR AI Panitia Sejarah Daerah Baling.
-                </p>
+                <p class="text-emerald-100 text-sm mt-1">Sistem Pengurusan, Dokumentasi Program & Penjanaan OPR AI Panitia Sejarah Daerah Baling.</p>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-white p-4 rounded-xl border shadow-sm">
+                    <span class="text-xs font-semibold text-slate-500">Sekolah Daerah Baling</span>
+                    <span class="text-2xl font-bold text-emerald-700 block mt-1">6 Sekolah</span>
+                </div>
+                <div class="bg-white p-4 rounded-xl border shadow-sm">
+                    <span class="text-xs font-semibold text-slate-500">Jumlah OPR Terjana</span>
+                    <span class="text-2xl font-bold text-teal-700 block mt-1">0 Laporan</span>
+                </div>
+                <div class="bg-white p-4 rounded-xl border shadow-sm">
+                    <span class="text-xs font-semibold text-slate-500">Modul/RPH Dimuat Naik</span>
+                    <span class="text-2xl font-bold text-blue-700 block mt-1">12 Bahan</span>
+                </div>
+                <div class="bg-white p-4 rounded-xl border shadow-sm">
+                    <span class="text-xs font-semibold text-slate-500">Status Sistem</span>
+                    <span class="text-2xl font-bold text-emerald-600 block mt-1">Aktif</span>
+                </div>
+            </div>
+
+            <!-- Action Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-2xl border shadow-sm">
+                    <i class="fa-solid fa-wand-magic-sparkles text-2xl text-amber-500 mb-2"></i>
+                    <h3 class="font-bold text-lg">Borang Penjanaan OPR AI</h3>
+                    <p class="text-xs text-slate-500 mb-4">Jana laporan OPR rasmi secara automatik untuk program panitia daerah.</p>
+                    <button onclick="switchTab('opr')" class="bg-emerald-800 text-white text-xs px-4 py-2 rounded-lg font-semibold">Buka Borang OPR</button>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border shadow-sm">
+                    <i class="fa-solid fa-folder-open text-2xl text-blue-500 mb-2"></i>
+                    <h3 class="font-bold text-lg">Bank Sumber & Modul PdP</h3>
+                    <p class="text-xs text-slate-500 mb-4">Muat turun koleksi RPH, soalan latihan, dan modul SPM Panitia Sejarah.</p>
+                    <button onclick="switchTab('sumber')" class="bg-slate-800 text-white text-xs px-4 py-2 rounded-lg font-semibold">Akses Sumber</button>
+                </div>
             </div>
         </div>
 
-        <!-- Metrics Grid -->
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
-                <span class="text-xs font-semibold text-slate-500">Sekolah Rendah</span>
-                <span class="text-2xl font-bold text-emerald-700 mt-2">3</span>
+        <!-- TAB 2: BORANG JANA OPR -->
+        <div id="tab-opr" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl border shadow-sm max-w-2xl mx-auto">
+                <h2 class="text-xl font-bold text-emerald-800 mb-4"><i class="fa-solid fa-pen-to-square mr-2"></i>Borang Laporan OPR AI</h2>
+                <form onsubmit="event.preventDefault(); alert('Laporan OPR Berjaya Dijana!');" class="space-y-4 text-xs">
+                    <div>
+                        <label class="block font-semibold mb-1">Nama Program / Aktiviti / PLC</label>
+                        <input type="text" placeholder="Contoh: Bengkel Teknik Menjawab SPM Sejarah 2026" class="w-full border p-2.5 rounded-lg focus:outline-emerald-600">
+                    </div>
+                    <div>
+                        <label class="block font-semibold mb-1">Anjuran / Panitia Sekolah</label>
+                        <input type="text" placeholder="Contoh: Panitia Sejarah SMK Baling" class="w-full border p-2.5 rounded-lg focus:outline-emerald-600">
+                    </div>
+                    <div>
+                        <label class="block font-semibold mb-1">Tarikh & Masa</label>
+                        <input type="date" class="w-full border p-2.5 rounded-lg focus:outline-emerald-600">
+                    </div>
+                    <div>
+                        <label class="block font-semibold mb-1">Ringkasan Impak / Kehadiran</label>
+                        <textarea rows="3" placeholder="Contoh: Dihadiri oleh 45 orang murid. Murid memahami format kertas 2." class="w-full border p-2.5 rounded-lg focus:outline-emerald-600"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-emerald-800 text-white py-3 rounded-lg font-bold text-sm hover:bg-emerald-900">
+                        <i class="fa-solid fa-gears mr-1"></i> Jana Laporan OPR (PDF)
+                    </button>
+                </form>
             </div>
-            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
-                <span class="text-xs font-semibold text-slate-500">Sekolah Menengah</span>
-                <span class="text-2xl font-bold text-teal-700 mt-2">3</span>
-            </div>
-            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
-                <span class="text-xs font-semibold text-slate-500">Ketua Panitia</span>
-                <span class="text-2xl font-bold text-blue-700 mt-2">6</span>
-            </div>
-            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
-                <span class="text-xs font-semibold text-slate-500">Jumlah OPR</span>
-                <span class="text-2xl font-bold text-indigo-700 mt-2">0</span>
-            </div>
-            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
-                <span class="text-xs font-semibold text-slate-500">Jumlah PLC</span>
-                <span class="text-2xl font-bold text-amber-700 mt-2">0</span>
-            </div>
-            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
-                <span class="text-xs font-semibold text-slate-500">Jumlah Program</span>
-                <span class="text-2xl font-bold text-rose-700 mt-2">0</span>
+        </div>
+
+        <!-- TAB 3: BANK SUMBER -->
+        <div id="tab-sumber" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl border shadow-sm">
+                <h2 class="text-xl font-bold text-emerald-800 mb-4"><i class="fa-solid fa-box-archive mr-2"></i>Bank Sumber Sejarah Daerah Baling</h2>
+                <div class="space-y-3 text-xs">
+                    <div class="p-3 border rounded-xl flex justify-between items-center bg-slate-50">
+                        <div>
+                            <p class="font-bold">Modul Kecemerlangan SPM Sejarah 2026</p>
+                            <p class="text-slate-500 text-[10px]">Format PDF • Disusun oleh Jurulatih Utama Daerah</p>
+                        </div>
+                        <button class="bg-blue-600 text-white px-3 py-1.5 rounded-lg font-semibold">Muat Turun</button>
+                    </div>
+                    <div class="p-3 border rounded-xl flex justify-between items-center bg-slate-50">
+                        <div>
+                            <p class="font-bold">Koleksi RPH Tingkatan 4 & 5 (KSSM)</p>
+                            <p class="text-slate-500 text-[10px]">Format DOCX / Word • Boleh Diubah</p>
+                        </div>
+                        <button class="bg-blue-600 text-white px-3 py-1.5 rounded-lg font-semibold">Muat Turun</button>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Features Quick Access -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- Feature 1 -->
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
-                <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center text-amber-600 mb-4">
-                    <i class="fa-solid fa-wand-magic-sparkles text-xl"></i>
-                </div>
-                <h3 class="font-bold text-slate-800 text-lg mb-2">Penjanaan OPR AI</h3>
-                <p class="text-xs text-slate-500 leading-relaxed mb-4">
-                    Isi maklumat ringkas aktiviti atau PLC sekolah dan biarkan AI menyusun laporan OPR rasmi secara automatik.
-                </p>
-                <button class="w-full bg-emerald-800 text-white text-xs font-semibold py-2.5 rounded-xl hover:bg-emerald-900 transition">Mula Jana OPR</button>
-            </div>
-
-            <!-- Feature 2 -->
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
-                <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 mb-4">
-                    <i class="fa-solid fa-book-bookmark text-xl"></i>
-                </div>
-                <h3 class="font-bold text-slate-800 text-lg mb-2">Bank Sumber & RPH</h3>
-                <p class="text-xs text-slate-500 leading-relaxed mb-4">
-                    Pusat perkongsian RPH, Modul SPM, Kajian Kes, PBD, dan bahan sokongan PdP Sejarah daerah.
-                </p>
-                <button class="w-full bg-slate-800 text-white text-xs font-semibold py-2.5 rounded-xl hover:bg-slate-900 transition">Akses Sumber</button>
-            </div>
-
-            <!-- Feature 3 -->
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
-                <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center text-indigo-600 mb-4">
-                    <i class="fa-solid fa-chart-line text-xl"></i>
-                </div>
-                <h3 class="font-bold text-slate-800 text-lg mb-2">Analisis SPM & Daerah</h3>
-                <p class="text-xs text-slate-500 leading-relaxed mb-4">
-                    Analisis trend pencapaian SPM 2021-2025 dan pemantauan aktiviti panitia seluruh Baling.
-                </p>
-                <button class="w-full bg-slate-800 text-white text-xs font-semibold py-2.5 rounded-xl hover:bg-slate-900 transition">Lihat Analisis</button>
-            </div>
-        </div>
     </div>
+
+    <!-- JavaScript Navigation Script -->
+    <script>
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.getElementById('tab-dashboard').classList.add('hidden');
+            document.getElementById('tab-opr').classList.add('hidden');
+            document.getElementById('tab-sumber').classList.add('hidden');
+
+            // Reset buttons
+            document.getElementById('btn-dashboard').className = 'px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-emerald-700 text-emerald-100';
+            document.getElementById('btn-opr').className = 'px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-emerald-700 text-emerald-100';
+            document.getElementById('btn-sumber').className = 'px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-emerald-700 text-emerald-100';
+
+            // Show selected tab & highlight active button
+            document.getElementById('tab-' + tabName).classList.remove('hidden');
+            document.getElementById('btn-' + tabName).className = 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-900 text-amber-400 border border-emerald-700';
+        }
+    </script>
 </body>
 </html>
