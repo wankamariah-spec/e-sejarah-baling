@@ -176,7 +176,7 @@
                 </button>
             </div>
 
-            <!-- BAHAGIAN PENAMBAHBAIKAN: 4 BUTANG AKSES PANTAS PADA DASHBOARD -->
+            <!-- 4 BUTANG AKSES PANTAS PADA DASHBOARD -->
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
                 <h3 class="font-black text-slate-900 text-sm mb-4 flex items-center space-x-2">
                     <i class="fa-solid fa-bolt text-amber-500"></i>
@@ -208,7 +208,7 @@
                         </div>
                     </button>
 
-                    <!-- BUTANG 3: PAUTAN ANALISIS ITEM -->
+                    <!-- BUTANG 3: PAUTAN ANALISIS ITEM (LINK TERUS KE NETLIFY) -->
                     <button onclick="openExternalAnalysis()" class="bg-indigo-600 hover:bg-indigo-700 text-white p-5 rounded-2xl shadow-md transition text-left flex flex-col justify-between group">
                         <div class="flex justify-between items-center mb-3">
                             <span class="text-2xl"><i class="fa-solid fa-link"></i></span>
@@ -216,7 +216,7 @@
                         </div>
                         <div>
                             <span class="font-extrabold text-sm block">3. PAUTAN ANALISIS ITEM</span>
-                            <span class="text-[10px] text-indigo-100 block mt-0.5">Portal Analisis Peperiksaan</span>
+                            <span class="text-[10px] text-indigo-100 block mt-0.5">e-Analisis Sejarah Baling</span>
                         </div>
                     </button>
 
@@ -264,9 +264,6 @@
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
                 <h3 class="font-black text-slate-900 text-base mb-2">📚 MODUL BAHAN PANITIA</h3>
                 <p class="text-xs text-slate-500 mb-4">Pusat perkongsian RPH, DSKP, PBD, Kajian Kes & Pendekatan Terbeza.</p>
-                <div class="p-4 bg-slate-50 border rounded-2xl text-xs text-slate-600">
-                    Sistem dalam proses mengemaskini muat naik bahan mengikut daerah.
-                </div>
             </div>
         </section>
 
@@ -275,9 +272,6 @@
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
                 <h3 class="font-black text-slate-900 text-base mb-2">📖 BANK SUMBER SEJARAH</h3>
                 <p class="text-xs text-slate-500 mb-4">Pusat rujukan Modul KBAT, Bank Soalan & Infografik.</p>
-                <div class="p-4 bg-slate-50 border rounded-2xl text-xs text-slate-600">
-                    Bahan-bahan sumber daerah sedang dikemaskini.
-                </div>
             </div>
         </section>
 
@@ -286,9 +280,6 @@
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
                 <h3 class="font-black text-slate-900 text-base mb-2">📂 LAIN-LAIN DOKUMEN</h3>
                 <p class="text-xs text-slate-500 mb-4">Arkit Surat, Pekeliling & Panduan Rasmi.</p>
-                <div class="p-4 bg-slate-50 border rounded-2xl text-xs text-slate-600">
-                    Koleksi surat dan pekeliling rasmi PPD/JPN.
-                </div>
             </div>
         </section>
 
@@ -589,8 +580,9 @@
             document.getElementById('nav-' + tabId)?.classList.add('bg-emerald-800', 'text-white');
         }
 
+        // FUNGSI MEMBUKA PAUTAN NETLIFY
         function openExternalAnalysis() {
-            window.open('https://sistem-analisis-item-demo.vercel.app', '_blank');
+            window.open('https://e-analisis-sejarah-baling.netlify.app', '_blank');
         }
 
         function switchSchoolCategory(kat) {
