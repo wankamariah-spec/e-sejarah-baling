@@ -253,7 +253,7 @@
             <div id="schoolCardsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
-        <!-- TAB MODUL BAHAN PANITIA (LENGKAP BUTANG LIHAT, MUAT TURUN, SIMPAN, CETAK) -->
+        <!-- TAB MODUL BAHAN PANITIA -->
         <section id="tab-bahan" class="hidden space-y-6">
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
                 
@@ -341,25 +341,23 @@
 
     </main>
 
-    <!-- MODAL PRATONTON / LIHAT DOKUMEN -->
+    <!-- MODAL PRATONTON / LIHAT DOKUMEN SEBENAR -->
     <div id="viewDocumentModal" class="fixed inset-0 bg-slate-900/80 z-[120] hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 relative text-xs space-y-4 shadow-2xl">
+        <div class="bg-white rounded-3xl max-w-4xl w-full p-6 relative text-xs space-y-4 shadow-2xl max-h-[90vh] flex flex-col">
             <button onclick="closeDocumentModal()" class="absolute right-5 top-5 text-slate-400 hover:text-slate-700 font-bold"><i class="fa-solid fa-xmark text-lg"></i></button>
             
-            <div class="border-b pb-3">
+            <div class="border-b pb-3 shrink-0">
                 <span id="docModalCategoryBadge" class="bg-blue-100 text-blue-800 font-extrabold px-2.5 py-0.5 rounded-full text-[9px] uppercase">DOKUMEN</span>
                 <h3 id="docModalTitle" class="font-black text-slate-900 text-base mt-1">Tajuk Dokumen</h3>
                 <p id="docModalMeta" class="text-[10px] text-slate-500">Sumber • Tarikh</p>
             </div>
 
-            <!-- PRATONTON RANGKA DOKUMEN -->
-            <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl space-y-2 min-h-[150px] flex flex-col justify-center items-center text-center">
-                <i class="fa-solid fa-file-pdf text-4xl text-emerald-800 mb-2"></i>
-                <p class="font-bold text-slate-800">Pratonton Dokumen Berjaya Dimuatkan</p>
-                <p class="text-[10px] text-slate-500">Dokumen rasmi Panitia Sejarah Daerah Baling dalam format digital.</p>
+            <!-- KONTENA PRATONTON DINAMIK (IFRAME / IMJ / TEKS) -->
+            <div id="docViewerContainer" class="bg-slate-50 border border-slate-200 rounded-2xl flex-1 min-h-[350px] overflow-hidden flex flex-col justify-center items-center">
+                <!-- Content Injected Dynamically -->
             </div>
 
-            <div class="flex justify-end space-x-2 pt-2 border-t">
+            <div class="flex justify-end space-x-2 pt-2 border-t shrink-0">
                 <button onclick="downloadFile(currentViewingDocTitle)" class="bg-blue-700 text-white font-bold py-2 px-4 rounded-xl hover:bg-blue-800"><i class="fa-solid fa-download mr-1"></i> Muat Turun</button>
                 <button onclick="saveItem(currentViewingDocTitle)" class="bg-emerald-700 text-white font-bold py-2 px-4 rounded-xl hover:bg-emerald-800"><i class="fa-solid fa-bookmark mr-1"></i> Simpan</button>
                 <button onclick="printFile(currentViewingDocTitle)" class="bg-slate-800 text-white font-bold py-2 px-4 rounded-xl hover:bg-slate-900"><i class="fa-solid fa-print mr-1"></i> Cetak</button>
@@ -375,7 +373,6 @@
             <p id="uploadModalSchool" class="text-emerald-800 font-bold mb-4"></p>
             
             <form onsubmit="handleUploadSubmit(event)" class="space-y-3">
-                <input type="hidden" id="uploadCategoryType" value="RPH">
                 <div>
                     <label class="block font-bold mb-1 text-slate-700">Kategori Bahan</label>
                     <select id="uploadCategorySelect" class="w-full p-2.5 border border-slate-300 rounded-xl font-bold bg-slate-50 focus:outline-emerald-800">
@@ -413,38 +410,39 @@
 
         let currentActiveBahanCat = 'RPH';
         let currentViewingDocTitle = '';
+        let currentViewingDocUrl = null;
 
-        // DATABASE PANGKALAN BAHAN MODUL
+        // DATABASE PANGKALAN BAHAN MODUL (BERSAMA PAUTAN FAIL DINAMIK)
         let sampleBahanList = [
             // DSKP
-            { id: 1, tajuk: "DSKP Sejarah Tingkatan 1", kat: "DSKP", sumber: "BPK KPM", tarikh: "2026-01-01" },
-            { id: 2, tajuk: "DSKP Sejarah Tingkatan 2", kat: "DSKP", sumber: "BPK KPM", tarikh: "2026-01-01" },
-            { id: 3, tajuk: "DSKP Sejarah Tingkatan 3", kat: "DSKP", sumber: "BPK KPM", tarikh: "2026-01-01" },
-            { id: 4, tajuk: "DSKP Sejarah Tahun 4, 5 & 6 (KSSR Semakan)", kat: "DSKP", sumber: "BPK KPM", tarikh: "2026-01-01" },
+            { id: 1, tajuk: "DSKP Sejarah Tingkatan 1", kat: "DSKP", sumber: "BPK KPM", tarikh: "2026-01-01", fileUrl: null },
+            { id: 2, tajuk: "DSKP Sejarah Tingkatan 2", kat: "DSKP", sumber: "BPK KPM", tarikh: "2026-01-01", fileUrl: null },
+            { id: 3, tajuk: "DSKP Sejarah Tingkatan 3", kat: "DSKP", sumber: "BPK KPM", tarikh: "2026-01-01", fileUrl: null },
+            { id: 4, tajuk: "DSKP Sejarah Tahun 4, 5 & 6 (KSSR Semakan)", kat: "DSKP", sumber: "BPK KPM", tarikh: "2026-01-01", fileUrl: null },
 
             // RPH & CONTOH RPH
-            { id: 5, tajuk: "Slaid RPH Interaktif Sejarah Tingkatan 1", kat: "RPH", sumber: "JU Sejarah Baling", tarikh: "2026-02-01" },
-            { id: 6, tajuk: "RPH KSSM Sejarah Tingkatan 1 (Lengkap)", kat: "RPH", sumber: "JU Sejarah Baling", tarikh: "2026-02-01" },
-            { id: 7, tajuk: "RPH KSSM Sejarah Tingkatan 2 (Lengkap)", kat: "RPH", sumber: "JU Sejarah Baling", tarikh: "2026-02-01" },
-            { id: 8, tajuk: "Contoh RPH Tingkatan 5 (Integrasi KBAT)", kat: "CONTOH_RPH", sumber: "Muat Naik: SMK TUNKU PUTERA", tarikh: "2026-03-02" },
+            { id: 5, tajuk: "Slaid RPH Interaktif Sejarah Tingkatan 1", kat: "RPH", sumber: "JU Sejarah Baling", tarikh: "2026-02-01", fileUrl: null },
+            { id: 6, tajuk: "RPH KSSM Sejarah Tingkatan 1 (Lengkap)", kat: "RPH", sumber: "JU Sejarah Baling", tarikh: "2026-02-01", fileUrl: null },
+            { id: 7, tajuk: "RPH KSSM Sejarah Tingkatan 2 (Lengkap)", kat: "RPH", sumber: "JU Sejarah Baling", tarikh: "2026-02-01", fileUrl: null },
+            { id: 8, tajuk: "Contoh RPH Tingkatan 5 (Integrasi KBAT)", kat: "CONTOH_RPH", sumber: "Muat Naik: SMK TUNKU PUTERA", tarikh: "2026-03-02", fileUrl: null },
 
             // ITEM & SOALAN
-            { id: 9, tajuk: "Perealisasian Item & Soalan Ujian Mac Sejarah T4", kat: "ITEM", sumber: "Muat Naik: SMK BALING", tarikh: "2026-02-28" },
+            { id: 9, tajuk: "Perealisasian Item & Soalan Ujian Mac Sejarah T4", kat: "ITEM", sumber: "Muat Naik: SMK BALING", tarikh: "2026-02-28", fileUrl: null },
 
             // KAJIAN KES
-            { id: 10, tajuk: "Panduan Laporan Contoh Kajian Kes KSSM T3", kat: "KAJIAN", sumber: "Muat Naik: SK BALING", tarikh: "2026-02-20" },
+            { id: 10, tajuk: "Panduan Laporan Contoh Kajian Kes KSSM T3", kat: "KAJIAN", sumber: "Muat Naik: SK BALING", tarikh: "2026-02-20", fileUrl: null },
 
             // PLC
-            { id: 11, tajuk: "Modul Sesi Perbincangan PLC Panitia Bil 1/2026", kat: "PLC", sumber: "Panitia Daerah", tarikh: "2026-01-15" },
+            { id: 11, tajuk: "Modul Sesi Perbincangan PLC Panitia Bil 1/2026", kat: "PLC", sumber: "Panitia Daerah", tarikh: "2026-01-15", fileUrl: null },
 
             // TERBEZA
-            { id: 12, tajuk: "Panduan & Contoh RPH Pendekatan Terbeza Aras Cemerlang/Weak", kat: "TERBEZA", sumber: "SISC+ PPD Baling", tarikh: "2026-02-10" },
+            { id: 12, tajuk: "Panduan & Contoh RPH Pendekatan Terbeza Aras Cemerlang/Weak", kat: "TERBEZA", sumber: "SISC+ PPD Baling", tarikh: "2026-02-10", fileUrl: null },
 
             // AMALAN TERBAIK
-            { id: 13, tajuk: "Amalan Terbaik: Inovasi Peta Minda Digital Sejarah", kat: "AMALAN", sumber: "SMK KUALA KETIL", tarikh: "2026-01-25" },
+            { id: 13, tajuk: "Amalan Terbaik: Inovasi Peta Minda Digital Sejarah", kat: "AMALAN", sumber: "SMK KUALA KETIL", tarikh: "2026-01-25", fileUrl: null },
 
             // PBD
-            { id: 14, tajuk: "Panduan Pelaksanaan & Rubrik Pentaksiran PBD Sejarah", kat: "PBD", sumber: "SISC+ PPD Baling", tarikh: "2026-01-10" }
+            { id: 14, tajuk: "Panduan Pelaksanaan & Rubrik Pentaksiran PBD Sejarah", kat: "PBD", sumber: "SISC+ PPD Baling", tarikh: "2026-01-10", fileUrl: null }
         ];
 
         const sampleSumberList = [
@@ -809,7 +807,7 @@
             });
         }
 
-        // FUNGSI UTAMA PAPARAN SENARAI TERTENTU SAHAJA LENGKAP BUTANG LIHAT, MUAT TURUN, SIMPAN, CETAK
+        // FUNGSI PAPARAN MENDATAR MENGIKUT KATEGORI TEPAT
         function renderBahanList(filterCategory = 'RPH') {
             currentActiveBahanCat = filterCategory;
             const bahanGrid = document.getElementById('bahanListGrid');
@@ -840,7 +838,6 @@
                 return;
             }
 
-            // PAPARAN DENGAN 4 BUTANG AKSI LENGKAP: LIHAT, MUAT TURUN, SIMPAN, CETAK
             bahanGrid.innerHTML = list.map((item, index) => `
                 <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm hover:border-blue-300 transition">
                     <div class="flex items-start space-x-3">
@@ -853,7 +850,7 @@
                     </div>
 
                     <div class="flex items-center space-x-1.5 shrink-0 border-t md:border-t-0 pt-2 md:pt-0">
-                        <button onclick="viewDocument('${item.tajuk}', '${item.kat}', '${item.sumber} • ${item.tarikh}')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-1.5 px-2.5 rounded-xl text-[10px] flex items-center space-x-1 shadow-sm">
+                        <button onclick="viewDocument('${item.id}')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-1.5 px-2.5 rounded-xl text-[10px] flex items-center space-x-1 shadow-sm">
                             <i class="fa-solid fa-eye"></i> <span>Lihat</span>
                         </button>
                         <button onclick="downloadFile('${item.tajuk}')" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-1.5 px-2.5 rounded-xl text-[10px] flex items-center space-x-1 shadow-sm">
@@ -910,7 +907,7 @@
                             </div>
                         </div>
                         <div class="flex items-center space-x-1.5 shrink-0 border-t md:border-t-0 pt-2 md:pt-0">
-                            <button onclick="viewDocument('${item.tajuk}', '${item.jenis}', '${item.penyumbang} • ${item.tarikh}')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-1.5 px-2.5 rounded-xl text-[10px] flex items-center space-x-1 shadow-sm">
+                            <button onclick="alert('Melihat fail sumber: ${item.tajuk}')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-1.5 px-2.5 rounded-xl text-[10px] flex items-center space-x-1 shadow-sm">
                                 <i class="fa-solid fa-eye"></i> <span>Lihat</span>
                             </button>
                             <button onclick="downloadFile('${item.tajuk}')" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-1.5 px-2.5 rounded-xl text-[10px] flex items-center space-x-1">
@@ -940,7 +937,7 @@
                             </div>
                         </div>
                         <div class="flex items-center space-x-1.5 shrink-0 border-t md:border-t-0 pt-2 md:pt-0">
-                            <button onclick="viewDocument('${item.tajuk}', '${item.jenis}', '${item.penyumbang} • ${item.tarikh}')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-1.5 px-2.5 rounded-xl text-[10px] flex items-center space-x-1 shadow-sm">
+                            <button onclick="alert('Melihat fail dokumen: ${item.tajuk}')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-1.5 px-2.5 rounded-xl text-[10px] flex items-center space-x-1 shadow-sm">
                                 <i class="fa-solid fa-eye"></i> <span>Lihat</span>
                             </button>
                             <button onclick="downloadFile('${item.tajuk}')" class="bg-teal-700 hover:bg-teal-800 text-white font-bold py-1.5 px-2.5 rounded-xl text-[10px] flex items-center space-x-1">
@@ -974,11 +971,18 @@
             document.getElementById('uploadModal').classList.add('hidden');
         }
 
+        // ENJIN BACAAN FAIL UNTUK PRATONTON DINAMIK REALTIME
         function handleUploadSubmit(e) {
             e.preventDefault();
             const title = document.getElementById('uploadTitle').value;
             const category = document.getElementById('uploadCategorySelect').value;
             const schoolName = document.getElementById('uploadModalSchool').innerText;
+            const fileInput = document.getElementById('uploadFileInput');
+
+            let createdUrl = null;
+            if (fileInput.files && fileInput.files[0]) {
+                createdUrl = URL.createObjectURL(fileInput.files[0]);
+            }
 
             const today = new Date().toISOString().split('T')[0];
 
@@ -988,7 +992,7 @@
                 kat: category,
                 sumber: `Muat Naik: ${schoolName}`,
                 tarikh: today,
-                fileUrl: "#"
+                fileUrl: createdUrl
             };
 
             sampleBahanList.unshift(newBahan);
@@ -996,17 +1000,44 @@
             alert(`Bahan [${title}] berjaya dimuat naik dan disimpan ke dalam kategori ${category}!`);
             closeUploadModal();
             document.getElementById('uploadTitle').value = '';
+            document.getElementById('uploadFileInput').value = '';
 
             filterBahanCategory(category);
             switchTab('bahan');
         }
 
-        // FUNGSI BUTANG 👁️ LIHAT
-        function viewDocument(title, category, meta) {
-            currentViewingDocTitle = title;
-            document.getElementById('docModalTitle').innerText = title;
-            document.getElementById('docModalCategoryBadge').innerText = category.replace('_', ' ');
-            document.getElementById('docModalMeta').innerText = meta;
+        // FUNGSI BUTANG 👁️ LIHAT DENGAN PAPARAN PRATONTON DOKUMEN REALTIME
+        function viewDocument(itemId) {
+            const item = sampleBahanList.find(b => b.id == itemId);
+            if (!item) return;
+
+            currentViewingDocTitle = item.tajuk;
+            document.getElementById('docModalTitle').innerText = item.tajuk;
+            document.getElementById('docModalCategoryBadge').innerText = item.kat.replace('_', ' ');
+            document.getElementById('docModalMeta').innerText = `${item.sumber} • ${item.tarikh}`;
+
+            const container = document.getElementById('docViewerContainer');
+
+            // JIKA FAIL SEBENAR DIMUAT NAIK DENGAN PANTAS (PDF/IMJ)
+            if (item.fileUrl) {
+                container.innerHTML = `<iframe src="${item.fileUrl}" class="w-full h-full min-h-[400px] rounded-2xl border-none"></iframe>`;
+            } else {
+                // RENDER PAPARAN TEKS DIGITAL STANDALONE RANGKA RASMI
+                container.innerHTML = `
+                    <div class="w-full h-full p-6 text-left space-y-4 bg-white rounded-2xl border border-slate-200">
+                        <div class="text-center border-b pb-3">
+                            <h4 class="font-black text-emerald-900 uppercase text-sm">${item.tajuk}</h4>
+                            <p class="text-[10px] text-slate-500 uppercase">DOKUMEN PANITIA SEJARAH DAERAH BALING</p>
+                        </div>
+                        <div class="space-y-2 text-[11px] text-slate-700 leading-relaxed">
+                            <p><strong>Standard Kandungan:</strong> KSSM / KSSR Semakan Panitia Sejarah</p>
+                            <p><strong>Peringkat Akses:</strong> Kebenaran Rasmi Guru & Panitia Daerah Baling</p>
+                            <p><strong>Nota Ringkas:</strong> Dokumen rasmi ini mengandungi panduan pengajaran, soalan atau DSKP untuk kegunaan sekolah-sekolah di Daerah Baling.</p>
+                        </div>
+                    </div>
+                `;
+            }
+
             document.getElementById('viewDocumentModal').classList.remove('hidden');
         }
 
