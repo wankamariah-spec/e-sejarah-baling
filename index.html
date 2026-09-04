@@ -14,7 +14,7 @@
 </head>
 <body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col md:flex-row">
 
-    <!-- LOGIN MODAL -->
+    <!-- MODAL LOG MASUK -->
     <div id="loginModal" class="fixed inset-0 bg-slate-900/80 z-[100] flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl border border-slate-100">
             <div class="text-center mb-6">
@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    <!-- SIDEBAR NAVIGATION -->
+    <!-- NAVIGASI TEPI (SIDEBAR) -->
     <aside class="w-full md:w-64 bg-slate-900 text-slate-300 p-5 flex flex-col justify-between shrink-0">
         <div>
             <div class="flex items-center space-x-3 mb-8 px-2">
@@ -62,40 +62,40 @@
             <div class="bg-slate-800/60 rounded-xl p-3 border border-slate-700/50 mb-6 flex items-center justify-between">
                 <div>
                     <p id="userDisplayName" class="text-xs font-bold text-white">Nama Pengguna</p>
-                    <p id="userRoleBadge" class="text-[10px] text-emerald-400 font-semibold">Role</p>
+                    <p id="userRoleBadge" class="text-[10px] text-emerald-400 font-semibold">Akses</p>
                 </div>
                 <button onclick="logout()" title="Log Keluar" class="text-slate-400 hover:text-rose-400 text-xs"><i class="fa-solid fa-right-from-bracket"></i></button>
             </div>
 
             <nav class="space-y-1.5 text-xs font-medium">
                 <button onclick="switchTab('dashboard')" id="nav-dashboard" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl bg-emerald-800 text-white font-semibold">
-                    <i class="fa-solid fa-house w-5"></i> <span>Dashboard</span>
+                    <i class="fa-solid fa-house w-5"></i> <span>Dashboard Utama</span>
                 </button>
                 <button onclick="switchTab('sekolah')" id="nav-sekolah" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition">
-                    <i class="fa-solid fa-school w-5 text-emerald-400"></i> <span>Modul Sekolah</span>
+                    <i class="fa-solid fa-school w-5 text-emerald-400"></i> <span>Pengurusan Sekolah</span>
                 </button>
                 <button onclick="switchTab('senarai-opr')" id="nav-senarai-opr" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition">
-                    <i class="fa-solid fa-list-check w-5 text-amber-400"></i> <span>Senarai Program / PLC</span>
+                    <i class="fa-solid fa-list-check w-5 text-amber-400"></i> <span>Rekod Program & PLC</span>
                 </button>
             </nav>
         </div>
 
         <div class="pt-6 border-t border-slate-800 text-[10px] text-slate-500 text-center">
-            &copy; 2026 Panitia Sejarah Baling.
+            &copy; 2026 Panitia Sejarah Daerah Baling.
         </div>
     </aside>
 
-    <!-- MAIN VIEWPORT -->
+    <!-- RUANG KANDUNGAN UTAMA -->
     <main class="flex-1 p-4 md:p-8 overflow-y-auto max-w-7xl mx-auto w-full">
 
         <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 pb-4 border-b border-slate-200">
             <div>
                 <h2 id="pageTitle" class="text-2xl font-extrabold text-slate-900">Dashboard Utama</h2>
-                <p id="pageSubtitle" class="text-xs text-slate-500 mt-0.5">Ekosistem Pengurusan & Dokumentasi AI Sejarah Daerah Baling</p>
+                <p id="pageSubtitle" class="text-xs text-slate-500 mt-0.5">Ekosistem Digital & Dokumentasi AI Panitia Sejarah Daerah Baling</p>
             </div>
         </header>
 
-        <!-- DASHBOARD TAB -->
+        <!-- TAB DASHBOARD -->
         <section id="tab-dashboard" class="space-y-6">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
@@ -109,30 +109,30 @@
                     <span class="text-[10px] text-slate-400 block mt-1">SMK / SABK / SMKA</span>
                 </div>
                 <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-                    <span class="text-xs font-bold text-slate-400 uppercase">Jumlah Guru SM</span>
+                    <span class="text-xs font-bold text-slate-400 uppercase">Guru Sejarah SM</span>
                     <span id="countGuruSM" class="text-3xl font-extrabold text-indigo-600 block mt-1">0</span>
-                    <span class="text-[10px] text-slate-400 block mt-1">Dalam Rekod</span>
+                    <span class="text-[10px] text-slate-400 block mt-1">Terdaftar</span>
                 </div>
                 <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-                    <span class="text-xs font-bold text-slate-400 uppercase">Jumlah Guru SR</span>
+                    <span class="text-xs font-bold text-slate-400 uppercase">Guru Sejarah SR</span>
                     <span id="countGuruSR" class="text-3xl font-extrabold text-amber-600 block mt-1">0</span>
-                    <span class="text-[10px] text-slate-400 block mt-1">Dalam Rekod</span>
+                    <span class="text-[10px] text-slate-400 block mt-1">Terdaftar</span>
                 </div>
             </div>
 
             <div class="bg-gradient-to-r from-emerald-900 to-teal-800 text-white p-6 rounded-3xl shadow-xl flex flex-col justify-between">
                 <div>
-                    <span class="bg-amber-400 text-slate-950 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase">SISTEM SEKOLAH</span>
-                    <h3 class="text-xl font-black mt-3">Pengurusan Sekolah Rendah & Menengah</h3>
-                    <p class="text-xs text-emerald-100/80 mt-1">Lihat profil guru & kelas, borang program, PLC, serta muat turun contoh RPH, Kajian Kes, dan Soalan Peperiksaan.</p>
+                    <span class="bg-amber-400 text-slate-950 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase">EKOSISTEM DIGITAL</span>
+                    <h3 class="text-xl font-black mt-3">Pengurusan & Dokumentasi Sekolah</h3>
+                    <p class="text-xs text-emerald-100/80 mt-1">Sistem penjanaan laporan OPR automatik (AI) serta pusat pengurusan bahan RPH, Kajian Kes, dan Bank Soalan.</p>
                 </div>
                 <button onclick="switchTab('sekolah')" class="mt-6 bg-white text-emerald-950 font-extrabold text-xs px-5 py-3 rounded-xl shadow hover:bg-emerald-50 transition w-fit">
-                    <i class="fa-solid fa-arrow-right mr-1"></i> Buka Modul Sekolah
+                    <i class="fa-solid fa-arrow-right mr-1"></i> Buka Modul Pengurusan Sekolah
                 </button>
             </div>
         </section>
 
-        <!-- MODUL SEKOLAH -->
+        <!-- TAB MODUL SEKOLAH -->
         <section id="tab-sekolah" class="hidden space-y-6">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-200 pb-3">
                 <div class="flex space-x-2 font-bold text-xs">
@@ -146,29 +146,51 @@
                     </button>
                 </div>
 
-                <!-- Carian Sekolah -->
                 <div class="relative w-full sm:w-64">
                     <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400 text-xs"></i>
                     <input type="text" id="searchSchoolInput" onkeyup="searchSchool()" placeholder="Cari nama sekolah..." class="w-full pl-9 pr-4 py-2 text-xs border border-slate-300 rounded-xl focus:outline-emerald-800">
                 </div>
             </div>
 
-            <!-- Kad-Kad Sekolah -->
+            <!-- Kontena Kad Sekolah -->
             <div id="schoolCardsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
-        <!-- SENARAI PROGRAM / PLC -->
+        <!-- TAB SENARAI PROGRAM / PLC -->
         <section id="tab-senarai-opr" class="hidden space-y-6">
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
-                <h3 class="font-black text-slate-900 text-base mb-4">📋 SENARAI PROGRAM & PLC DAERAH</h3>
-                <p class="text-xs text-slate-500">Kumpulan rekod OPR terjana mengikut sekolah.</p>
+                <h3 class="font-black text-slate-900 text-base mb-4">📋 SENARAI DOKUMENTASI PROGRAM & PLC DAERAH</h3>
+                <p class="text-xs text-slate-500">Kumpulan rekod OPR yang telah dijana secara AI mengikut sekolah.</p>
             </div>
         </section>
 
     </main>
 
+    <!-- MODAL POPUP MUAT NAIK BAHAN -->
+    <div id="uploadModal" class="fixed inset-0 bg-slate-900/80 z-[110] hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 relative text-xs">
+            <button onclick="closeUploadModal()" class="absolute right-5 top-5 text-slate-400 hover:text-slate-700 font-bold"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h3 id="uploadModalTitle" class="font-black text-slate-900 text-sm mb-1">MUAT NAIK BAHAN PANITIA</h3>
+            <p id="uploadModalSchool" class="text-emerald-800 font-bold mb-4"></p>
+            
+            <form onsubmit="handleUploadSubmit(event)" class="space-y-3">
+                <div>
+                    <label class="block font-bold mb-1 text-slate-700">Tajuk Dokumen / Bahan</label>
+                    <input type="text" id="uploadTitle" required placeholder="Contoh: Modul Soalan Peperiksaan Akhir Tahun" class="w-full p-2.5 border border-slate-300 rounded-xl focus:outline-emerald-800">
+                </div>
+                <div>
+                    <label class="block font-bold mb-1 text-slate-700">Pilih Fail (PDF / Word / PPT)</label>
+                    <input type="file" required class="w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-800 hover:file:bg-emerald-100">
+                </div>
+                <button type="submit" class="w-full bg-emerald-800 text-white font-bold py-2.5 rounded-xl hover:bg-emerald-900 transition mt-2">
+                    <i class="fa-solid fa-cloud-arrow-up mr-1.5"></i> MULA MUAT NAIK
+                </button>
+            </form>
+        </div>
+    </div>
+
     <script>
-        // DATA LENGKAP 17 SEKOLAH MENENGAH + 54 SEKOLAH RENDAH (LENGKAP BESERTA KELAS DIAJAR)
+        // DATA APLIKASI
         const schoolDatabase = [
             // --- 17 SEKOLAH MENENGAH ---
             { 
@@ -193,7 +215,7 @@
                 guru: [
                     { nama: "NOR AZIRA BINTI ISMAIL", kelas: "T1, T2, T4, T5" },
                     { nama: "NOR AZILA BINTI ABDUL TALIB", kelas: "T1, T3, T4, T5" },
-                    { nama: "ZURAIKHA AZRIN BINTI AZMI", kelas: "TIDAK AJAR SEJARAH" },
+                    { nama: "ZURAIKHA AZRIN BINTI AZMI", kelas: "Tidak Ajar Sejarah" },
                     { nama: "SHAHIDA BINTI MOHD TAJUDIN", kelas: "T1, T2, T3, T5" }
                 ] 
             },
@@ -258,7 +280,7 @@
                     { nama: "ASMA BINTI JAN MOHAMMED", kelas: "T3, T5" },
                     { nama: "MUHAMMAD ANAS BIN HARON", kelas: "T3, T4" },
                     { nama: "MOHAMAD HADIAN BIN MD NOR", kelas: "T1" },
-                    { nama: "SHAHRIN BIN MOHD SHAH", kelas: "T1" },
+                    { nama: "SHAHRIN BIN MOHD SHAHT", kelas: "T1" },
                     { nama: "HASHIM BIN MD SAMAN", kelas: "T4" },
                     { nama: "MOHD ERWAN FAIZ BIN AHMAD", kelas: "T1, T3, T4" }
                 ] 
@@ -296,7 +318,7 @@
                     { nama: "MOHD RIZUAN BIN MOHD RODYI", kelas: "T4, T5" },
                     { nama: "NUR AIN BINTI RUSLAN", kelas: "T1, T2, T3" },
                     { nama: "NOR AZURA BINTI YUSOFF", kelas: "T4" },
-                    { nama: "NURHAYATI BINTI ZAKARIA", kelas: "TIDAK AJAR SEJARAH" }
+                    { nama: "NURHAYATI BINTI ZAKARIA", kelas: "Tidak Ajar Sejarah" }
                 ] 
             },
             { 
@@ -502,24 +524,31 @@
                             <h4 class="font-black text-slate-900 text-sm my-2">${s.nama}</h4>
 
                             <div class="bg-slate-50 p-3 rounded-2xl border border-slate-100 my-3 space-y-1">
-                                <span class="font-bold text-slate-500 block text-[10px] uppercase mb-1">👨‍🏫 GURU SEJARAH & KELAS DIAJAR (${s.guru.length} Orang):</span>
+                                <span class="font-bold text-slate-500 block text-[10px] uppercase mb-1">👨‍🏫 SENARAI GURU SEJARAH (${s.guru.length} Orang):</span>
                                 ${guruHtml}
                             </div>
                         </div>
 
+                        <!-- SUSUNAN BUTANG AKSI & BAHAN PANITIA -->
                         <div class="space-y-2 border-t pt-3">
                             <button onclick="alert('Membuka Borang Program/PLC untuk ${s.nama}')" class="w-full bg-emerald-800 text-white font-extrabold py-2.5 rounded-xl hover:bg-emerald-900 text-[11px] flex items-center justify-center space-x-1.5 shadow-sm">
-                                <i class="fa-solid fa-circle-plus"></i> <span>+ Tambah Program / PLC</span>
+                                <i class="fa-solid fa-circle-plus"></i> <span>+ TAMBAH PROGRAM / PLC (JANA OPR AI)</span>
                             </button>
-                            <button onclick="downloadSample('${s.nama}', 'RPH')" class="w-full bg-blue-700 text-white font-bold py-2 rounded-xl hover:bg-blue-800 text-[11px] flex items-center justify-center space-x-2">
-                                <i class="fa-solid fa-file-arrow-down"></i> <span>2. MUAT TURUN CONTOH RPH</span>
-                            </button>
-                            <button onclick="downloadSample('${s.nama}', 'KAJIAN KES')" class="w-full bg-amber-600 text-white font-bold py-2 rounded-xl hover:bg-amber-700 text-[11px] flex items-center justify-center space-x-2">
-                                <i class="fa-solid fa-file-circle-check"></i> <span>3. MUAT TURUN CONTOH KAJIAN KES</span>
-                            </button>
-                            <button onclick="downloadSample('${s.nama}', 'SOALAN UJIAN/PEPERIKSAAN')" class="w-full bg-indigo-700 text-white font-bold py-2 rounded-xl hover:bg-indigo-800 text-[11px] flex items-center justify-center space-x-2">
-                                <i class="fa-solid fa-file-pen"></i> <span>4. MUAT TURUN SOALAN UJIAN/PEPERIKSAAN</span>
-                            </button>
+                            
+                            <div class="grid grid-cols-1 gap-1.5 pt-1">
+                                <button onclick="downloadSample('${s.nama}', 'RPH')" class="w-full bg-blue-700 text-white font-bold py-2 rounded-xl hover:bg-blue-800 text-[11px] flex items-center justify-center space-x-2">
+                                    <i class="fa-solid fa-file-arrow-down"></i> <span>Muat Turun Contoh RPH</span>
+                                </button>
+                                <button onclick="downloadSample('${s.nama}', 'KAJIAN KES')" class="w-full bg-amber-600 text-white font-bold py-2 rounded-xl hover:bg-amber-700 text-[11px] flex items-center justify-center space-x-2">
+                                    <i class="fa-solid fa-file-circle-check"></i> <span>Muat Turun Contoh Kajian Kes</span>
+                                </button>
+                                <button onclick="downloadSample('${s.nama}', 'SOALAN UJIAN/PEPERIKSAAN')" class="w-full bg-indigo-700 text-white font-bold py-2 rounded-xl hover:bg-indigo-800 text-[11px] flex items-center justify-center space-x-2">
+                                    <i class="fa-solid fa-file-pen"></i> <span>Muat Turun Soalan Ujian / Peperiksaan</span>
+                                </button>
+                                <button onclick="openUploadModal('${s.nama}')" class="w-full bg-slate-800 text-white font-bold py-2 rounded-xl hover:bg-slate-900 text-[11px] flex items-center justify-center space-x-2">
+                                    <i class="fa-solid fa-cloud-arrow-up"></i> <span>Muat Naik Bahan Sekolah</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -532,7 +561,22 @@
         }
 
         function downloadSample(schoolName, materialType) {
-            alert(`Memuat turun contoh [${materialType}] untuk ${schoolName}...`);
+            alert(`Memuat turun bahan [${materialType}] bagi ${schoolName}...`);
+        }
+
+        function openUploadModal(schoolName) {
+            document.getElementById('uploadModalSchool').innerText = schoolName;
+            document.getElementById('uploadModal').classList.remove('hidden');
+        }
+
+        function closeUploadModal() {
+            document.getElementById('uploadModal').classList.add('hidden');
+        }
+
+        function handleUploadSubmit(e) {
+            e.preventDefault();
+            alert('Bahan berjaya dimuat naik ke sistem!');
+            closeUploadModal();
         }
     </script>
 </body>
