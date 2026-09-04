@@ -108,8 +108,17 @@
                 <button onclick="switchTab('sekolah')" id="nav-sekolah" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition">
                     <i class="fa-solid fa-school w-5 text-emerald-400"></i> <span>Pengurusan Sekolah</span>
                 </button>
-                <button onclick="switchTab('senarai-opr')" id="nav-senarai-opr" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition">
-                    <i class="fa-solid fa-list-check w-5 text-amber-400"></i> <span>Rekod Program & PLC</span>
+                <button onclick="switchTab('bahan')" id="nav-bahan" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition">
+                    <i class="fa-solid fa-folder-open w-5 text-blue-400"></i> <span>Modul Bahan</span>
+                </button>
+                <button onclick="switchTab('sumber')" id="nav-sumber" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition">
+                    <i class="fa-solid fa-book-bookmark w-5 text-amber-400"></i> <span>Bank Sumber</span>
+                </button>
+                <button onclick="openExternalAnalysis()" id="nav-analisis" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition">
+                    <i class="fa-solid fa-link w-5 text-indigo-400"></i> <span>Pautan Analisis Item</span>
+                </button>
+                <button onclick="switchTab('lain')" id="nav-lain" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition">
+                    <i class="fa-solid fa-ellipsis w-5 text-teal-400"></i> <span>Lain-Lain Dokumen</span>
                 </button>
             </nav>
         </div>
@@ -129,8 +138,9 @@
             </div>
         </header>
 
-        <!-- TAB DASHBOARD -->
+        <!-- TAB DASHBOARD UTAMA -->
         <section id="tab-dashboard" class="space-y-6">
+            <!-- Statistik -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
                     <span class="text-xs font-bold text-slate-400 uppercase">Sekolah Rendah</span>
@@ -154,6 +164,7 @@
                 </div>
             </div>
 
+            <!-- Banner Utama -->
             <div class="bg-gradient-to-r from-emerald-900 to-teal-800 text-white p-6 rounded-3xl shadow-xl flex flex-col justify-between">
                 <div>
                     <span class="bg-amber-400 text-slate-950 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase">EKOSISTEM DIGITAL</span>
@@ -163,6 +174,64 @@
                 <button onclick="switchTab('sekolah')" class="mt-6 bg-white text-emerald-950 font-extrabold text-xs px-5 py-3 rounded-xl shadow hover:bg-emerald-50 transition w-fit">
                     <i class="fa-solid fa-arrow-right mr-1"></i> Buka Modul Pengurusan Sekolah
                 </button>
+            </div>
+
+            <!-- BAHAGIAN PENAMBAHBAIKAN: 4 BUTANG AKSES PANTAS PADA DASHBOARD -->
+            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+                <h3 class="font-black text-slate-900 text-sm mb-4 flex items-center space-x-2">
+                    <i class="fa-solid fa-bolt text-amber-500"></i>
+                    <span>CAPAIAN PANTAS MODUL PANITIA</span>
+                </h3>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- BUTANG 1: BAHAN -->
+                    <button onclick="switchTab('bahan')" class="bg-blue-600 hover:bg-blue-700 text-white p-5 rounded-2xl shadow-md transition text-left flex flex-col justify-between group">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-2xl"><i class="fa-solid fa-folder-open"></i></span>
+                            <i class="fa-solid fa-arrow-up-right-from-square opacity-60 group-hover:opacity-100 text-xs"></i>
+                        </div>
+                        <div>
+                            <span class="font-extrabold text-sm block">1. BAHAN</span>
+                            <span class="text-[10px] text-blue-100 block mt-0.5">RPH, DSKP, PBD & Kajian Kes</span>
+                        </div>
+                    </button>
+
+                    <!-- BUTANG 2: BANK SUMBER -->
+                    <button onclick="switchTab('sumber')" class="bg-amber-600 hover:bg-amber-700 text-white p-5 rounded-2xl shadow-md transition text-left flex flex-col justify-between group">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-2xl"><i class="fa-solid fa-book-bookmark"></i></span>
+                            <i class="fa-solid fa-arrow-up-right-from-square opacity-60 group-hover:opacity-100 text-xs"></i>
+                        </div>
+                        <div>
+                            <span class="font-extrabold text-sm block">2. BANK SUMBER</span>
+                            <span class="text-[10px] text-amber-100 block mt-0.5">Modul KBAT, Soalan & Infografik</span>
+                        </div>
+                    </button>
+
+                    <!-- BUTANG 3: PAUTAN ANALISIS ITEM -->
+                    <button onclick="openExternalAnalysis()" class="bg-indigo-600 hover:bg-indigo-700 text-white p-5 rounded-2xl shadow-md transition text-left flex flex-col justify-between group">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-2xl"><i class="fa-solid fa-link"></i></span>
+                            <i class="fa-solid fa-arrow-up-right-from-square opacity-60 group-hover:opacity-100 text-xs"></i>
+                        </div>
+                        <div>
+                            <span class="font-extrabold text-sm block">3. PAUTAN ANALISIS ITEM</span>
+                            <span class="text-[10px] text-indigo-100 block mt-0.5">Portal Analisis Peperiksaan</span>
+                        </div>
+                    </button>
+
+                    <!-- BUTANG 4: LAIN-LAIN -->
+                    <button onclick="switchTab('lain')" class="bg-teal-700 hover:bg-teal-800 text-white p-5 rounded-2xl shadow-md transition text-left flex flex-col justify-between group">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-2xl"><i class="fa-solid fa-ellipsis-vertical"></i></span>
+                            <i class="fa-solid fa-arrow-up-right-from-square opacity-60 group-hover:opacity-100 text-xs"></i>
+                        </div>
+                        <div>
+                            <span class="font-extrabold text-sm block">4. LAIN-LAIN</span>
+                            <span class="text-[10px] text-teal-100 block mt-0.5">Surat, Pekeliling & Dokumen</span>
+                        </div>
+                    </button>
+                </div>
             </div>
         </section>
 
@@ -188,6 +257,39 @@
 
             <!-- Kontena Kad Sekolah -->
             <div id="schoolCardsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <!-- TAB MODUL BAHAN -->
+        <section id="tab-bahan" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+                <h3 class="font-black text-slate-900 text-base mb-2">📚 MODUL BAHAN PANITIA</h3>
+                <p class="text-xs text-slate-500 mb-4">Pusat perkongsian RPH, DSKP, PBD, Kajian Kes & Pendekatan Terbeza.</p>
+                <div class="p-4 bg-slate-50 border rounded-2xl text-xs text-slate-600">
+                    Sistem dalam proses mengemaskini muat naik bahan mengikut daerah.
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB BANK SUMBER -->
+        <section id="tab-sumber" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+                <h3 class="font-black text-slate-900 text-base mb-2">📖 BANK SUMBER SEJARAH</h3>
+                <p class="text-xs text-slate-500 mb-4">Pusat rujukan Modul KBAT, Bank Soalan & Infografik.</p>
+                <div class="p-4 bg-slate-50 border rounded-2xl text-xs text-slate-600">
+                    Bahan-bahan sumber daerah sedang dikemaskini.
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB LAIN-LAIN DOKUMEN -->
+        <section id="tab-lain" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+                <h3 class="font-black text-slate-900 text-base mb-2">📂 LAIN-LAIN DOKUMEN</h3>
+                <p class="text-xs text-slate-500 mb-4">Arkit Surat, Pekeliling & Panduan Rasmi.</p>
+                <div class="p-4 bg-slate-50 border rounded-2xl text-xs text-slate-600">
+                    Koleksi surat dan pekeliling rasmi PPD/JPN.
+                </div>
+            </div>
         </section>
 
         <!-- TAB SENARAI PROGRAM / PLC -->
@@ -224,13 +326,11 @@
     </div>
 
     <script>
-        // TETAPAN PENGGUNA AKTIF (RBAC PERMISSION)
         let currentUser = {
             role: 'KETUA_PANITIA',
             sekolah: 'SEKOLAH MENENGAH KEBANGSAAN TUNKU PUTERA'
         };
 
-        // DATA APLIKASI
         const schoolDatabase = [
             // --- 17 SEKOLAH MENENGAH ---
             { 
@@ -459,7 +559,6 @@
                 document.getElementById('userDisplayName').innerText = currentUser.sekolah;
                 document.getElementById('userRoleBadge').innerText = 'Ketua Panitia';
                 
-                // Cari kategori sekolah pengguna
                 const targetSchool = schoolDatabase.find(s => s.nama === currentUser.sekolah);
                 if (targetSchool) currentCategoryView = targetSchool.kat;
             } else {
@@ -482,10 +581,16 @@
         }
 
         function switchTab(tabId) {
-            ['dashboard', 'sekolah', 'senarai-opr'].forEach(t => {
+            ['dashboard', 'sekolah', 'bahan', 'sumber', 'lain', 'senarai-opr'].forEach(t => {
                 document.getElementById('tab-' + t).classList.add('hidden');
+                document.getElementById('nav-' + t)?.classList.remove('bg-emerald-800', 'text-white');
             });
             document.getElementById('tab-' + tabId).classList.remove('hidden');
+            document.getElementById('nav-' + tabId)?.classList.add('bg-emerald-800', 'text-white');
+        }
+
+        function openExternalAnalysis() {
+            window.open('https://sistem-analisis-item-demo.vercel.app', '_blank');
         }
 
         function switchSchoolCategory(kat) {
@@ -519,10 +624,9 @@
 
             let list = schoolDatabase;
 
-            // KAWALAN HAK AKSES GURU (HANYA SEKOLAH SENDIRI)
             if (currentUser.role === 'KETUA_PANITIA') {
                 list = list.filter(s => s.nama === currentUser.sekolah);
-                document.getElementById('schoolCategoryHeader').style.display = 'none'; // Sembunyikan penapis kategori untuk guru
+                document.getElementById('schoolCategoryHeader').style.display = 'none';
             } else {
                 document.getElementById('schoolCategoryHeader').style.display = 'flex';
                 list = list.filter(s => s.kat === currentCategoryView);
@@ -556,7 +660,6 @@
                             </div>
                         </div>
 
-                        <!-- KEMASKINI BUTANG PERKHIDMATAN (MUAT NAIK) -->
                         <div class="space-y-2 border-t pt-3">
                             <button onclick="alert('Membuka Borang Program/PLC AI OPR untuk ${s.nama}')" class="w-full bg-emerald-800 text-white font-extrabold py-2.5 rounded-xl hover:bg-emerald-900 text-[11px] flex items-center justify-center space-x-1.5 shadow-sm">
                                 <i class="fa-solid fa-circle-plus"></i> <span>1. PROGRAM / PLC (JANA OPR AI)</span>
