@@ -253,7 +253,7 @@
             <div id="schoolCardsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
-        <!-- TAB MODUL BAHAN PANITIA (BERSIFAT LENGKAP DENGAN BUTANG DSKP, PBD & DUA PILIHAN MUAT NAIK) -->
+        <!-- TAB MODUL BAHAN PANITIA -->
         <section id="tab-bahan" class="hidden space-y-6">
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
                 
@@ -266,7 +266,7 @@
                         </h3>
                         <p class="text-xs text-slate-500 mt-1">Pusat pengurusan RPH, Item, Kajian Kes, PLC, Pendekatan Terbeza, DSKP dan PBD.</p>
                     </div>
-                    <button onclick="openUploadModal('BAHAN DOKUMEN GENERAL', 'MODUL BAHAN')" id="btnUploadCurrentCat" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow flex items-center space-x-1.5">
+                    <button onclick="triggerCategoryUpload()" id="btnUploadCurrentCat" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow flex items-center space-x-1.5">
                         <i class="fa-solid fa-cloud-arrow-up"></i>
                         <span id="btnUploadCurrentCatText">➕ MUAT NAIK BAHAN BAHARU</span>
                     </button>
@@ -337,7 +337,7 @@
 
     </main>
 
-    <!-- MODAL POPUP MUAT NAIK BAHAN -->
+    <!-- MODAL POPUP MUAT NAIK BAHAN DENGAN ENJIN SIMPANAN REKOD REALTIME -->
     <div id="uploadModal" class="fixed inset-0 bg-slate-900/80 z-[110] hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-md w-full p-6 relative text-xs">
             <button onclick="closeUploadModal()" class="absolute right-5 top-5 text-slate-400 hover:text-slate-700 font-bold"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -345,16 +345,31 @@
             <p id="uploadModalSchool" class="text-emerald-800 font-bold mb-4"></p>
             
             <form onsubmit="handleUploadSubmit(event)" class="space-y-3">
+                <input type="hidden" id="uploadCategoryType" value="RPH">
+                <div>
+                    <label class="block font-bold mb-1 text-slate-700">Kategori Bahan</label>
+                    <select id="uploadCategorySelect" class="w-full p-2.5 border border-slate-300 rounded-xl font-bold bg-slate-50 focus:outline-emerald-800">
+                        <option value="RPH">1. RPH</option>
+                        <option value="CONTOH_RPH">2. CONTOH RPH</option>
+                        <option value="ITEM">3. PEREALISASIAN ITEM / CONTOH SOALAN</option>
+                        <option value="KAJIAN">4. KAJIAN KES / CONTOH KAJIAN KES</option>
+                        <option value="PLC">5. PLC</option>
+                        <option value="TERBEZA">6. PENDEKATAN TERBEZA</option>
+                        <option value="AMALAN">7. AMALAN TERBAIK</option>
+                        <option value="DSKP">8. DSKP</option>
+                        <option value="PBD">9. PBD</option>
+                    </select>
+                </div>
                 <div>
                     <label class="block font-bold mb-1 text-slate-700">Tajuk Dokumen / Bahan</label>
-                    <input type="text" id="uploadTitle" required placeholder="Contoh: Dokumen DSKP / Panduan PBD Tingkatan 4" class="w-full p-2.5 border border-slate-300 rounded-xl focus:outline-emerald-800">
+                    <input type="text" id="uploadTitle" required placeholder="Contoh: Dokumen DSKP Sejarah Tingkatan 4" class="w-full p-2.5 border border-slate-300 rounded-xl focus:outline-emerald-800">
                 </div>
                 <div>
-                    <label class="block font-bold mb-1 text-slate-700">Pilih Fail (PDF / Word / PPT / Excel)</label>
-                    <input type="file" required class="w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-800 hover:file:bg-emerald-100">
+                    <label class="block font-bold mb-1 text-slate-700">Pilih Fail Dokumen</label>
+                    <input type="file" id="uploadFileInput" required class="w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-800 hover:file:bg-emerald-100">
                 </div>
                 <button type="submit" class="w-full bg-emerald-800 text-white font-bold py-2.5 rounded-xl hover:bg-emerald-900 transition mt-2">
-                    <i class="fa-solid fa-cloud-arrow-up mr-1.5"></i> MULA MUAT NAIK
+                    <i class="fa-solid fa-cloud-arrow-up mr-1.5"></i> SIMPAN & TERBITKAN BAHAN
                 </button>
             </form>
         </div>
@@ -368,17 +383,17 @@
 
         let currentActiveBahanCat = 'ALL';
 
-        // DATABASE PANGKALAN BAHAN MODUL (INCORPORATING DSKP & PBD)
-        const sampleBahanList = [
-            { id: 1, tajuk: "RPH Standard KSSM Tingkatan 4 Bab 1 & 2", kat: "RPH", sumber: "JU Sejarah Daerah", tarikh: "2026-03-01" },
-            { id: 2, tajuk: "Contoh RPH Tingkatan 5 (Integrasi KBAT)", kat: "CONTOH_RPH", sumber: "Muat Naik: SMK TUNKU PUTERA", tarikh: "2026-03-02" },
-            { id: 3, tajuk: "Perealisasian Item & Soalan Ujian Mac Sejarah T4", kat: "ITEM", sumber: "Muat Naik: SMK BALING", tarikh: "2026-02-28" },
-            { id: 4, tajuk: "Panduan Laporan Contoh Kajian Kes KSSM T3", kat: "KAJIAN", sumber: "Muat Naik: SK BALING", tarikh: "2026-02-20" },
-            { id: 5, tajuk: "Modul Sesi Perbincangan PLC Panitia Bil 1/2026", kat: "PLC", sumber: "Panitia Daerah", tarikh: "2026-01-15" },
-            { id: 6, tajuk: "Panduan & Contoh RPH Pendekatan Terbeza Aras Cemerlang/Weak", kat: "TERBEZA", sumber: "SISC+ PPD Baling", tarikh: "2026-02-10" },
-            { id: 7, tajuk: "Amalan Terbaik: Inovasi Peta Minda Digital Sejarah", kat: "AMALAN", sumber: "SMK KUALA KETIL", tarikh: "2026-01-25" },
-            { id: 8, tajuk: "Dokumen Standard Kurikulum dan Pentaksiran (DSKP) Tingkatan 1-5", kat: "DSKP", sumber: "Bahagian Pembangunan Kurikulum KPM", tarikh: "2026-01-01" },
-            { id: 9, tajuk: "Panduan Pelaksanaan & Rubrik Pentaksiran PBD Sejarah", kat: "PBD", sumber: "SISC+ PPD Baling", tarikh: "2026-01-10" }
+        // DATABASE PANGKALAN BAHAN MODUL (ARRAY REALTIME)
+        let sampleBahanList = [
+            { id: 1, tajuk: "RPH Standard KSSM Tingkatan 4 Bab 1 & 2", kat: "RPH", sumber: "JU Sejarah Daerah", tarikh: "2026-03-01", fileUrl: "#" },
+            { id: 2, tajuk: "Contoh RPH Tingkatan 5 (Integrasi KBAT)", kat: "CONTOH_RPH", sumber: "Muat Naik: SMK TUNKU PUTERA", tarikh: "2026-03-02", fileUrl: "#" },
+            { id: 3, tajuk: "Perealisasian Item & Soalan Ujian Mac Sejarah T4", kat: "ITEM", sumber: "Muat Naik: SMK BALING", tarikh: "2026-02-28", fileUrl: "#" },
+            { id: 4, tajuk: "Panduan Laporan Contoh Kajian Kes KSSM T3", kat: "KAJIAN", sumber: "Muat Naik: SK BALING", tarikh: "2026-02-20", fileUrl: "#" },
+            { id: 5, tajuk: "Modul Sesi Perbincangan PLC Panitia Bil 1/2026", kat: "PLC", sumber: "Panitia Daerah", tarikh: "2026-01-15", fileUrl: "#" },
+            { id: 6, tajuk: "Panduan & Contoh RPH Pendekatan Terbeza Aras Cemerlang/Weak", kat: "TERBEZA", sumber: "SISC+ PPD Baling", tarikh: "2026-02-10", fileUrl: "#" },
+            { id: 7, tajuk: "Amalan Terbaik: Inovasi Peta Minda Digital Sejarah", kat: "AMALAN", sumber: "SMK KUALA KETIL", tarikh: "2026-01-25", fileUrl: "#" },
+            { id: 8, tajuk: "Dokumen Standard Kurikulum dan Pentaksiran (DSKP) Tingkatan 1–5", kat: "DSKP", sumber: "Bahagian Pembangunan Kurikulum KPM", tarikh: "2026-01-01", fileUrl: "#" },
+            { id: 9, tajuk: "Panduan Pelaksanaan & Rubrik Pentaksiran PBD Sejarah", kat: "PBD", sumber: "SISC+ PPD Baling", tarikh: "2026-01-10", fileUrl: "#" }
         ];
 
         const sampleSumberList = [
@@ -727,13 +742,13 @@
                             </button>
                             
                             <div class="grid grid-cols-1 gap-1.5 pt-1">
-                                <button onclick="openUploadModal('${s.nama}', 'RPH')" class="w-full bg-blue-700 text-white font-bold py-2 rounded-xl hover:bg-blue-800 text-[11px] flex items-center justify-center space-x-2">
+                                <button onclick="openUploadModal('${s.nama}', 'CONTOH_RPH')" class="w-full bg-blue-700 text-white font-bold py-2 rounded-xl hover:bg-blue-800 text-[11px] flex items-center justify-center space-x-2">
                                     <i class="fa-solid fa-cloud-arrow-up"></i> <span>2. MUAT NAIK CONTOH RPH</span>
                                 </button>
-                                <button onclick="openUploadModal('${s.nama}', 'KAJIAN KES')" class="w-full bg-amber-600 text-white font-bold py-2 rounded-xl hover:bg-amber-700 text-[11px] flex items-center justify-center space-x-2">
+                                <button onclick="openUploadModal('${s.nama}', 'KAJIAN')" class="w-full bg-amber-600 text-white font-bold py-2 rounded-xl hover:bg-amber-700 text-[11px] flex items-center justify-center space-x-2">
                                     <i class="fa-solid fa-cloud-arrow-up"></i> <span>3. MUAT NAIK CONTOH KAJIAN KES</span>
                                 </button>
-                                <button onclick="openUploadModal('${s.nama}', 'SOALAN UJIAN/PEPERIKSAAN')" class="w-full bg-indigo-700 text-white font-bold py-2 rounded-xl hover:bg-indigo-800 text-[11px] flex items-center justify-center space-x-2">
+                                <button onclick="openUploadModal('${s.nama}', 'ITEM')" class="w-full bg-indigo-700 text-white font-bold py-2 rounded-xl hover:bg-indigo-800 text-[11px] flex items-center justify-center space-x-2">
                                     <i class="fa-solid fa-cloud-arrow-up"></i> <span>4. MUAT NAIK SOALAN UJIAN/PEPERIKSAAN</span>
                                 </button>
                             </div>
@@ -743,7 +758,7 @@
             });
         }
 
-        // FUNGSI MEMAPARKAN BAHAN MODUL PANITIA (LENGKAP DENGAN DSKP & PBD)
+        // FUNGSI MEMAPARKAN BAHAN MODUL PANITIA SECARA REALTIME
         function renderBahanList(filterCategory = 'ALL') {
             currentActiveBahanCat = filterCategory;
             const bahanGrid = document.getElementById('bahanListGrid');
@@ -755,12 +770,12 @@
             }
 
             if (list.length === 0) {
-                bahanGrid.innerHTML = `<p class="text-slate-400 italic text-xs col-span-2">Tiada bahan dijumpai di bawah kategori ini.</p>`;
+                bahanGrid.innerHTML = `<p class="text-slate-400 italic text-xs col-span-2 py-4 text-center">Tiada bahan dijumpai di bawah kategori ini. Sila muat naik bahan baharu.</p>`;
                 return;
             }
 
             bahanGrid.innerHTML = list.map(item => `
-                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs flex flex-col justify-between space-y-3">
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs flex flex-col justify-between space-y-3 shadow-sm">
                     <div>
                         <span class="bg-blue-100 text-blue-800 font-extrabold px-2.5 py-0.5 rounded-full text-[9px] uppercase">${item.kat.replace('_', ' ')}</span>
                         <h4 class="font-bold text-slate-900 text-sm mt-2">${item.tajuk}</h4>
@@ -782,7 +797,6 @@
         }
 
         function filterBahanCategory(cat) {
-            // Highlight butang aktif
             ['ALL', 'RPH', 'CONTOH_RPH', 'ITEM', 'KAJIAN', 'PLC', 'TERBEZA', 'AMALAN', 'DSKP', 'PBD'].forEach(c => {
                 const btn = document.getElementById('btn-bahan-' + c);
                 if (btn) {
@@ -794,7 +808,6 @@
                 }
             });
 
-            // Tukar Teks Butang Muat Naik Utama Mengikut Kategori Terpilih
             const uploadBtnText = document.getElementById('btnUploadCurrentCatText');
             if (uploadBtnText) {
                 if (cat === 'ALL') uploadBtnText.innerText = "➕ MUAT NAIK BAHAN BAHARU";
@@ -804,10 +817,14 @@
             renderBahanList(cat);
         }
 
+        function triggerCategoryUpload() {
+            const currentCat = currentActiveBahanCat === 'ALL' ? 'RPH' : currentActiveBahanCat;
+            openUploadModal(currentUser.sekolah, currentCat);
+        }
+
         function renderModuleCards() {
             renderBahanList('ALL');
 
-            // RENDER BANK SUMBER
             const sumberGrid = document.getElementById('sumberListGrid');
             if (sumberGrid) {
                 sumberGrid.innerHTML = sampleSumberList.map(item => `
@@ -832,7 +849,6 @@
                 `).join('');
             }
 
-            // RENDER LAIN-LAIN DOKUMEN
             const lainGrid = document.getElementById('lainListGrid');
             if (lainGrid) {
                 lainGrid.innerHTML = sampleLainList.map(item => `
@@ -863,9 +879,10 @@
             renderSchools(val);
         }
 
-        function openUploadModal(schoolName, materialType) {
-            document.getElementById('uploadModalTitle').innerText = `MUAT NAIK CONTOH ${materialType}`;
-            document.getElementById('uploadModalSchool').innerText = schoolName;
+        function openUploadModal(schoolName, materialType = 'RPH') {
+            document.getElementById('uploadModalSchool').innerText = schoolName || currentUser.sekolah;
+            document.getElementById('uploadCategorySelect').value = materialType;
+            document.getElementById('uploadModalTitle').innerText = `MUAT NAIK BAHAN [${materialType.replace('_', ' ')}]`;
             document.getElementById('uploadModal').classList.remove('hidden');
         }
 
@@ -873,10 +890,34 @@
             document.getElementById('uploadModal').classList.add('hidden');
         }
 
+        // FUNGSI UTAMA PENAMBAHAN REALTIME KE DALAM PANGKALAN DATA DSKP/BAHAN
         function handleUploadSubmit(e) {
             e.preventDefault();
-            alert('Bahan berjaya dimuat naik ke dalam pangkalan data sistem!');
+            const title = document.getElementById('uploadTitle').value;
+            const category = document.getElementById('uploadCategorySelect').value;
+            const schoolName = document.getElementById('uploadModalSchool').innerText;
+
+            const today = new Date().toISOString().split('T')[0];
+
+            const newBahan = {
+                id: sampleBahanList.length + 1,
+                tajuk: title,
+                kat: category,
+                sumber: `Muat Naik: ${schoolName}`,
+                tarikh: today,
+                fileUrl: "#"
+            };
+
+            // Masukkan rekod baharu ke dalam senarai
+            sampleBahanList.unshift(newBahan);
+
+            alert(`Bahan [${title}] berjaya dimuat naik ke dalam pangkalan data!`);
             closeUploadModal();
+            document.getElementById('uploadTitle').value = '';
+
+            // Papar semula senarai bahan serta-merta
+            filterBahanCategory(category);
+            switchTab('bahan');
         }
 
         function downloadFile(title) { alert(`Memuat turun fail: ${title}`); }
