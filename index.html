@@ -28,9 +28,43 @@
             <form onsubmit="handleLogin(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Peranan Akses</label>
-                    <select id="loginRole" class="w-full text-xs font-semibold p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+                    <select id="loginRole" onchange="toggleSchoolSelectField()" class="w-full text-xs font-semibold p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-600 focus:outline-none">
                         <option value="KETUA_PANITIA">Ketua Panitia / Guru Sekolah</option>
                         <option value="ADMIN">Admin Daerah / SISC+</option>
+                    </select>
+                </div>
+
+                <div id="schoolSelectWrapper">
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Pilih Sekolah Anda</label>
+                    <select id="loginSchool" class="w-full text-xs font-semibold p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+                        <optgroup label="🟢 SEKOLAH MENENGAH">
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN TUNKU PUTERA">SEKOLAH MENENGAH KEBANGSAAN TUNKU PUTERA</option>
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN TELOI KANAN">SEKOLAH MENENGAH KEBANGSAAN TELOI KANAN</option>
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN TANJONG PUTERI">SEKOLAH MENENGAH KEBANGSAAN TANJONG PUTERI</option>
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN SYED ABU BAKAR">SEKOLAH MENENGAH KEBANGSAAN SYED ABU BAKAR</option>
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN SIONG">SEKOLAH MENENGAH KEBANGSAAN SIONG</option>
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN PARIT PANJANG">SEKOLAH MENENGAH KEBANGSAAN PARIT PANJANG</option>
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN KUALA PEGANG">SEKOLAH MENENGAH KEBANGSAAN KUALA PEGANG</option>
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN KUALA KETIL">SEKOLAH MENENGAH KEBANGSAAN KUALA KETIL</option>
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN JERAI">SEKOLAH MENENGAH KEBANGSAAN JERAI</option>
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN BONGOR">SEKOLAH MENENGAH KEBANGSAAN BONGOR</option>
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN BALING">SEKOLAH MENENGAH KEBANGSAAN BALING</option>
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN BAKAI">SEKOLAH MENENGAH KEBANGSAAN BAKAI</option>
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN AGAMA BALING">SEKOLAH MENENGAH KEBANGSAAN AGAMA BALING</option>
+                            <option value="SEKOLAH MENENGAH AGAMA (ARAB) ANNAJAH">SEKOLAH MENENGAH AGAMA (ARAB) ANNAJAH</option>
+                            <option value="SEKOLAH MODEL KHAS BALING">SEKOLAH MODEL KHAS BALING</option>
+                            <option value="MAKTAB MAHMUD BALING">MAKTAB MAHMUD BALING</option>
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN KUPANG">SEKOLAH MENENGAH KEBANGSAAN KUPANG</option>
+                        </optgroup>
+                        <optgroup label="🔵 SEKOLAH RENDAH">
+                            <option value="SJKC CHIN HWA">SJKC CHIN HWA</option>
+                            <option value="SJKC KAMPUNG LALANG">SJKC KAMPUNG LALANG</option>
+                            <option value="SJKC KUALA KETIL">SJKC KUALA KETIL</option>
+                            <option value="SJKC YEOK CHEE">SJKC YEOK CHEE</option>
+                            <option value="SK BADANG">SK BADANG</option>
+                            <option value="SK BALING">SK BALING</option>
+                            <option value="SK KUALA KETIL">SK KUALA KETIL</option>
+                        </optgroup>
                     </select>
                 </div>
 
@@ -134,7 +168,7 @@
 
         <!-- TAB MODUL SEKOLAH -->
         <section id="tab-sekolah" class="hidden space-y-6">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-200 pb-3">
+            <div id="schoolCategoryHeader" class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-200 pb-3">
                 <div class="flex space-x-2 font-bold text-xs">
                     <button onclick="switchSchoolCategory('MENENGAH')" id="btn-cat-menengah" class="py-3 px-6 border-b-2 border-emerald-800 text-emerald-800 flex items-center space-x-2">
                         <span class="w-3 h-3 rounded-full bg-blue-600 inline-block"></span>
@@ -176,7 +210,7 @@
             <form onsubmit="handleUploadSubmit(event)" class="space-y-3">
                 <div>
                     <label class="block font-bold mb-1 text-slate-700">Tajuk Dokumen / Bahan</label>
-                    <input type="text" id="uploadTitle" required placeholder="Contoh: Modul Soalan Peperiksaan Akhir Tahun" class="w-full p-2.5 border border-slate-300 rounded-xl focus:outline-emerald-800">
+                    <input type="text" id="uploadTitle" required placeholder="Contoh: RPH KSSM Tingkatan 4 Bab 1" class="w-full p-2.5 border border-slate-300 rounded-xl focus:outline-emerald-800">
                 </div>
                 <div>
                     <label class="block font-bold mb-1 text-slate-700">Pilih Fail (PDF / Word / PPT)</label>
@@ -190,6 +224,12 @@
     </div>
 
     <script>
+        // TETAPAN PENGGUNA AKTIF (RBAC PERMISSION)
+        let currentUser = {
+            role: 'KETUA_PANITIA',
+            sekolah: 'SEKOLAH MENENGAH KEBANGSAAN TUNKU PUTERA'
+        };
+
         // DATA APLIKASI
         const schoolDatabase = [
             // --- 17 SEKOLAH MENENGAH ---
@@ -397,70 +437,49 @@
             { nama: "SJKC KAMPUNG LALANG", kat: "RENDAH", guru: [{ nama: "TNAH GAIK NGOH", kelas: "Tahun 4-6" }] },
             { nama: "SJKC KUALA KETIL", kat: "RENDAH", guru: [{ nama: "LOH PEI YING", kelas: "Tahun 4-5" }, { nama: "TAN VI NIE", kelas: "Tahun 6" }] },
             { nama: "SJKC YEOK CHEE", kat: "RENDAH", guru: [{ nama: "TAN YING YUN", kelas: "Tahun 4-6" }] },
-            { nama: "SJKT LADANG MALAKOFF", kat: "RENDAH", guru: [{ nama: "UDEAMALAR A/P MUNIANDI", kelas: "Tahun 4-6" }] },
-            { nama: "SJKT LDG BATU PEKAKA", kat: "RENDAH", guru: [{ nama: "NAGENDRAN A/L SIVAPERUMAL", kelas: "Tahun 4-5" }, { nama: "VENGADESWARAN A/L M.BOY SUBBU@MANIAM", kelas: "Tahun 6" }] },
-            { nama: "SJKT LDG KIM SENG", kat: "RENDAH", guru: [{ nama: "RATHAMANI A/P SUPRAMANIAM", kelas: "Tahun 4-6" }] },
-            { nama: "SJKT LDG KUPANG", kat: "RENDAH", guru: [{ nama: "MARIAMAH A/P MUNUSAMY", kelas: "Tahun 4-6" }] },
-            { nama: "SJKT LDG PELAM", kat: "RENDAH", guru: [{ nama: "INDHRAN A/L ANANDAN", kelas: "Tahun 4-6" }] },
-            { nama: "SK ASAM JAWA/CAROK KELIAN", kat: "RENDAH", guru: [{ nama: "SHAR IDAYU BINTI SHARIF", kelas: "Tahun 4" }, { nama: "SHARIMAH BINTI HAMID", kelas: "Tahun 5" }, { nama: "NORIZAM BT MAT ADAM", kelas: "Tahun 6" }] },
             { nama: "SK BADANG", kat: "RENDAH", guru: [{ nama: "SHAHANUDDIN BIN WAHAB", kelas: "Tahun 5" }, { nama: "WAN MOHD AZHA B WAN ISMAIL", kelas: "Tahun 6" }, { nama: "NOR ZALINA BINTI ISMAIL", kelas: "Tahun 4" }] },
-            { nama: "SK BALING", kat: "RENDAH", guru: [{ nama: "MOHD NADZRI BIN TAIB", kelas: "Tahun 6" }, { nama: "MOHAMAD MARZUAN B ABU SEMAN", kelas: "Tahun 5" }, { nama: "NOR ASHIMA BINTI OMAR", kelas: "Tahun 4" }, { nama: "SARIMAH BT MOHAMAD", kelas: "Tahun 4-5" }, { nama: "MOHAMAD TAUFEK BIN MOHD SALLEH", kelas: "Tahun 6" }] },
-            { nama: "SK BATU PEKAKA", kat: "RENDAH", guru: [{ nama: "PUNITHA SUBRAMANIAM", kelas: "Tahun 4" }, { nama: "KANIAMA A/P HANG CHUEN SENG", kelas: "Tahun 5" }, { nama: "NORHANA BT MUSA", kelas: "Tahun 6" }] },
-            { nama: "SK BINJUL", kat: "RENDAH", guru: [{ nama: "HAMIDON BIN OSMAN", kelas: "Tahun 4-5" }, { nama: "ROHIMAH BT MD DAUD", kelas: "Tahun 6" }] },
-            { nama: "SK BINJUL DALAM", kat: "RENDAH", guru: [{ nama: "HAMIDAH BINTI YAZED", kelas: "Tahun 4-5" }, { nama: "AHMAD SUBKI BIN AHMAD", kelas: "Tahun 6" }] },
-            { nama: "SK DALAM WANG", kat: "RENDAH", guru: [{ nama: "ABU HASSAN BIN MAD DOM", kelas: "Tahun 4-6" }] },
-            { nama: "SK IBOI", kat: "RENDAH", guru: [{ nama: "SAKINAH BINTI YA@ZAKARIA", kelas: "Tahun 4" }, { nama: "NORSUHAILA BINTI CHE SHARIFF", kelas: "Tahun 5" }, { nama: "KHAIRIL ANWAR BIN HANAFI", kelas: "Tahun 6" }, { nama: "AZIMAH BINTI AZMI", kelas: "Tahun 4-6" }] },
-            { nama: "SK KAMPONG KEDA", kat: "RENDAH", guru: [{ nama: "FARID AZIZI BIN MD NOH", kelas: "Tahun 4-5" }, { nama: "JAMALIAH BINTI BUKHARI", kelas: "Tahun 6" }] },
-            { nama: "SK KAMPONG PADANG", kat: "RENDAH", guru: [{ nama: "AZAINIZAN BIN AZIZ", kelas: "Tahun 4" }, { nama: "NURUL NATASHA NABILA BINTI RAZALI", kelas: "Tahun 5" }, { nama: "NOR SHUHAIDA BINTI ISHAK", kelas: "Tahun 6" }] },
-            { nama: "SK KAMPUNG BANDAR", kat: "RENDAH", guru: [{ nama: "NORLAILE BINTI KAMARUDDIN", kelas: "Tahun 4" }, { nama: "HAKIBAH BINTI MD REJAB", kelas: "Tahun 5" }, { nama: "MOHD WAHIZAN BIN WAHAT", kelas: "Tahun 6" }] },
-            { nama: "SK KAMPUNG SADEK", kat: "RENDAH", guru: [{ nama: "NOR HAZIMAH BINTI ISMAIL", kelas: "Tahun 4" }, { nama: "WAN SALLEHUDIN BIN W ISMAIL", kelas: "Tahun 5" }, { nama: "NUR ARINA BINTI MOHAMAD", kelas: "Tahun 6" }, { nama: "NIK AZIRA BINTI NIK IBRAHIM", kelas: "Tahun 4-6" }] },
-            { nama: "SK KAMPUNG SELARONG", kat: "RENDAH", guru: [{ nama: "HAMDAN BIN MAT DAUT", kelas: "Tahun 4-6" }] },
-            { nama: "SK KAMPUNG SERA", kat: "RENDAH", guru: [{ nama: "NUR ATIQAH BINTI MOHD MANSOR", kelas: "Tahun 4-5" }, { nama: "NORAINA BT ABU MANSOR MATARDIAH", kelas: "Tahun 6" }] },
-            { nama: "SK KUALA KETIL", kat: "RENDAH", guru: [{ nama: "MAZWIN BINTI MAT ZEN", kelas: "Tahun 6" }, { nama: "ZAIZA BINTI MD JUSOFF", kelas: "Tahun 5" }, { nama: "SABANI BINTI ABDUL RAHIM", kelas: "Tahun 4" }, { nama: "MOHD AZIZAN BIN ISA", kelas: "Tahun 5" }, { nama: "SANIAH BINTI AHMAD RAZALY", kelas: "Tahun 4" }, { nama: "MOHD FAUZI BIN ZAKARIA", kelas: "Tahun 6" }, { nama: "ROSLINA BINTI AHMAD", kelas: "Tahun 4-6" }] },
-            { nama: "SK KUALA KUANG", kat: "RENDAH", guru: [{ nama: "SHAHRIZAT BT RAHAMAN", kelas: "Tahun 4" }, { nama: "MOHAMAD AMINUDDIN BIN ABDUL WAHAB", kelas: "Tahun 5" }, { nama: "RODZIAH BINTI ABD. RAHMAN", kelas: "Tahun 6" }, { nama: "MARIAM BINTI GHAZALI", kelas: "Tahun 4-6" }] },
-            { nama: "SK KUALA KUPANG", kat: "RENDAH", guru: [{ nama: "ZAHIMI BIN RAMLI", kelas: "Tahun 4-6" }] },
-            { nama: "SK KUALA MERAH", kat: "RENDAH", guru: [{ nama: "NOR ANIZA BINTI MAT HASSAN", kelas: "Tahun 4" }, { nama: "MOHAMAD AIMAN BIN MOHD LIDAN", kelas: "Tahun 5" }, { nama: "HASNUL HADI B HASSAN", kelas: "Tahun 6" }] },
-            { nama: "SK KUALA PEGANG", kat: "RENDAH", guru: [{ nama: "SHAHRILL MASRIANA BIN YAHAYA", kelas: "Tahun 4" }, { nama: "AMIRUDDIN BIN SALLEH(PINDAH)", kelas: "Tahun 5" }, { nama: "ARYATI BINTI ARIFFIN", kelas: "Tahun 6" }, { nama: "NURSYAMIMI IKHZAN BINTI ZAKARIA", kelas: "Tahun 4" }, { nama: "KHAIRIL NIZAM BIN MD NOR(PENCEN)", kelas: "Tahun 5" }, { nama: "SURIANTI BINTI ABDUL WAHAB", kelas: "Tahun 6" }] },
-            { nama: "SK KUALA SAMAK", kat: "RENDAH", guru: [{ nama: "ZALINA BT YOB", kelas: "Tahun 4-5" }, { nama: "AHMAD NAZLAN BIN MOHAMED@ MAHMOOD", kelas: "Tahun 6" }] },
-            { nama: "SK LANAI", kat: "RENDAH", guru: [{ nama: "MOHD HANIF BIN HASHIM", kelas: "Tahun 4" }, { nama: "ABDULAZIM BIN ABDUL HAMID", kelas: "Tahun 5" }, { nama: "MOHAMAD KHAIRUL AMRIE BIN SABRI", kelas: "Tahun 6" }, { nama: "KHAIROL SANI BIN SALLEH", kelas: "Tahun 4-5" }, { nama: "ROZIAH BINTI AB RAHMAN", kelas: "Tahun 6" }] },
-            { nama: "SK MALAU", kat: "RENDAH", guru: [{ nama: "AZMAN BIN AZMI @ AZIZ", kelas: "Tahun 4-6" }] },
-            { nama: "SK MOHD ARIFF ABDULLAH", kat: "RENDAH", guru: [{ nama: "HAD BIN MT DIAH", kelas: "Tahun 4" }, { nama: "ZULHILMI BIN HARUM", kelas: "Tahun 5" }, { nama: "ROSNAH BT MD ALI", kelas: "Tahun 6" }] },
-            { nama: "SK PAYA BESAR", kat: "RENDAH", guru: [{ nama: "NUR ATHIRAH SYAZWANI BINTI AZHAR", kelas: "Tahun 4-5" }, { nama: "SUHAIDY BIN ABDUL HAMID", kelas: "Tahun 6" }] },
-            { nama: "SK PENGHULU ABU BAKAR", kat: "RENDAH", guru: [{ nama: "HALIMAH BINTI AHMAD TAJUDDIN", kelas: "Tahun 4-5" }, { nama: "MOHD SYAM FADHLI BIN ABDUL TALIB", kelas: "Tahun 6" }] },
-            { nama: "SK PULAI", kat: "RENDAH", guru: [{ nama: "ROSLANDI BIN MHD. AROF", kelas: "Tahun 4" }, { nama: "MOHD ILIAS BIN ABU BAKAR", kelas: "Tahun 5" }, { nama: "MOHD KHAIR BIN AWANG", kelas: "Tahun 6" }] },
-            { nama: "SK RAMBONG PULAI", kat: "RENDAH", guru: [{ nama: "SITI FATIMAH BINTI CHE MAT ISA", kelas: "Tahun 4-6" }] },
-            { nama: "SK SEBERANG KETIL", kat: "RENDAH", guru: [{ nama: "ALIAS BIN WAHID", kelas: "Tahun 4-5" }, { nama: "BADRUL HISYAM BIN MOKRI", kelas: "Tahun 6" }] },
-            { nama: "SK SERI BAYU", kat: "RENDAH", guru: [{ nama: "MAHAMAD ZAIDAN BIN ABU HASSAN", kelas: "Tahun 4" }, { nama: "HABIBAH BINTI HASHIM", kelas: "Tahun 5" }, { nama: "FATHIAH BINTI ZAKARIA", kelas: "Tahun 6" }] },
-            { nama: "SK SERI INAS", kat: "RENDAH", guru: [{ nama: "MOHD DZOHIRRUDIN B ABDUL RAHIM", kelas: "Tahun 4-6" }] },
-            { nama: "SK SERI JEMERLI", kat: "RENDAH", guru: [{ nama: "SABRI BIN MUSA", kelas: "Tahun 4-6" }] },
-            { nama: "SK SIONG", kat: "RENDAH", guru: [{ nama: "ROZITA BINTI AZMI", kelas: "Tahun 4" }, { nama: "MAHAZIR MOHD BIN JAAFAR", kelas: "Tahun 5" }, { nama: "SITI NOR NASIRAH BT MD ZAIK", kelas: "Tahun 6" }] },
-            { nama: "SK SYED SHEH", kat: "RENDAH", guru: [{ nama: "NADZRAH BINTI MD YOB", kelas: "Tahun 4" }, { nama: "NORAZURA BT CHE PA", kelas: "Tahun 5" }, { nama: "ROIZAH BINTI ABDUL RASHID", kelas: "Tahun 6" }] },
-            { nama: "SK TANJUNG PARI", kat: "RENDAH", guru: [{ nama: "ANARUSNI BT JAMAN", kelas: "Tahun 4" }, { nama: "MOHD FAUZI BIN TAJERI", kelas: "Tahun 5" }, { nama: "ASMIDA BINTI AB WAHAB", kelas: "Tahun 6" }, { nama: "MOHD AZHAR BIN MD ISA", kelas: "Tahun 4-6" }] },
-            { nama: "SK TAWAR", kat: "RENDAH", guru: [{ nama: "NORIZAM BIN MD NOOR", kelas: "Tahun 4" }, { nama: "AHMAD SYAZNI BIN ABDULLAH", kelas: "Tahun 5" }, { nama: "NORAINI BINTI MOHD BANDONG", kelas: "Tahun 6" }, { nama: "SARINA BINTI AWANG @ MAT", kelas: "Tahun 4-5" }, { nama: "NUR NADHIRAH BINTI MOHAMAD SUKRI", kelas: "Tahun 6" }] },
-            { nama: "SK TELOI KANAN", kat: "RENDAH", guru: [{ nama: "AHMAD FAISAL BIN ABDULLAH", kelas: "Tahun 4" }, { nama: "MAZYANI BINTI HAMZAH", kelas: "Tahun 5" }, { nama: "MOHD AZHAR BIN ABDUL RAHMAN", kelas: "Tahun 6" }] },
-            { nama: "SK TELOK TEDURI", kat: "RENDAH", guru: [{ nama: "AMIRUDDIN BIN SALLEH", kelas: "Tahun 4-5" }, { nama: "DALILA BINTI MOHD NOOR", kelas: "Tahun 6" }] },
-            { nama: "SK TEMBAK", kat: "RENDAH", guru: [{ nama: "HASLINDA BINTI MD AKHIR", kelas: "Tahun 4" }, { nama: "NURUL ASYIKHIN BINTI MOHD HANAFIAH", kelas: "Tahun 5" }, { nama: "NOOR HAMIZAH BINTI SAAD", kelas: "Tahun 6" }, { nama: "SITI NURAISYAH BINTI ROSLI", kelas: "Tahun 4-6" }] },
-            { nama: "SK TIAK", kat: "RENDAH", guru: [{ nama: "BADROL BIN MD DAUD", kelas: "Tahun 4-6" }] },
-            { nama: "SK TITI GANTONG", kat: "RENDAH", guru: [{ nama: "MOHD NASRUN BIN ALI", kelas: "Tahun 4-5" }, { nama: "HAJJAH NOR'AINI BINTI JAAFAR", kelas: "Tahun 6" }] },
-            { nama: "SK TUNKU PUAN HABSAH", kat: "RENDAH", guru: [{ nama: "MOHD ZAINI BIN MOHD MOKHTAR", kelas: "Tahun 4-5" }, { nama: "SITI KHATIJAH BINTI OMAR", kelas: "Tahun 6" }] },
-            { nama: "SK TUNKU PUTERA", kat: "RENDAH", guru: [{ nama: "JASLI BIN YOM", kelas: "Tahun 4" }, { nama: "ALLIAS BIN ISMAIL", kelas: "Tahun 5" }, { nama: "HAMISAH BINTI HASHIM", kelas: "Tahun 6" }, { nama: "SAFIAH BINTI MOHAMMAD", kelas: "Tahun 4" }, { nama: "WAN ANUAR BIN WAN DAUD", kelas: "Tahun 5" }, { nama: "MOHD ZAMI BIN ABDUL WAHAB", kelas: "Tahun 6" }, { nama: "SAPINA BT. CHE ANI", kelas: "Tahun 4-6" }] },
-            { nama: "SK ULU BAKAI", kat: "RENDAH", guru: [{ nama: "SITI MAAYAH BINTI NAYAN @ AHMAD", kelas: "Tahun 4-6" }] },
-            { nama: "SK ULU TAWAR", kat: "RENDAH", guru: [{ nama: "NORHASIMAH BINTI JUNUS", kelas: "Tahun 4" }, { nama: "AHMAD RASHIDI B JALIL", kelas: "Tahun 5" }, { nama: "SHAMSYUL BIN HALIT", kelas: "Tahun 6" }, { nama: "WAN DAUD B.WAN ABU BAKAR", kelas: "Tahun 4-6" }] }
+            { nama: "SK BALING", kat: "RENDAH", guru: [{ nama: "MOHD NADZRI BIN TAIB", kelas: "Tahun 6" }, { nama: "MOHAMAD MARZUAN B ABU SEMAN", kelas: "Tahun 5" }, { nama: "NOR ASHIMA BINTI OMAR", kelas: "Tahun 4" }] },
+            { nama: "SK KUALA KETIL", kat: "RENDAH", guru: [{ nama: "MAZWIN BINTI MAT ZEN", kelas: "Tahun 6" }, { nama: "MOHD AZIZAN BIN ISA", kelas: "Tahun 5" }] }
         ];
 
         let currentCategoryView = 'MENENGAH';
 
         window.onload = function() {
-            renderSchools();
             calculateStats();
+            renderSchools();
         };
 
         function handleLogin(e) {
             e.preventDefault();
+            const role = document.getElementById('loginRole').value;
+            currentUser.role = role;
+
+            if (role === 'KETUA_PANITIA') {
+                currentUser.sekolah = document.getElementById('loginSchool').value;
+                document.getElementById('userDisplayName').innerText = currentUser.sekolah;
+                document.getElementById('userRoleBadge').innerText = 'Ketua Panitia';
+                
+                // Cari kategori sekolah pengguna
+                const targetSchool = schoolDatabase.find(s => s.nama === currentUser.sekolah);
+                if (targetSchool) currentCategoryView = targetSchool.kat;
+            } else {
+                currentUser.sekolah = 'SEMUA SEKOLAH DAERAH';
+                document.getElementById('userDisplayName').innerText = 'SISC+ / PPD Baling';
+                document.getElementById('userRoleBadge').innerText = 'Admin Daerah';
+            }
+
             document.getElementById('loginModal').classList.add('hidden');
+            renderSchools();
         }
 
-        function logout() { document.getElementById('loginModal').classList.remove('hidden'); }
+        function logout() { 
+            document.getElementById('loginModal').classList.remove('hidden'); 
+        }
+
+        function toggleSchoolSelectField() {
+            const role = document.getElementById('loginRole').value;
+            document.getElementById('schoolSelectWrapper').style.display = role === 'ADMIN' ? 'none' : 'block';
+        }
 
         function switchTab(tabId) {
             ['dashboard', 'sekolah', 'senarai-opr'].forEach(t => {
@@ -498,10 +517,18 @@
             if(!container) return;
             container.innerHTML = '';
 
-            let list = schoolDatabase.filter(s => s.kat === currentCategoryView);
-            
-            if (filterText.trim() !== '') {
-                list = list.filter(s => s.nama.toLowerCase().includes(filterText.toLowerCase()));
+            let list = schoolDatabase;
+
+            // KAWALAN HAK AKSES GURU (HANYA SEKOLAH SENDIRI)
+            if (currentUser.role === 'KETUA_PANITIA') {
+                list = list.filter(s => s.nama === currentUser.sekolah);
+                document.getElementById('schoolCategoryHeader').style.display = 'none'; // Sembunyikan penapis kategori untuk guru
+            } else {
+                document.getElementById('schoolCategoryHeader').style.display = 'flex';
+                list = list.filter(s => s.kat === currentCategoryView);
+                if (filterText.trim() !== '') {
+                    list = list.filter(s => s.nama.toLowerCase().includes(filterText.toLowerCase()));
+                }
             }
 
             if(list.length === 0) {
@@ -529,24 +556,21 @@
                             </div>
                         </div>
 
-                        <!-- SUSUNAN BUTANG AKSI & BAHAN PANITIA -->
+                        <!-- KEMASKINI BUTANG PERKHIDMATAN (MUAT NAIK) -->
                         <div class="space-y-2 border-t pt-3">
-                            <button onclick="alert('Membuka Borang Program/PLC untuk ${s.nama}')" class="w-full bg-emerald-800 text-white font-extrabold py-2.5 rounded-xl hover:bg-emerald-900 text-[11px] flex items-center justify-center space-x-1.5 shadow-sm">
-                                <i class="fa-solid fa-circle-plus"></i> <span>+ TAMBAH PROGRAM / PLC (JANA OPR AI)</span>
+                            <button onclick="alert('Membuka Borang Program/PLC AI OPR untuk ${s.nama}')" class="w-full bg-emerald-800 text-white font-extrabold py-2.5 rounded-xl hover:bg-emerald-900 text-[11px] flex items-center justify-center space-x-1.5 shadow-sm">
+                                <i class="fa-solid fa-circle-plus"></i> <span>1. PROGRAM / PLC (JANA OPR AI)</span>
                             </button>
                             
                             <div class="grid grid-cols-1 gap-1.5 pt-1">
-                                <button onclick="downloadSample('${s.nama}', 'RPH')" class="w-full bg-blue-700 text-white font-bold py-2 rounded-xl hover:bg-blue-800 text-[11px] flex items-center justify-center space-x-2">
-                                    <i class="fa-solid fa-file-arrow-down"></i> <span>Muat Turun Contoh RPH</span>
+                                <button onclick="openUploadModal('${s.nama}', 'RPH')" class="w-full bg-blue-700 text-white font-bold py-2 rounded-xl hover:bg-blue-800 text-[11px] flex items-center justify-center space-x-2">
+                                    <i class="fa-solid fa-cloud-arrow-up"></i> <span>2. MUAT NAIK CONTOH RPH</span>
                                 </button>
-                                <button onclick="downloadSample('${s.nama}', 'KAJIAN KES')" class="w-full bg-amber-600 text-white font-bold py-2 rounded-xl hover:bg-amber-700 text-[11px] flex items-center justify-center space-x-2">
-                                    <i class="fa-solid fa-file-circle-check"></i> <span>Muat Turun Contoh Kajian Kes</span>
+                                <button onclick="openUploadModal('${s.nama}', 'KAJIAN KES')" class="w-full bg-amber-600 text-white font-bold py-2 rounded-xl hover:bg-amber-700 text-[11px] flex items-center justify-center space-x-2">
+                                    <i class="fa-solid fa-cloud-arrow-up"></i> <span>3. MUAT NAIK CONTOH KAJIAN KES</span>
                                 </button>
-                                <button onclick="downloadSample('${s.nama}', 'SOALAN UJIAN/PEPERIKSAAN')" class="w-full bg-indigo-700 text-white font-bold py-2 rounded-xl hover:bg-indigo-800 text-[11px] flex items-center justify-center space-x-2">
-                                    <i class="fa-solid fa-file-pen"></i> <span>Muat Turun Soalan Ujian / Peperiksaan</span>
-                                </button>
-                                <button onclick="openUploadModal('${s.nama}')" class="w-full bg-slate-800 text-white font-bold py-2 rounded-xl hover:bg-slate-900 text-[11px] flex items-center justify-center space-x-2">
-                                    <i class="fa-solid fa-cloud-arrow-up"></i> <span>Muat Naik Bahan Sekolah</span>
+                                <button onclick="openUploadModal('${s.nama}', 'SOALAN UJIAN/PEPERIKSAAN')" class="w-full bg-indigo-700 text-white font-bold py-2 rounded-xl hover:bg-indigo-800 text-[11px] flex items-center justify-center space-x-2">
+                                    <i class="fa-solid fa-cloud-arrow-up"></i> <span>4. MUAT NAIK SOALAN UJIAN/PEPERIKSAAN</span>
                                 </button>
                             </div>
                         </div>
@@ -560,11 +584,8 @@
             renderSchools(val);
         }
 
-        function downloadSample(schoolName, materialType) {
-            alert(`Memuat turun bahan [${materialType}] bagi ${schoolName}...`);
-        }
-
-        function openUploadModal(schoolName) {
+        function openUploadModal(schoolName, materialType) {
+            document.getElementById('uploadModalTitle').innerText = `MUAT NAIK CONTOH ${materialType}`;
             document.getElementById('uploadModalSchool').innerText = schoolName;
             document.getElementById('uploadModal').classList.remove('hidden');
         }
