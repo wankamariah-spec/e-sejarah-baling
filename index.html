@@ -20,6 +20,7 @@
 </head>
 <body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col md:flex-row">
 
+    <!-- LOGIN MODAL -->
     <div id="loginModal" class="fixed inset-0 bg-slate-900/80 z-[100] flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl border border-slate-100">
             <div class="text-center mb-6">
@@ -42,8 +43,80 @@
                 <div id="schoolSelectContainer">
                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Pilih Sekolah</label>
                     <select id="loginSchool" class="w-full text-xs font-semibold p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-600 focus:outline-none">
-                        <option value="SK BALING">SK BALING (RENDAH)</option>
-                        <option value="SMK BALING">SMK BALING (MENENGAH)</option>
+                        <optgroup label="🟢 SEKOLAH MENENGAH">
+                            <option value="SMK BAKAI">SEKOLAH MENENGAH KEBANGSAAN BAKAI</option>
+                            <option value="SMK JERAI">SEKOLAH MENENGAH KEBANGSAAN JERAI</option>
+                            <option value="SMK PARIT PANJANG">SEKOLAH MENENGAH KEBANGSAAN PARIT PANJANG</option>
+                            <option value="SMK TANJONG PUTERI">SEKOLAH MENENGAH KEBANGSAAN TANJONG PUTERI</option>
+                            <option value="SMK BALING">SEKOLAH MENENGAH KEBANGSAAN BALING</option>
+                            <option value="SMK KUALA KETIL">SEKOLAH MENENGAH KEBANGSAAN KUALA KETIL</option>
+                            <option value="SMK SIONG">SEKOLAH MENENGAH KEBANGSAAN SIONG</option>
+                            <option value="SMK TELOI KANAN">SEKOLAH MENENGAH KEBANGSAAN TELOI KANAN</option>
+                            <option value="SMK BONGOR">SEKOLAH MENENGAH KEBANGSAAN BONGOR</option>
+                            <option value="SMK KUALA PEGANG">SEKOLAH MENENGAH KEBANGSAAN KUALA PEGANG</option>
+                            <option value="SMK SYED ABU BAKAR">SEKOLAH MENENGAH KEBANGSAAN SYED ABU BAKAR</option>
+                            <option value="SMK TUNKU PUTERA">SEKOLAH MENENGAH KEBANGSAAN TUNKU PUTERA</option>
+                            <option value="SMK KUPANG">SEKOLAH MENENGAH KEBANGSAAN KUPANG</option>
+                            <option value="MAKTAB MAHMUD BALING">MAKTAB MAHMUD BALING</option>
+                            <option value="SMA ANNAJAH">SEKOLAH MENENGAH AGAMA (ARAB) ANNAJAH</option>
+                            <option value="SEKOLAH MODEL KHAS BALING">SEKOLAH MODEL KHAS BALING</option>
+                            <option value="SMKA BALING">SEKOLAH MENENGAH KEBANGSAAN AGAMA BALING</option>
+                        </optgroup>
+                        <optgroup label="🔵 SEKOLAH RENDAH">
+                            <option value="SJKC CHIN HWA">SJKC CHIN HWA</option>
+                            <option value="SJKC KAMPUNG LALANG">SJKC KAMPUNG LALANG</option>
+                            <option value="SJKC KUALA KETIL">SJKC KUALA KETIL</option>
+                            <option value="SJKC YEOK CHEE">SJKC YEOK CHEE</option>
+                            <option value="SJKT LADANG MALAKOFF">SJKT LADANG MALAKOFF</option>
+                            <option value="SJKT LDG BATU PEKAKA">SJKT LDG BATU PEKAKA</option>
+                            <option value="SJKT LDG KIM SENG">SJKT LDG KIM SENG</option>
+                            <option value="SJKT LDG KUPANG">SJKT LDG KUPANG</option>
+                            <option value="SJKT LDG PELAM">SJKT LDG PELAM</option>
+                            <option value="SK ASAM JAWA/CAROK KELIAN">SK ASAM JAWA/CAROK KELIAN</option>
+                            <option value="SK BADANG">SK BADANG</option>
+                            <option value="SK BALING">SK BALING</option>
+                            <option value="SK BATU PEKAKA">SK BATU PEKAKA</option>
+                            <option value="SK BINJUL">SK BINJUL</option>
+                            <option value="SK BINJUL DALAM">SK BINJUL DALAM</option>
+                            <option value="SK DALAM WANG">SK DALAM WANG</option>
+                            <option value="SK IBOI">SK IBOI</option>
+                            <option value="SK KAMPONG KEDA">SK KAMPONG KEDA</option>
+                            <option value="SK KAMPONG PADANG">SK KAMPONG PADANG</option>
+                            <option value="SK KAMPUNG BANDAR">SK KAMPUNG BANDAR</option>
+                            <option value="SK KAMPUNG SADEK">SK KAMPUNG SADEK</option>
+                            <option value="SK KAMPUNG SELARONG">SK KAMPUNG SELARONG</option>
+                            <option value="SK KAMPUNG SERA">SK KAMPUNG SERA</option>
+                            <option value="SK KUALA KETIL">SK KUALA KETIL</option>
+                            <option value="SK KUALA KUANG">SK KUALA KUANG</option>
+                            <option value="SK KUALA KUPANG">SK KUALA KUPANG</option>
+                            <option value="SK KUALA MERAH">SK KUALA MERAH</option>
+                            <option value="SK KUALA PEGANG">SK KUALA PEGANG</option>
+                            <option value="SK KUALA SAMAK">SK KUALA SAMAK</option>
+                            <option value="SK LANAI">SK LANAI</option>
+                            <option value="SK MALAU">SK MALAU</option>
+                            <option value="SK MOHD ARIFF ABDULLAH">SK MOHD ARIFF ABDULLAH</option>
+                            <option value="SK PAYA BESAR">SK PAYA BESAR</option>
+                            <option value="SK PENGHULU ABU BAKAR">SK PENGHULU ABU BAKAR</option>
+                            <option value="SK PULAI">SK PULAI</option>
+                            <option value="SK RAMBONG PULAI">SK RAMBONG PULAI</option>
+                            <option value="SK SEBERANG KETIL">SK SEBERANG KETIL</option>
+                            <option value="SK SERI BAYU">SK SERI BAYU</option>
+                            <option value="SK SERI INAS">SK SERI INAS</option>
+                            <option value="SK SERI JEMERLI">SK SERI JEMERLI</option>
+                            <option value="SK SIONG">SK SIONG</option>
+                            <option value="SK SYED SHEH">SK SYED SHEH</option>
+                            <option value="SK TANJUNG PARI">SK TANJUNG PARI</option>
+                            <option value="SK TAWAR">SK TAWAR</option>
+                            <option value="SK TELOI KANAN">SK TELOI KANAN</option>
+                            <option value="SK TELOK TEDURI">SK TELOK TEDURI</option>
+                            <option value="SK TEMBAK">SK TEMBAK</option>
+                            <option value="SK TIAK">SK TIAK</option>
+                            <option value="SK TITI GANTONG">SK TITI GANTONG</option>
+                            <option value="SK TUNKU PUAN HABSAH">SK TUNKU PUAN HABSAH</option>
+                            <option value="SK TUNKU PUTERA">SK TUNKU PUTERA</option>
+                            <option value="SK ULU BAKAI">SK ULU BAKAI</option>
+                            <option value="SK ULU TAWAR">SK ULU TAWAR</option>
+                        </optgroup>
                     </select>
                 </div>
 
@@ -59,6 +132,7 @@
         </div>
     </div>
 
+    <!-- SIDEBAR NAVIGATION -->
     <aside class="w-full md:w-64 bg-slate-900 text-slate-300 p-5 flex flex-col justify-between shrink-0">
         <div>
             <div class="flex items-center space-x-3 mb-8 px-2">
@@ -112,6 +186,7 @@
         </div>
     </aside>
 
+    <!-- MAIN VIEWPORT -->
     <main class="flex-1 p-4 md:p-8 overflow-y-auto max-w-7xl mx-auto w-full">
 
         <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 pb-4 border-b border-slate-200">
@@ -139,6 +214,7 @@
             </div>
         </header>
 
+        <!-- DASHBOARD TAB -->
         <section id="tab-dashboard" class="space-y-6">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
@@ -148,8 +224,8 @@
                 </div>
                 <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
                     <span class="text-xs font-bold text-slate-400 uppercase">Sekolah Menengah</span>
-                    <span class="text-3xl font-extrabold text-slate-900 block mt-1">19</span>
-                    <span class="text-[10px] text-slate-400 block mt-1">SMK / SABK</span>
+                    <span class="text-3xl font-extrabold text-slate-900 block mt-1">17</span>
+                    <span class="text-[10px] text-slate-400 block mt-1">SMK / SABK / SMKA</span>
                 </div>
                 <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
                     <span class="text-xs font-bold text-slate-400 uppercase">Jumlah OPR (<span class="yearLabel">2026</span>)</span>
@@ -188,6 +264,7 @@
             </div>
         </section>
 
+        <!-- MODUL SEKOLAH -->
         <section id="tab-sekolah" class="hidden space-y-6">
             <div class="flex border-b border-slate-200 font-bold text-xs">
                 <button onclick="switchSchoolCategory('MENENGAH')" id="btn-cat-menengah" class="py-3 px-6 border-b-2 border-emerald-800 text-emerald-800 flex items-center space-x-2">
@@ -200,162 +277,183 @@
                 </button>
             </div>
 
-            <div id="adminBulkDownloadArea" class="bg-amber-50 border border-amber-200 p-4 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 text-xs">
-                <div>
-                    <span class="font-extrabold text-amber-900"><i class="fa-solid fa-shield-halved mr-1"></i> MOD ADMIN / SISC+</span>
-                    <p class="text-[11px] text-amber-800">Muat turun rekod data guru atau OPR secara pukal mengikut kategori.</p>
-                </div>
-                <div class="flex flex-wrap gap-2">
-                    <button onclick="downloadBulkTeachers('RENDAH')" class="bg-emerald-800 text-white font-bold px-3 py-2 rounded-xl"><i class="fa-solid fa-download mr-1"></i> Guru Sek. Rendah (PDF)</button>
-                    <button onclick="downloadBulkTeachers('MENENGAH')" class="bg-blue-800 text-white font-bold px-3 py-2 rounded-xl"><i class="fa-solid fa-download mr-1"></i> Guru Sek. Menengah (PDF)</button>
-                </div>
-            </div>
-
             <div id="schoolCardsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
+        <!-- SENARAI PROGRAM / PLC -->
         <section id="tab-senarai-opr" class="hidden space-y-6">
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 pb-4 border-b">
-                    <div>
-                        <h3 class="font-black text-slate-900 text-base">📋 SENARAI PROGRAM & PLC DAERAH</h3>
-                        <p class="text-xs text-slate-500">Kumpulan rekod OPR terjana mengikut sekolah dan tahun.</p>
-                    </div>
-
-                    <div class="flex flex-wrap gap-2 text-xs">
-                        <select id="filterOprType" onchange="renderFullOprList()" class="p-2 border rounded-xl font-bold">
-                            <option value="ALL">Semua Jenis (Program / PLC)</option>
-                            <option value="PROGRAM">Program</option>
-                            <option value="PLC">PLC</option>
-                        </select>
-                        <select id="filterOprCategory" onchange="renderFullOprList()" class="p-2 border rounded-xl font-bold">
-                            <option value="ALL">Semua Peringkat Sekolah</option>
-                            <option value="RENDAH">Sekolah Rendah</option>
-                            <option value="MENENGAH">Sekolah Menengah</option>
-                        </select>
-                    </div>
-                </div>
-
+                <h3 class="font-black text-slate-900 text-base mb-4">📋 SENARAI PROGRAM & PLC DAERAH</h3>
                 <div id="fullOprCardsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
             </div>
         </section>
 
+        <!-- ANALISIS SPM -->
         <section id="tab-spm" class="hidden space-y-6">
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
                 <h3 class="font-black text-slate-900 text-base mb-2">🎓 ANALISIS & TREND SPM DAERAH (2021–2036)</h3>
                 <p class="text-xs text-slate-500 mb-6">Pusat rujukan trend pencapaian, sasaran, dan GPS Sejarah SPM Daerah Baling.</p>
-
-                <div class="overflow-x-auto">
-                    <table class="w-full text-xs text-left border-collapse">
-                        <thead>
-                            <tr class="bg-slate-900 text-white uppercase font-bold">
-                                <th class="p-3 rounded-l-xl">Tahun SPM</th>
-                                <th class="p-3">Bil. Calon</th>
-                                <th class="p-3">GPS Daerah</th>
-                                <th class="p-3">% Lulus</th>
-                                <th class="p-3">Sasaran GPS</th>
-                                <th class="p-3 rounded-r-xl">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody id="spmTrendTable" class="divide-y divide-slate-100 font-semibold text-slate-700"></tbody>
-                    </table>
-                </div>
             </div>
         </section>
 
+        <!-- MODUL BAHAN -->
         <section id="tab-bahan" class="hidden space-y-6">
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-                    <div>
-                        <h3 class="font-black text-slate-900 text-base">📚 MODUL BAHAN PANITIA</h3>
-                        <p class="text-xs text-slate-500">Pusat perkongsian RPH, DSKP, PBD, Kajian Kes, & Pendekatan Terbeza.</p>
-                    </div>
-                    <button onclick="openUploadModal('BAHAN')" class="bg-emerald-800 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow hover:bg-emerald-900">
-                        <i class="fa-solid fa-plus mr-1"></i> ➕ MASUKKAN BAHAN
-                    </button>
-                </div>
-
-                <div class="flex flex-wrap gap-2 mb-6 text-xs font-bold">
-                    <button onclick="filterBahanCategory('ALL')" class="px-3 py-2 bg-emerald-800 text-white rounded-xl">Semua</button>
-                    <button onclick="filterBahanCategory('RPH')" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-xl">📝 RPH</button>
-                    <button onclick="filterBahanCategory('ITEM')" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-xl">🎯 Perealisasian Item</button>
-                    <button onclick="filterBahanCategory('DSKP')" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-xl">📖 DSKP</button>
-                    <button onclick="filterBahanCategory('KAJIAN')" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-xl">🔎 Kajian Kes</button>
-                    <button onclick="filterBahanCategory('PBD')" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-xl">📊 PBD</button>
-                    <button onclick="filterBahanCategory('PLC')" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-xl">🤝 PLC</button>
-                    <button onclick="filterBahanCategory('TERBEZA')" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-xl">🧩 Pendekatan Terbeza</button>
-                    <button onclick="filterBahanCategory('AMALAN')" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-xl">⭐ Amalan Terbaik</button>
-                </div>
-
-                <div id="bahanGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+                <h3 class="font-black text-slate-900 text-base mb-4">📚 MODUL BAHAN PANITIA</h3>
+                <p class="text-xs text-slate-500">Pusat perkongsian RPH, DSKP, PBD, Kajian Kes, & Pendekatan Terbeza.</p>
             </div>
         </section>
 
+        <!-- BANK SUMBER -->
         <section id="tab-sumber" class="hidden space-y-6">
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-                    <div>
-                        <h3 class="font-black text-slate-900 text-base">📚 BANK SUMBER SEJARAH</h3>
-                        <p class="text-xs text-slate-500">Soalan Peperiksaan, Modul KBAT, & Infografik.</p>
-                    </div>
-                    <button onclick="openUploadModal('SUMBER')" class="bg-emerald-800 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow hover:bg-emerald-900">
-                        <i class="fa-solid fa-plus mr-1"></i> ➕ MASUKKAN SUMBER
-                    </button>
-                </div>
-
-                <div id="sumberGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                <h3 class="font-black text-slate-900 text-base mb-4">📚 BANK SUMBER SEJARAH</h3>
+                <p class="text-xs text-slate-500">Soalan Peperiksaan, Modul KBAT, & Infografik.</p>
             </div>
         </section>
 
+        <!-- LAIN-LAIN DOKUMEN -->
         <section id="tab-lain" class="hidden space-y-6">
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
                 <h3 class="font-black text-slate-900 text-base mb-4">📂 SURAT, PEKELILING & DOKUMEN RASMI</h3>
-                <div id="lainGrid" class="space-y-3"></div>
             </div>
         </section>
 
     </main>
 
-    <div id="oprFormModal" class="fixed inset-0 bg-slate-900/80 z-[110] hidden flex items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-white rounded-3xl max-w-3xl w-full p-6 md:p-8 my-auto shadow-2xl relative max-h-[90vh] overflow-y-auto text-xs">
-            <button onclick="closeOprFormModal()" class="absolute right-6 top-6 text-slate-400 hover:text-slate-700 text-lg font-bold"><i class="fa-solid fa-xmark"></i></button>
+    <script>
+        const schoolDatabase = [
+            // SEKOLAH MENENGAH (17 SEKOLAH)
+            { nama: "SMK BAKAI", kat: "MENENGAH" },
+            { nama: "SMK JERAI", kat: "MENENGAH" },
+            { nama: "SMK PARIT PANJANG", kat: "MENENGAH" },
+            { nama: "SMK TANJONG PUTERI", kat: "MENENGAH" },
+            { nama: "SMK BALING", kat: "MENENGAH" },
+            { nama: "SMK KUALA KETIL", kat: "MENENGAH" },
+            { nama: "SMK SIONG", kat: "MENENGAH" },
+            { nama: "SMK TELOI KANAN", kat: "MENENGAH" },
+            { nama: "SMK BONGOR", kat: "MENENGAH" },
+            { nama: "SMK KUALA PEGANG", kat: "MENENGAH" },
+            { nama: "SMK SYED ABU BAKAR", kat: "MENENGAH" },
+            { nama: "SMK TUNKU PUTERA", kat: "MENENGAH" },
+            { nama: "SMK KUPANG", kat: "MENENGAH" },
+            { nama: "MAKTAB MAHMUD BALING", kat: "MENENGAH" },
+            { nama: "SMA ANNAJAH", kat: "MENENGAH" },
+            { nama: "SEKOLAH MODEL KHAS BALING", kat: "MENENGAH" },
+            { nama: "SMKA BALING", kat: "MENENGAH" },
 
-            <h3 id="formModalTitle" class="text-lg font-black text-slate-900 mb-1">BORANG MAKLUMAT OPR PROGRAM / PLC</h3>
-            <p class="text-slate-500 mb-6">Lengkapkan maklumat dan muat naik 4 keping gambar untuk dijana AI.</p>
+            // SEKOLAH RENDAH (54 SEKOLAH)
+            { nama: "SJKC CHIN HWA", kat: "RENDAH" },
+            { nama: "SJKC KAMPUNG LALANG", kat: "RENDAH" },
+            { nama: "SJKC KUALA KETIL", kat: "RENDAH" },
+            { nama: "SJKC YEOK CHEE", kat: "RENDAH" },
+            { nama: "SJKT LADANG MALAKOFF", kat: "RENDAH" },
+            { nama: "SJKT LDG BATU PEKAKA", kat: "RENDAH" },
+            { nama: "SJKT LDG KIM SENG", kat: "RENDAH" },
+            { nama: "SJKT LDG KUPANG", kat: "RENDAH" },
+            { nama: "SJKT LDG PELAM", kat: "RENDAH" },
+            { nama: "SK ASAM JAWA/CAROK KELIAN", kat: "RENDAH" },
+            { nama: "SK BADANG", kat: "RENDAH" },
+            { nama: "SK BALING", kat: "RENDAH" },
+            { nama: "SK BATU PEKAKA", kat: "RENDAH" },
+            { nama: "SK BINJUL", kat: "RENDAH" },
+            { nama: "SK BINJUL DALAM", kat: "RENDAH" },
+            { nama: "SK DALAM WANG", kat: "RENDAH" },
+            { nama: "SK IBOI", kat: "RENDAH" },
+            { nama: "SK KAMPONG KEDA", kat: "RENDAH" },
+            { nama: "SK KAMPONG PADANG", kat: "RENDAH" },
+            { nama: "SK KAMPUNG BANDAR", kat: "RENDAH" },
+            { nama: "SK KAMPUNG SADEK", kat: "RENDAH" },
+            { nama: "SK KAMPUNG SELARONG", kat: "RENDAH" },
+            { nama: "SK KAMPUNG SERA", kat: "RENDAH" },
+            { nama: "SK KUALA KETIL", kat: "RENDAH" },
+            { nama: "SK KUALA KUANG", kat: "RENDAH" },
+            { nama: "SK KUALA KUPANG", kat: "RENDAH" },
+            { nama: "SK KUALA MERAH", kat: "RENDAH" },
+            { nama: "SK KUALA PEGANG", kat: "RENDAH" },
+            { nama: "SK KUALA SAMAK", kat: "RENDAH" },
+            { nama: "SK LANAI", kat: "RENDAH" },
+            { nama: "SK MALAU", kat: "RENDAH" },
+            { nama: "SK MOHD ARIFF ABDULLAH", kat: "RENDAH" },
+            { nama: "SK PAYA BESAR", kat: "RENDAH" },
+            { nama: "SK PENGHULU ABU BAKAR", kat: "RENDAH" },
+            { nama: "SK PULAI", kat: "RENDAH" },
+            { nama: "SK RAMBONG PULAI", kat: "RENDAH" },
+            { nama: "SK SEBERANG KETIL", kat: "RENDAH" },
+            { nama: "SK SERI BAYU", kat: "RENDAH" },
+            { nama: "SK SERI INAS", kat: "RENDAH" },
+            { nama: "SK SERI JEMERLI", kat: "RENDAH" },
+            { nama: "SK SIONG", kat: "RENDAH" },
+            { nama: "SK SYED SHEH", kat: "RENDAH" },
+            { nama: "SK TANJUNG PARI", kat: "RENDAH" },
+            { nama: "SK TAWAR", kat: "RENDAH" },
+            { nama: "SK TELOI KANAN", kat: "RENDAH" },
+            { nama: "SK TELOK TEDURI", kat: "RENDAH" },
+            { nama: "SK TEMBAK", kat: "RENDAH" },
+            { nama: "SK TIAK", kat: "RENDAH" },
+            { nama: "SK TITI GANTONG", kat: "RENDAH" },
+            { nama: "SK TUNKU PUAN HABSAH", kat: "RENDAH" },
+            { nama: "SK TUNKU PUTERA", kat: "RENDAH" },
+            { nama: "SK ULU BAKAI", kat: "RENDAH" },
+            { nama: "SK ULU TAWAR", kat: "RENDAH" }
+        ];
 
-            <form onsubmit="handleOprFormSubmit(event)" class="space-y-4">
-                <input type="hidden" id="formOprSchoolName">
-                <input type="hidden" id="formOprCategory">
+        let currentCategoryView = 'MENENGAH';
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block font-bold mb-1">Jenis Laporan</label>
-                        <select id="formOprType" class="w-full p-3 border rounded-xl font-bold">
-                            <option value="PROGRAM">Program Panitia</option>
-                            <option value="PLC">Aktiviti PLC</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block font-bold mb-1">Nama Program / PLC</label>
-                        <input type="text" id="formOprTitle" required placeholder="Contoh: Bengkel Menjawab Sejarah Kertas 2" class="w-full p-3 border rounded-xl">
-                    </div>
-                </div>
+        window.onload = function() {
+            renderSchools();
+        };
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div>
-                        <label class="block font-bold mb-1">Tarikh</label>
-                        <input type="date" id="formOprDate" required class="w-full p-3 border rounded-xl">
-                    </div>
-                    <div>
-                        <label class="block font-bold mb-1">Tempat / Fokus (PLC)</label>
-                        <input type="text" id="formOprVenue" required placeholder="Dewan / Bilik Mesyuarat" class="w-full p-3 border rounded-xl">
-                    </div>
-                    <div>
-                        <label class="block font-bold mb-1">Sasaran / Ahli</label>
-                        <input type="text" id="formOprTarget" required placeholder="Murid T5 / All Guru Sejarah" class="w-full p-3 border rounded-xl">
-                    </div>
-                </div>
+        function handleLogin(e) {
+            e.preventDefault();
+            const school = document.getElementById('loginSchool').value;
+            const role = document.getElementById('loginRole').value;
+            document.getElementById('userDisplayName').innerText = role === 'ADMIN' ? 'SISC+ / PPD Baling' : school;
+            document.getElementById('userRoleBadge').innerText = role === 'ADMIN' ? 'Admin Daerah' : 'Ketua Panitia';
+            document.getElementById('loginModal').classList.add('hidden');
+        }
 
-                <div>
-                    <label class="block font-bold mb-1">Objektif Utama / Isu Perbincangan</label>
-                    <textarea id="formOprObjective" rows="2" required
+        function logout() { document.getElementById('loginModal').classList.remove('hidden'); }
+        function toggleSchoolField() {
+            const role = document.getElementById('loginRole').value;
+            document.getElementById('schoolSelectContainer').style.display = role === 'ADMIN' ? 'none' : 'block';
+        }
+
+        function switchTab(tabId) {
+            ['dashboard', 'sekolah', 'senarai-opr', 'spm', 'bahan', 'sumber', 'lain'].forEach(t => {
+                document.getElementById('tab-' + t).classList.add('hidden');
+            });
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+        }
+
+        function switchSchoolCategory(kat) {
+            currentCategoryView = kat;
+            renderSchools();
+        }
+
+        function renderSchools() {
+            const container = document.getElementById('schoolCardsContainer');
+            if(!container) return;
+            container.innerHTML = '';
+
+            const list = schoolDatabase.filter(s => s.kat === currentCategoryView);
+            list.forEach(s => {
+                container.innerHTML += `
+                    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between text-xs space-y-4">
+                        <div>
+                            <span class="bg-emerald-100 text-emerald-800 font-extrabold px-2.5 py-1 rounded-full text-[10px]">${s.kat}</span>
+                            <h4 class="font-black text-slate-900 text-sm my-2">${s.nama}</h4>
+                        </div>
+                        <button onclick="alert('Membuka borang OPR untuk ${s.nama}')" class="w-full bg-emerald-800 text-white font-extrabold py-2.5 rounded-xl hover:bg-emerald-900">
+                            + Tambah Program / PLC
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        function openExternalAnalysis() { window.open('https://sistem-analisis-item-demo.vercel.app', '_blank'); }
+        function changeYearFilter() {}
+    </script>
+</body>
+</html>
