@@ -253,7 +253,7 @@
             <div id="schoolCardsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
-        <!-- TAB MODUL BAHAN PANITIA -->
+        <!-- TAB MODUL BAHAN PANITIA (DENGAN PAPARAN SENARAI MENDATAR KE BAWAH) -->
         <section id="tab-bahan" class="hidden space-y-6">
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
                 
@@ -272,7 +272,7 @@
                     </button>
                 </div>
 
-                <!-- SUB-BUTANG KATEGORI TERMASUK DSKP & PBD -->
+                <!-- SUB-BUTANG KATEGORI -->
                 <div class="flex flex-wrap gap-2 font-extrabold text-xs border-b pb-4">
                     <button onclick="filterBahanCategory('ALL')" id="btn-bahan-ALL" class="px-3.5 py-2 bg-slate-900 text-white rounded-xl shadow-sm">Semua Bahan</button>
                     <button onclick="filterBahanCategory('RPH')" id="btn-bahan-RPH" class="px-3.5 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-xl">📝 1. RPH</button>
@@ -286,8 +286,8 @@
                     <button onclick="filterBahanCategory('PBD')" id="btn-bahan-PBD" class="px-3.5 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-xl">📊 9. PBD</button>
                 </div>
 
-                <!-- KONTENA SENARAI KAD BAHAN MODUL -->
-                <div id="bahanListGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                <!-- KONTENA SENARAI KE BAWAH (KEKEMASAN BARIS MENDATAR) -->
+                <div id="bahanListGrid" class="space-y-3"></div>
             </div>
         </section>
 
@@ -305,7 +305,7 @@
                     </button>
                 </div>
 
-                <div id="sumberListGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                <div id="sumberListGrid" class="space-y-3"></div>
             </div>
         </section>
 
@@ -323,7 +323,7 @@
                     </button>
                 </div>
 
-                <div id="lainListGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                <div id="lainListGrid" class="space-y-3"></div>
             </div>
         </section>
 
@@ -337,7 +337,7 @@
 
     </main>
 
-    <!-- MODAL POPUP MUAT NAIK BAHAN DENGAN ENJIN SIMPANAN REKOD REALTIME -->
+    <!-- MODAL POPUP MUAT NAIK BAHAN -->
     <div id="uploadModal" class="fixed inset-0 bg-slate-900/80 z-[110] hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-md w-full p-6 relative text-xs">
             <button onclick="closeUploadModal()" class="absolute right-5 top-5 text-slate-400 hover:text-slate-700 font-bold"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -383,16 +383,16 @@
 
         let currentActiveBahanCat = 'ALL';
 
-        // DATABASE PANGKALAN BAHAN MODUL (ARRAY REALTIME)
+        // DATABASE PANGKALAN BAHAN MODUL
         let sampleBahanList = [
-            { id: 1, tajuk: "RPH Standard KSSM Tingkatan 4 Bab 1 & 2", kat: "RPH", sumber: "JU Sejarah Daerah", tarikh: "2026-03-01", fileUrl: "#" },
-            { id: 2, tajuk: "Contoh RPH Tingkatan 5 (Integrasi KBAT)", kat: "CONTOH_RPH", sumber: "Muat Naik: SMK TUNKU PUTERA", tarikh: "2026-03-02", fileUrl: "#" },
-            { id: 3, tajuk: "Perealisasian Item & Soalan Ujian Mac Sejarah T4", kat: "ITEM", sumber: "Muat Naik: SMK BALING", tarikh: "2026-02-28", fileUrl: "#" },
-            { id: 4, tajuk: "Panduan Laporan Contoh Kajian Kes KSSM T3", kat: "KAJIAN", sumber: "Muat Naik: SK BALING", tarikh: "2026-02-20", fileUrl: "#" },
-            { id: 5, tajuk: "Modul Sesi Perbincangan PLC Panitia Bil 1/2026", kat: "PLC", sumber: "Panitia Daerah", tarikh: "2026-01-15", fileUrl: "#" },
-            { id: 6, tajuk: "Panduan & Contoh RPH Pendekatan Terbeza Aras Cemerlang/Weak", kat: "TERBEZA", sumber: "SISC+ PPD Baling", tarikh: "2026-02-10", fileUrl: "#" },
-            { id: 7, tajuk: "Amalan Terbaik: Inovasi Peta Minda Digital Sejarah", kat: "AMALAN", sumber: "SMK KUALA KETIL", tarikh: "2026-01-25", fileUrl: "#" },
-            { id: 8, tajuk: "Dokumen Standard Kurikulum dan Pentaksiran (DSKP) Tingkatan 1–5", kat: "DSKP", sumber: "Bahagian Pembangunan Kurikulum KPM", tarikh: "2026-01-01", fileUrl: "#" },
+            { id: 1, tajuk: "DSKP SEJARAH TAHUN 6", kat: "DSKP", sumber: "Muat Naik: SEMUA SEKOLAH DAERAH", tarikh: "2026-09-04", fileUrl: "#" },
+            { id: 2, tajuk: "DSKP SEJARAH TAHUN 5", kat: "DSKP", sumber: "Muat Naik: SEMUA SEKOLAH DAERAH", tarikh: "2026-09-04", fileUrl: "#" },
+            { id: 3, tajuk: "DSKP SEJARAH TAHUN 4", kat: "DSKP", sumber: "Muat Naik: SEMUA SEKOLAH DAERAH", tarikh: "2026-09-04", fileUrl: "#" },
+            { id: 4, tajuk: "DSKP SEJARAH TINGKATAN 1", kat: "DSKP", sumber: "Muat Naik: SEMUA SEKOLAH DAERAH", tarikh: "2026-09-04", fileUrl: "#" },
+            { id: 5, tajuk: "RPH Standard KSSM Tingkatan 4 Bab 1 & 2", kat: "RPH", sumber: "JU Sejarah Daerah", tarikh: "2026-03-01", fileUrl: "#" },
+            { id: 6, tajuk: "Contoh RPH Tingkatan 5 (Integrasi KBAT)", kat: "CONTOH_RPH", sumber: "Muat Naik: SMK TUNKU PUTERA", tarikh: "2026-03-02", fileUrl: "#" },
+            { id: 7, tajuk: "Perealisasian Item & Soalan Ujian Mac Sejarah T4", kat: "ITEM", sumber: "Muat Naik: SMK BALING", tarikh: "2026-02-28", fileUrl: "#" },
+            { id: 8, tajuk: "Panduan Laporan Contoh Kajian Kes KSSM T3", kat: "KAJIAN", sumber: "Muat Naik: SK BALING", tarikh: "2026-02-20", fileUrl: "#" },
             { id: 9, tajuk: "Panduan Pelaksanaan & Rubrik Pentaksiran PBD Sejarah", kat: "PBD", sumber: "SISC+ PPD Baling", tarikh: "2026-01-10", fileUrl: "#" }
         ];
 
@@ -758,7 +758,7 @@
             });
         }
 
-        // FUNGSI MEMAPARKAN BAHAN MODUL PANITIA SECARA REALTIME
+        // PAPARAN SENARAI MENDATAR KE BAWAH (BARIS LENGKAP & INTERAKSI PANITIA)
         function renderBahanList(filterCategory = 'ALL') {
             currentActiveBahanCat = filterCategory;
             const bahanGrid = document.getElementById('bahanListGrid');
@@ -770,25 +770,30 @@
             }
 
             if (list.length === 0) {
-                bahanGrid.innerHTML = `<p class="text-slate-400 italic text-xs col-span-2 py-4 text-center">Tiada bahan dijumpai di bawah kategori ini. Sila muat naik bahan baharu.</p>`;
+                bahanGrid.innerHTML = `<p class="text-slate-400 italic text-xs py-4 text-center">Tiada bahan dijumpai di bawah kategori ini. Sila muat naik bahan baharu.</p>`;
                 return;
             }
 
+            // PAPARAN BARIS MENDATAR (BARIS DEMI BARIS KE BAWAH)
             bahanGrid.innerHTML = list.map(item => `
-                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs flex flex-col justify-between space-y-3 shadow-sm">
-                    <div>
-                        <span class="bg-blue-100 text-blue-800 font-extrabold px-2.5 py-0.5 rounded-full text-[9px] uppercase">${item.kat.replace('_', ' ')}</span>
-                        <h4 class="font-bold text-slate-900 text-sm mt-2">${item.tajuk}</h4>
-                        <p class="text-[10px] text-slate-500 mt-1"><i class="fa-solid fa-database mr-1"></i>${item.sumber} • ${item.tarikh}</p>
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm hover:border-blue-300 transition">
+                    <div class="space-y-1">
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-blue-100 text-blue-800 font-extrabold px-2.5 py-0.5 rounded-full text-[9px] uppercase">${item.kat.replace('_', ' ')}</span>
+                            <span class="text-[10px] text-slate-400"><i class="fa-solid fa-calendar mr-1"></i>${item.tarikh}</span>
+                        </div>
+                        <h4 class="font-bold text-slate-900 text-sm">${item.tajuk}</h4>
+                        <p class="text-[10px] text-slate-500"><i class="fa-solid fa-database mr-1 text-slate-400"></i>${item.sumber}</p>
                     </div>
-                    <div class="grid grid-cols-3 gap-1.5 pt-2 border-t border-slate-200">
-                        <button onclick="downloadFile('${item.tajuk}')" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-1.5 px-2 rounded-lg text-[10px] flex items-center justify-center space-x-1">
+
+                    <div class="flex items-center space-x-2 shrink-0 border-t md:border-t-0 pt-2 md:pt-0">
+                        <button onclick="downloadFile('${item.tajuk}')" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-3 rounded-xl text-[10px] flex items-center space-x-1 shadow-sm">
                             <i class="fa-solid fa-download"></i> <span>Muat Turun</span>
                         </button>
-                        <button onclick="saveItem('${item.tajuk}')" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-1.5 px-2 rounded-lg text-[10px] flex items-center justify-center space-x-1">
+                        <button onclick="saveItem('${item.tajuk}')" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2 px-3 rounded-xl text-[10px] flex items-center space-x-1 shadow-sm">
                             <i class="fa-solid fa-bookmark"></i> <span>Simpan</span>
                         </button>
-                        <button onclick="printFile('${item.tajuk}')" class="bg-slate-800 hover:bg-slate-900 text-white font-bold py-1.5 px-2 rounded-lg text-[10px] flex items-center justify-center space-x-1">
+                        <button onclick="printFile('${item.tajuk}')" class="bg-slate-800 hover:bg-slate-900 text-white font-bold py-2 px-3 rounded-xl text-[10px] flex items-center space-x-1 shadow-sm">
                             <i class="fa-solid fa-print"></i> <span>Cetak</span>
                         </button>
                     </div>
@@ -828,20 +833,20 @@
             const sumberGrid = document.getElementById('sumberListGrid');
             if (sumberGrid) {
                 sumberGrid.innerHTML = sampleSumberList.map(item => `
-                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs flex flex-col justify-between space-y-3">
+                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm">
                         <div>
                             <span class="bg-amber-100 text-amber-800 font-extrabold px-2.5 py-0.5 rounded-full text-[9px] uppercase">${item.jenis}</span>
-                            <h4 class="font-bold text-slate-900 text-sm mt-2">${item.tajuk}</h4>
-                            <p class="text-[10px] text-slate-500 mt-1"><i class="fa-solid fa-user-gear mr-1"></i>${item.penyumbang} • ${item.tarikh}</p>
+                            <h4 class="font-bold text-slate-900 text-sm mt-1">${item.tajuk}</h4>
+                            <p class="text-[10px] text-slate-500 mt-0.5"><i class="fa-solid fa-user-gear mr-1"></i>${item.penyumbang} • ${item.tarikh}</p>
                         </div>
-                        <div class="grid grid-cols-3 gap-1.5 pt-2 border-t border-slate-200">
-                            <button onclick="downloadFile('${item.tajuk}')" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-1.5 px-2 rounded-lg text-[10px] flex items-center justify-center space-x-1">
+                        <div class="flex items-center space-x-2 shrink-0 border-t md:border-t-0 pt-2 md:pt-0">
+                            <button onclick="downloadFile('${item.tajuk}')" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-3 rounded-xl text-[10px] flex items-center space-x-1">
                                 <i class="fa-solid fa-download"></i> <span>Muat Turun</span>
                             </button>
-                            <button onclick="saveItem('${item.tajuk}')" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-1.5 px-2 rounded-lg text-[10px] flex items-center justify-center space-x-1">
+                            <button onclick="saveItem('${item.tajuk}')" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2 px-3 rounded-xl text-[10px] flex items-center space-x-1">
                                 <i class="fa-solid fa-bookmark"></i> <span>Simpan</span>
                             </button>
-                            <button onclick="printFile('${item.tajuk}')" class="bg-slate-800 hover:bg-slate-900 text-white font-bold py-1.5 px-2 rounded-lg text-[10px] flex items-center justify-center space-x-1">
+                            <button onclick="printFile('${item.tajuk}')" class="bg-slate-800 hover:bg-slate-900 text-white font-bold py-2 px-3 rounded-xl text-[10px] flex items-center space-x-1">
                                 <i class="fa-solid fa-print"></i> <span>Cetak</span>
                             </button>
                         </div>
@@ -852,20 +857,20 @@
             const lainGrid = document.getElementById('lainListGrid');
             if (lainGrid) {
                 lainGrid.innerHTML = sampleLainList.map(item => `
-                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs flex flex-col justify-between space-y-3">
+                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm">
                         <div>
                             <span class="bg-teal-100 text-teal-800 font-extrabold px-2.5 py-0.5 rounded-full text-[9px] uppercase">${item.jenis}</span>
-                            <h4 class="font-bold text-slate-900 text-sm mt-2">${item.tajuk}</h4>
-                            <p class="text-[10px] text-slate-500 mt-1"><i class="fa-solid fa-file-signature mr-1"></i>${item.penyumbang} • ${item.tarikh}</p>
+                            <h4 class="font-bold text-slate-900 text-sm mt-1">${item.tajuk}</h4>
+                            <p class="text-[10px] text-slate-500 mt-0.5"><i class="fa-solid fa-file-signature mr-1"></i>${item.penyumbang} • ${item.tarikh}</p>
                         </div>
-                        <div class="grid grid-cols-3 gap-1.5 pt-2 border-t border-slate-200">
-                            <button onclick="downloadFile('${item.tajuk}')" class="bg-teal-700 hover:bg-teal-800 text-white font-bold py-1.5 px-2 rounded-lg text-[10px] flex items-center justify-center space-x-1">
+                        <div class="flex items-center space-x-2 shrink-0 border-t md:border-t-0 pt-2 md:pt-0">
+                            <button onclick="downloadFile('${item.tajuk}')" class="bg-teal-700 hover:bg-teal-800 text-white font-bold py-2 px-3 rounded-xl text-[10px] flex items-center space-x-1">
                                 <i class="fa-solid fa-download"></i> <span>Muat Turun</span>
                             </button>
-                            <button onclick="saveItem('${item.tajuk}')" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-1.5 px-2 rounded-lg text-[10px] flex items-center justify-center space-x-1">
+                            <button onclick="saveItem('${item.tajuk}')" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2 px-3 rounded-xl text-[10px] flex items-center space-x-1">
                                 <i class="fa-solid fa-bookmark"></i> <span>Simpan</span>
                             </button>
-                            <button onclick="printFile('${item.tajuk}')" class="bg-slate-800 hover:bg-slate-900 text-white font-bold py-1.5 px-2 rounded-lg text-[10px] flex items-center justify-center space-x-1">
+                            <button onclick="printFile('${item.tajuk}')" class="bg-slate-800 hover:bg-slate-900 text-white font-bold py-2 px-3 rounded-xl text-[10px] flex items-center space-x-1">
                                 <i class="fa-solid fa-print"></i> <span>Cetak</span>
                             </button>
                         </div>
@@ -890,7 +895,6 @@
             document.getElementById('uploadModal').classList.add('hidden');
         }
 
-        // FUNGSI UTAMA PENAMBAHAN REALTIME KE DALAM PANGKALAN DATA DSKP/BAHAN
         function handleUploadSubmit(e) {
             e.preventDefault();
             const title = document.getElementById('uploadTitle').value;
@@ -908,14 +912,12 @@
                 fileUrl: "#"
             };
 
-            // Masukkan rekod baharu ke dalam senarai
             sampleBahanList.unshift(newBahan);
 
             alert(`Bahan [${title}] berjaya dimuat naik ke dalam pangkalan data!`);
             closeUploadModal();
             document.getElementById('uploadTitle').value = '';
 
-            // Papar semula senarai bahan serta-merta
             filterBahanCategory(category);
             switchTab('bahan');
         }
