@@ -181,7 +181,7 @@
                     <span>CAPAIAN PANTAS MODUL PANITIA</span>
                 </h3>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <button onclick="switchTab('bahan')" class="bg-blue-600 hover:bg-blue-700 text-white p-5 rounded-2xl shadow-md transition text-left flex flex-col justify-between group">
                         <div class="flex justify-between items-center mb-3">
                             <span class="text-2xl"><i class="fa-solid fa-folder-open"></i></span>
@@ -215,31 +215,20 @@
                         </div>
                     </button>
 
-                    <button onclick="switchTab('senarai-opr')" class="bg-rose-600 hover:bg-rose-700 text-white p-5 rounded-2xl shadow-md transition text-left flex flex-col justify-between group">
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-2xl"><i class="fa-solid fa-award"></i></span>
-                            <i class="fa-solid fa-arrow-up-right-from-square opacity-60 group-hover:opacity-100 text-xs"></i>
-                        </div>
-                        <div>
-                            <span class="font-extrabold text-sm block">4. PROGRAM KPM / JPN / PPD</span>
-                            <span class="text-[10px] text-rose-100 block mt-0.5">Laporan & Aktiviti Rasmi Peringkat Tinggi</span>
-                        </div>
-                    </button>
-
                     <button onclick="switchTab('lain')" class="bg-teal-700 hover:bg-teal-800 text-white p-5 rounded-2xl shadow-md transition text-left flex flex-col justify-between group">
                         <div class="flex justify-between items-center mb-3">
                             <span class="text-2xl"><i class="fa-solid fa-ellipsis-vertical"></i></span>
                             <i class="fa-solid fa-arrow-up-right-from-square opacity-60 group-hover:opacity-100 text-xs"></i>
                         </div>
                         <div>
-                            <span class="font-extrabold text-sm block">5. LAIN-LAIN</span>
+                            <span class="font-extrabold text-sm block">4. LAIN-LAIN</span>
                             <span class="text-[10px] text-teal-100 block mt-0.5">Surat, Pekeliling & Dokumen</span>
                         </div>
                     </button>
                 </div>
             </div>
 
-            <!-- PENAMBAHBAIKAN BAHARU: SEKSYEN PAPARAN PROGRAM KPM / JPN / PPD DIBAWAH DASHBOARD -->
+            <!-- SEKSYEN PERMANEN: PROGRAM KPM / JPN / PPD TERUS DIBAWAH DASHBOARD -->
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-3 gap-2">
                     <div>
@@ -247,39 +236,39 @@
                             <i class="fa-solid fa-award text-rose-600"></i>
                             <span>PROGRAM & AKTIVITI RASMI KPM / JPN / PPD</span>
                         </h3>
-                        <p class="text-xs text-slate-500 mt-0.5">Paparan aktiviti, bengkel, dan inisiatif khas panitia daerah peringkat tinggi.</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Paparan program utama, bengkel intervensi, dan perancangan panitia daerah.</p>
                     </div>
-                    <button onclick="switchTab('senarai-opr')" class="text-xs text-rose-600 font-extrabold hover:underline">Lihat Semua Laporan OPR <i class="fa-solid fa-chevron-right ml-1"></i></button>
+                    <button onclick="switchTab('senarai-opr')" class="text-xs text-rose-600 font-extrabold hover:underline">Lihat Rekod Laporan OPR <i class="fa-solid fa-chevron-right ml-1"></i></button>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="bg-rose-50 border border-rose-100 p-4 rounded-2xl space-y-2">
-                        <span class="bg-rose-600 text-white font-extrabold text-[9px] px-2 py-0.5 rounded-full uppercase">KPM / JPN</span>
-                        <h4 class="font-bold text-slate-900 text-xs">Bengkel Pemantapan Pedagogi Sejarah KSSM Daerah</h4>
-                        <p class="text-[10px] text-slate-500">PPD Baling • 15 Februari 2026</p>
-                        <div class="pt-2 flex justify-between items-center text-[10px]">
+                    <div class="bg-rose-50/60 border border-rose-100 p-4 rounded-2xl space-y-2">
+                        <span class="bg-rose-600 text-white font-extrabold text-[9px] px-2.5 py-0.5 rounded-full uppercase">KPM / JPN</span>
+                        <h4 class="font-bold text-slate-900 text-xs mt-1">Bengkel Pemantapan Pedagogi Sejarah KSSM Daerah</h4>
+                        <p class="text-[10px] text-slate-500"><i class="fa-solid fa-location-dot mr-1"></i>PPD Baling • 15 Februari 2026</p>
+                        <div class="pt-2 flex justify-between items-center text-[10px] border-t border-rose-100">
                             <span class="text-emerald-700 font-bold"><i class="fa-solid fa-circle-check mr-1"></i>Selesai</span>
-                            <button onclick="switchTab('senarai-opr')" class="text-slate-700 font-bold hover:underline">Lihat OPR</button>
+                            <button onclick="switchTab('senarai-opr')" class="text-slate-800 font-extrabold hover:underline">Lihat OPR</button>
                         </div>
                     </div>
 
-                    <div class="bg-rose-50 border border-rose-100 p-4 rounded-2xl space-y-2">
-                        <span class="bg-rose-600 text-white font-extrabold text-[9px] px-2 py-0.5 rounded-full uppercase">PPD BALING</span>
-                        <h4 class="font-bold text-slate-900 text-xs">Program Intervensi & Bimbingan SPM Sejarah 2026</h4>
-                        <p class="text-[10px] text-slate-500">SISC+ PPD Baling • 01 Mac 2026</p>
-                        <div class="pt-2 flex justify-between items-center text-[10px]">
+                    <div class="bg-rose-50/60 border border-rose-100 p-4 rounded-2xl space-y-2">
+                        <span class="bg-rose-600 text-white font-extrabold text-[9px] px-2.5 py-0.5 rounded-full uppercase">PPD BALING</span>
+                        <h4 class="font-bold text-slate-900 text-xs mt-1">Program Intervensi & Bimbingan SPM Sejarah 2026</h4>
+                        <p class="text-[10px] text-slate-500"><i class="fa-solid fa-location-dot mr-1"></i>SISC+ PPD Baling • 01 Mac 2026</p>
+                        <div class="pt-2 flex justify-between items-center text-[10px] border-t border-rose-100">
                             <span class="text-amber-600 font-bold"><i class="fa-solid fa-clock mr-1"></i>Dalam Pelaksanaan</span>
-                            <button onclick="switchTab('senarai-opr')" class="text-slate-700 font-bold hover:underline">Lihat OPR</button>
+                            <button onclick="switchTab('senarai-opr')" class="text-slate-800 font-extrabold hover:underline">Lihat OPR</button>
                         </div>
                     </div>
 
-                    <div class="bg-rose-50 border border-rose-100 p-4 rounded-2xl space-y-2">
-                        <span class="bg-rose-600 text-white font-extrabold text-[9px] px-2 py-0.5 rounded-full uppercase">KPM / JPN</span>
-                        <h4 class="font-bold text-slate-900 text-xs">Karnival Inovasi & Kajian Kes Sejarah Sekolah Baling</h4>
-                        <p class="text-[10px] text-slate-500">PPD Baling • 10 Mac 2026</p>
-                        <div class="pt-2 flex justify-between items-center text-[10px]">
+                    <div class="bg-rose-50/60 border border-rose-100 p-4 rounded-2xl space-y-2">
+                        <span class="bg-rose-600 text-white font-extrabold text-[9px] px-2.5 py-0.5 rounded-full uppercase">KPM / JPN</span>
+                        <h4 class="font-bold text-slate-900 text-xs mt-1">Karnival Inovasi & Kajian Kes Sejarah Sekolah Baling</h4>
+                        <p class="text-[10px] text-slate-500"><i class="fa-solid fa-location-dot mr-1"></i>PPD Baling • 10 Mac 2026</p>
+                        <div class="pt-2 flex justify-between items-center text-[10px] border-t border-rose-100">
                             <span class="text-blue-600 font-bold"><i class="fa-solid fa-calendar-check mr-1"></i>Mendatang</span>
-                            <button onclick="switchTab('senarai-opr')" class="text-slate-700 font-bold hover:underline">Lihat OPR</button>
+                            <button onclick="switchTab('senarai-opr')" class="text-slate-800 font-extrabold hover:underline">Lihat OPR</button>
                         </div>
                     </div>
                 </div>
@@ -306,7 +295,6 @@
                 </div>
             </div>
 
-            <!-- Kontena Kad Sekolah -->
             <div id="schoolCardsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
@@ -328,7 +316,6 @@
                     </button>
                 </div>
 
-                <!-- SUB-BUTANG KATEGORI TERASING -->
                 <div class="flex flex-wrap gap-2 font-extrabold text-xs border-b pb-4">
                     <button onclick="filterBahanCategory('RPH')" id="btn-bahan-RPH" class="px-3.5 py-2 bg-slate-900 text-white rounded-xl shadow-sm">📝 1. RPH</button>
                     <button onclick="filterBahanCategory('CONTOH_RPH')" id="btn-bahan-CONTOH_RPH" class="px-3.5 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-xl">📥 2. CONTOH RPH (AUTO-SYNC)</button>
@@ -341,13 +328,11 @@
                     <button onclick="filterBahanCategory('PBD')" id="btn-bahan-PBD" class="px-3.5 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-xl">📊 9. PBD</button>
                 </div>
 
-                <!-- TAJUK KATEGORI AKTIF -->
                 <div class="bg-slate-100 p-3 rounded-xl border border-slate-200 flex justify-between items-center">
                     <span id="activeCategoryTitleDisplay" class="font-extrabold text-xs text-slate-800 uppercase">KATEGORI: 📝 1. RPH</span>
                     <span id="activeCategoryCountBadge" class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">0 Bahan</span>
                 </div>
 
-                <!-- KONTENA SENARAI KE BAWAH -->
                 <div id="bahanListGrid" class="space-y-3"></div>
             </div>
         </section>
@@ -875,7 +860,6 @@
             });
         }
 
-        // 1. RENDER MODUL BAHAN PANITIA
         function renderBahanList(filterCategory = 'RPH') {
             currentActiveBahanCat = filterCategory;
             const bahanGrid = document.getElementById('bahanListGrid');
@@ -935,7 +919,6 @@
             `).join('');
         }
 
-        // 2. RENDER BANK SUMBER
         function renderSumberList(filterCategory = 'KBAT') {
             currentActiveSumberCat = filterCategory;
             const sumberGrid = document.getElementById('sumberListGrid');
@@ -991,7 +974,6 @@
             `).join('');
         }
 
-        // 3. RENDER LAIN-LAIN DOKUMEN
         function renderLainList(filterCategory = 'SURAT') {
             currentActiveLainCat = filterCategory;
             const lainGrid = document.getElementById('lainListGrid');
