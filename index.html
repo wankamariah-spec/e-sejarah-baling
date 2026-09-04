@@ -42,7 +42,9 @@
                 <div id="schoolSelectContainer">
                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Pilih Sekolah</label>
                     <select id="loginSchool" class="w-full text-xs font-semibold p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-600 focus:outline-none">
-                        </select>
+                        <option value="SK BALING">SK BALING (RENDAH)</option>
+                        <option value="SMK BALING">SMK BALING (MENENGAH)</option>
+                    </select>
                 </div>
 
                 <div>
@@ -209,12 +211,151 @@
                 </div>
             </div>
 
-            <div id="schoolCardsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                </div>
+            <div id="schoolCardsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
         <section id="tab-senarai-opr" class="hidden space-y-6">
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 pb-4 border-b">
                     <div>
-                        <h3 class="font-black text-slate-900 text-base">📋
+                        <h3 class="font-black text-slate-900 text-base">📋 SENARAI PROGRAM & PLC DAERAH</h3>
+                        <p class="text-xs text-slate-500">Kumpulan rekod OPR terjana mengikut sekolah dan tahun.</p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        <select id="filterOprType" onchange="renderFullOprList()" class="p-2 border rounded-xl font-bold">
+                            <option value="ALL">Semua Jenis (Program / PLC)</option>
+                            <option value="PROGRAM">Program</option>
+                            <option value="PLC">PLC</option>
+                        </select>
+                        <select id="filterOprCategory" onchange="renderFullOprList()" class="p-2 border rounded-xl font-bold">
+                            <option value="ALL">Semua Peringkat Sekolah</option>
+                            <option value="RENDAH">Sekolah Rendah</option>
+                            <option value="MENENGAH">Sekolah Menengah</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="fullOprCardsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+            </div>
+        </section>
+
+        <section id="tab-spm" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+                <h3 class="font-black text-slate-900 text-base mb-2">🎓 ANALISIS & TREND SPM DAERAH (2021–2036)</h3>
+                <p class="text-xs text-slate-500 mb-6">Pusat rujukan trend pencapaian, sasaran, dan GPS Sejarah SPM Daerah Baling.</p>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-900 text-white uppercase font-bold">
+                                <th class="p-3 rounded-l-xl">Tahun SPM</th>
+                                <th class="p-3">Bil. Calon</th>
+                                <th class="p-3">GPS Daerah</th>
+                                <th class="p-3">% Lulus</th>
+                                <th class="p-3">Sasaran GPS</th>
+                                <th class="p-3 rounded-r-xl">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="spmTrendTable" class="divide-y divide-slate-100 font-semibold text-slate-700"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-bahan" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                    <div>
+                        <h3 class="font-black text-slate-900 text-base">📚 MODUL BAHAN PANITIA</h3>
+                        <p class="text-xs text-slate-500">Pusat perkongsian RPH, DSKP, PBD, Kajian Kes, & Pendekatan Terbeza.</p>
+                    </div>
+                    <button onclick="openUploadModal('BAHAN')" class="bg-emerald-800 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow hover:bg-emerald-900">
+                        <i class="fa-solid fa-plus mr-1"></i> ➕ MASUKKAN BAHAN
+                    </button>
+                </div>
+
+                <div class="flex flex-wrap gap-2 mb-6 text-xs font-bold">
+                    <button onclick="filterBahanCategory('ALL')" class="px-3 py-2 bg-emerald-800 text-white rounded-xl">Semua</button>
+                    <button onclick="filterBahanCategory('RPH')" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-xl">📝 RPH</button>
+                    <button onclick="filterBahanCategory('ITEM')" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-xl">🎯 Perealisasian Item</button>
+                    <button onclick="filterBahanCategory('DSKP')" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-xl">📖 DSKP</button>
+                    <button onclick="filterBahanCategory('KAJIAN')" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-xl">🔎 Kajian Kes</button>
+                    <button onclick="filterBahanCategory('PBD')" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-xl">📊 PBD</button>
+                    <button onclick="filterBahanCategory('PLC')" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-xl">🤝 PLC</button>
+                    <button onclick="filterBahanCategory('TERBEZA')" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-xl">🧩 Pendekatan Terbeza</button>
+                    <button onclick="filterBahanCategory('AMALAN')" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-xl">⭐ Amalan Terbaik</button>
+                </div>
+
+                <div id="bahanGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+            </div>
+        </section>
+
+        <section id="tab-sumber" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                    <div>
+                        <h3 class="font-black text-slate-900 text-base">📚 BANK SUMBER SEJARAH</h3>
+                        <p class="text-xs text-slate-500">Soalan Peperiksaan, Modul KBAT, & Infografik.</p>
+                    </div>
+                    <button onclick="openUploadModal('SUMBER')" class="bg-emerald-800 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow hover:bg-emerald-900">
+                        <i class="fa-solid fa-plus mr-1"></i> ➕ MASUKKAN SUMBER
+                    </button>
+                </div>
+
+                <div id="sumberGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+            </div>
+        </section>
+
+        <section id="tab-lain" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+                <h3 class="font-black text-slate-900 text-base mb-4">📂 SURAT, PEKELILING & DOKUMEN RASMI</h3>
+                <div id="lainGrid" class="space-y-3"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="oprFormModal" class="fixed inset-0 bg-slate-900/80 z-[110] hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-3xl w-full p-6 md:p-8 my-auto shadow-2xl relative max-h-[90vh] overflow-y-auto text-xs">
+            <button onclick="closeOprFormModal()" class="absolute right-6 top-6 text-slate-400 hover:text-slate-700 text-lg font-bold"><i class="fa-solid fa-xmark"></i></button>
+
+            <h3 id="formModalTitle" class="text-lg font-black text-slate-900 mb-1">BORANG MAKLUMAT OPR PROGRAM / PLC</h3>
+            <p class="text-slate-500 mb-6">Lengkapkan maklumat dan muat naik 4 keping gambar untuk dijana AI.</p>
+
+            <form onsubmit="handleOprFormSubmit(event)" class="space-y-4">
+                <input type="hidden" id="formOprSchoolName">
+                <input type="hidden" id="formOprCategory">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block font-bold mb-1">Jenis Laporan</label>
+                        <select id="formOprType" class="w-full p-3 border rounded-xl font-bold">
+                            <option value="PROGRAM">Program Panitia</option>
+                            <option value="PLC">Aktiviti PLC</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block font-bold mb-1">Nama Program / PLC</label>
+                        <input type="text" id="formOprTitle" required placeholder="Contoh: Bengkel Menjawab Sejarah Kertas 2" class="w-full p-3 border rounded-xl">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block font-bold mb-1">Tarikh</label>
+                        <input type="date" id="formOprDate" required class="w-full p-3 border rounded-xl">
+                    </div>
+                    <div>
+                        <label class="block font-bold mb-1">Tempat / Fokus (PLC)</label>
+                        <input type="text" id="formOprVenue" required placeholder="Dewan / Bilik Mesyuarat" class="w-full p-3 border rounded-xl">
+                    </div>
+                    <div>
+                        <label class="block font-bold mb-1">Sasaran / Ahli</label>
+                        <input type="text" id="formOprTarget" required placeholder="Murid T5 / All Guru Sejarah" class="w-full p-3 border rounded-xl">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block font-bold mb-1">Objektif Utama / Isu Perbincangan</label>
+                    <textarea id="formOprObjective" rows="2" required
