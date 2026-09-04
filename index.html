@@ -267,13 +267,13 @@
         <!-- MODUL SEKOLAH -->
         <section id="tab-sekolah" class="hidden space-y-6">
             <div class="flex border-b border-slate-200 font-bold text-xs">
-                <button onclick="switchSchoolCategory('MENENGAH')" id="btn-cat-menengah" class="py-3 px-6 border-b-2 border-emerald-800 text-emerald-800 flex items-center space-x-2">
-                    <span class="w-3 h-3 rounded-full bg-blue-600 inline-block"></span>
-                    <span>🟢 SEKOLAH MENENGAH</span>
-                </button>
-                <button onclick="switchSchoolCategory('RENDAH')" id="btn-cat-rendah" class="py-3 px-6 border-b-2 border-transparent text-slate-500 hover:text-slate-800 flex items-center space-x-2">
+                <button onclick="switchSchoolCategory('RENDAH')" id="btn-cat-rendah" class="py-3 px-6 border-b-2 border-emerald-800 text-emerald-800 flex items-center space-x-2">
                     <span class="w-3 h-3 rounded-full bg-emerald-600 inline-block"></span>
                     <span>🔵 SEKOLAH RENDAH</span>
+                </button>
+                <button onclick="switchSchoolCategory('MENENGAH')" id="btn-cat-menengah" class="py-3 px-6 border-b-2 border-transparent text-slate-500 hover:text-slate-800 flex items-center space-x-2">
+                    <span class="w-3 h-3 rounded-full bg-blue-600 inline-block"></span>
+                    <span>🟢 SEKOLAH MENENGAH</span>
                 </button>
             </div>
 
@@ -322,36 +322,84 @@
     </main>
 
     <script>
+        // DATA SENARAI Penuh 54 SEKOLAH RENDAH & GURU SEJARAH DARI JADUAL IMEJ
         const schoolDatabase = [
-            // SEKOLAH MENENGAH
-            { nama: "SMK BAKAI", kat: "MENENGAH", guru: [{nama: "MOHD SHAHIR B ISMAIL", kelas: "Tingkatan 4 & 5"}] },
-            { nama: "SMK JERAI", kat: "MENENGAH", guru: [{nama: "ROSLINA BT AHMAD", kelas: "Tingkatan 1-3"}] },
-            { nama: "SMK PARIT PANJANG", kat: "MENENGAH", guru: [{nama: "ZULKIFLI B MD NOOR", kelas: "Tingkatan 5"}] },
-            { nama: "SMK TANJONG PUTERI", kat: "MENENGAH", guru: [{nama: "FARIDAH BT ZAKARIA", kelas: "Tingkatan 4"}] },
-            { nama: "SMK BALING", kat: "MENENGAH", guru: [{nama: "MOHD SHAHIR B ISMAIL", kelas: "Tingkatan 4 & 5"}] },
-            { nama: "SMK KUALA KETIL", kat: "MENENGAH", guru: [{nama: "ROSLINA BT AHMAD", kelas: "Tingkatan 1-3"}] },
-            { nama: "SMK SIONG", kat: "MENENGAH", guru: [{nama: "ZULKIFLI B MD NOOR", kelas: "Tingkatan 5"}] },
-            { nama: "SMK TELOI KANAN", kat: "MENENGAH", guru: [{nama: "FARIDAH BT ZAKARIA", kelas: "Tingkatan 4"}] },
-            { nama: "SMK BONGOR", kat: "MENENGAH", guru: [{nama: "MOHD SHAHIR B ISMAIL", kelas: "Tingkatan 4 & 5"}] },
-            { nama: "SMK KUALA PEGANG", kat: "MENENGAH", guru: [{nama: "ROSLINA BT AHMAD", kelas: "Tingkatan 1-3"}] },
-            { nama: "SMK SYED ABU BAKAR", kat: "MENENGAH", guru: [{nama: "ZULKIFLI B MD NOOR", kelas: "Tingkatan 5"}] },
-            { nama: "SMK TUNKU PUTERA", kat: "MENENGAH", guru: [{nama: "FARIDAH BT ZAKARIA", kelas: "Tingkatan 4"}] },
-            { nama: "SMK KUPANG", kat: "MENENGAH", guru: [{nama: "FARIDAH BT ZAKARIA", kelas: "Tingkatan 4"}] },
-            { nama: "MAKTAB MAHMUD BALING", kat: "MENENGAH", guru: [{nama: "MOHD SHAHIR B ISMAIL", kelas: "Tingkatan 4 & 5"}] },
-            { nama: "SMA ANNAJAH", kat: "MENENGAH", guru: [{nama: "ROSLINA BT AHMAD", kelas: "Tingkatan 1-3"}] },
-            { nama: "SEKOLAH MODEL KHAS BALING", kat: "MENENGAH", guru: [{nama: "ZULKIFLI B MD NOOR", kelas: "Tingkatan 5"}] },
-            { nama: "SMKA BALING", kat: "MENENGAH", guru: [{nama: "FARIDAH BT ZAKARIA", kelas: "Tingkatan 4"}] },
+            // --- SEKOLAH RENDAH (54) ---
+            { nama: "SJKC CHIN HWA", kat: "RENDAH", guru: ["LIEW WEI HWA"] },
+            { nama: "SJKC KAMPUNG LALANG", kat: "RENDAH", guru: ["TNAH GAIK NGOH"] },
+            { nama: "SJKC KUALA KETIL", kat: "RENDAH", guru: ["LOH PEI YING", "TAN VI NIE"] },
+            { nama: "SJKC YEOK CHEE", kat: "RENDAH", guru: ["TAN YING YUN"] },
+            { nama: "SJKT LADANG MALAKOFF", kat: "RENDAH", guru: ["UDEAMALAR A/P MUNIANDI"] },
+            { nama: "SJKT LDG BATU PEKAKA", kat: "RENDAH", guru: ["NAGENDRAN A/L SIVAPERUMAL", "VENGADESWARAN A/L M.BOY SUBBU@MANIAM"] },
+            { nama: "SJKT LDG KIM SENG", kat: "RENDAH", guru: ["RATHAMANI A/P SUPRAMANIAM"] },
+            { nama: "SJKT LDG KUPANG", kat: "RENDAH", guru: ["MARIAMAH A/P MUNUSAMY"] },
+            { nama: "SJKT LDG PELAM", kat: "RENDAH", guru: ["INDHRAN A/L ANANDAN"] },
+            { nama: "SK ASAM JAWA/CAROK KELIAN", kat: "RENDAH", guru: ["SHAR IDAYU BINTI SHARIF", "SHARIMAH BINTI HAMID", "NORIZAM BT MAT ADAM"] },
+            { nama: "SK BADANG", kat: "RENDAH", guru: ["SHAHANUDDIN BIN WAHAB", "WAN MOHD AZHA B WAN ISMAIL", "NOR ZALINA BINTI ISMAIL"] },
+            { nama: "SK BALING", kat: "RENDAH", guru: ["MOHD NADZRI BIN TAIB", "MOHAMAD MARZUAN B ABU SEMAN", "NOR ASHIMA BINTI OMAR", "SARIMAH BT MOHAMAD", "MOHAMAD TAUFEK BIN MOHD SALLEH"] },
+            { nama: "SK BATU PEKAKA", kat: "RENDAH", guru: ["PUNITHA SUBRAMANIAM", "KANIAMA A/P HANG CHUEN SENG", "NORHANA BT MUSA"] },
+            { nama: "SK BINJUL", kat: "RENDAH", guru: ["HAMIDON BIN OSMAN", "ROHIMAH BT MD DAUD"] },
+            { nama: "SK BINJUL DALAM", kat: "RENDAH", guru: ["HAMIDAH BINTI YAZED", "AHMAD SUBKI BIN AHMAD"] },
+            { nama: "SK DALAM WANG", kat: "RENDAH", guru: ["ABU HASSAN BIN MAD DOM"] },
+            { nama: "SK IBOI", kat: "RENDAH", guru: ["SAKINAH BINTI YA@ZAKARIA", "NORSUHAILA BINTI CHE SHARIFF", "KHAIRIL ANWAR BIN HANAFI", "AZIMAH BINTI AZMI"] },
+            { nama: "SK KAMPONG KEDA", kat: "RENDAH", guru: ["FARID AZIZI BIN MD NOH", "JAMALIAH BINTI BUKHARI"] },
+            { nama: "SK KAMPONG PADANG", kat: "RENDAH", guru: ["AZAINIZAN BIN AZIZ", "NURUL NATASHA NABILA BINTI RAZALI", "NOR SHUHAIDA BINTI ISHAK"] },
+            { nama: "SK KAMPUNG BANDAR", kat: "RENDAH", guru: ["NORLAILE BINTI KAMARUDDIN", "HAKIBAH BINTI MD REJAB", "MOHD WAHIZAN BIN WAHAT"] },
+            { nama: "SK KAMPUNG SADEK", kat: "RENDAH", guru: ["NOR HAZIMAH BINTI ISMAIL", "WAN SALLEHUDIN BIN W ISMAIL", "NUR ARINA BINTI MOHAMAD", "NIK AZIRA BINTI NIK IBRAHIM"] },
+            { nama: "SK KAMPUNG SELARONG", kat: "RENDAH", guru: ["HAMDAN BIN MAT DAUT"] },
+            { nama: "SK KAMPUNG SERA", kat: "RENDAH", guru: ["NUR ATIQAH BINTI MOHD MANSOR", "NORAINA BT ABU MANSOR MATARDIAH"] },
+            { nama: "SK KUALA KETIL", kat: "RENDAH", guru: ["MAZWIN BINTI MAT ZEN", "ZAIZA BINTI MD JUSOFF", "SABANI BINTI ABDUL RAHIM", "MOHD AZIZAN BIN ISA", "SANIAH BINTI AHMAD RAZALY", "MOHD FAUZI BIN ZAKARIA", "ROSLINA BINTI AHMAD"] },
+            { nama: "SK KUALA KUANG", kat: "RENDAH", guru: ["SHAHRIZAT BT RAHAMAN", "MOHAMAD AMINUDDIN BIN ABDUL WAHAB", "RODZIAH BINTI ABD. RAHMAN", "MARIAM BINTI GHAZALI"] },
+            { nama: "SK KUALA KUPANG", kat: "RENDAH", guru: ["ZAHIMI BIN RAMLI"] },
+            { nama: "SK KUALA MERAH", kat: "RENDAH", guru: ["NOR ANIZA BINTI MAT HASSAN", "MOHAMAD AIMAN BIN MOHD LIDAN", "HASNUL HADI B HASSAN"] },
+            { nama: "SK KUALA PEGANG", kat: "RENDAH", guru: ["SHAHRILL MASRIANA BIN YAHAYA", "AMIRUDDIN BIN SALLEH(PINDAH)", "ARYATI BINTI ARIFFIN", "NURSYAMIMI IKHZAN BINTI ZAKARIA", "KHAIRIL NIZAM BIN MD NOR(PENCEN)", "SURIANTI BINTI ABDUL WAHAB"] },
+            { nama: "SK KUALA SAMAK", kat: "RENDAH", guru: ["ZALINA BT YOB", "AHMAD NAZLAN BIN MOHAMED@ MAHMOOD"] },
+            { nama: "SK LANAI", kat: "RENDAH", guru: ["MOHD HANIF BIN HASHIM", "ABDULAZIM BIN ABDUL HAMID", "MOHAMAD KHAIRUL AMRIE BIN SABRI", "KHAIROL SANI BIN SALLEH", "ROZIAH BINTI AB RAHMAN"] },
+            { nama: "SK MALAU", kat: "RENDAH", guru: ["AZMAN BIN AZMI @ AZIZ"] },
+            { nama: "SK MOHD ARIFF ABDULLAH", kat: "RENDAH", guru: ["HAD BIN MT DIAH", "ZULHILMI BIN HARUM", "ROSNAH BT MD ALI"] },
+            { nama: "SK PAYA BESAR", kat: "RENDAH", guru: ["NUR ATHIRAH SYAZWANI BINTI AZHAR", "SUHAIDY BIN ABDUL HAMID"] },
+            { nama: "SK PENGHULU ABU BAKAR", kat: "RENDAH", guru: ["HALIMAH BINTI AHMAD TAJUDDIN", "MOHD SYAM FADHLI BIN ABDUL TALIB"] },
+            { nama: "SK PULAI", kat: "RENDAH", guru: ["ROSLANDI BIN MHD. AROF", "MOHD ILIAS BIN ABU BAKAR", "MOHD KHAIR BIN AWANG"] },
+            { nama: "SK RAMBONG PULAI", kat: "RENDAH", guru: ["SITI FATIMAH BINTI CHE MAT ISA"] },
+            { nama: "SK SEBERANG KETIL", kat: "RENDAH", guru: ["ALIAS BIN WAHID", "BADRUL HISYAM BIN MOKRI"] },
+            { nama: "SK SERI BAYU", kat: "RENDAH", guru: ["MAHAMAD ZAIDAN BIN ABU HASSAN", "HABIBAH BINTI HASHIM", "FATHIAH BINTI ZAKARIA"] },
+            { nama: "SK SERI INAS", kat: "RENDAH", guru: ["MOHD DZOHIRRUDIN B ABDUL RAHIM"] },
+            { nama: "SK SERI JEMERLI", kat: "RENDAH", guru: ["SABRI BIN MUSA"] },
+            { nama: "SK SIONG", kat: "RENDAH", guru: ["ROZITA BINTI AZMI", "MAHAZIR MOHD BIN JAAFAR", "SITI NOR NASIRAH BT MD ZAIK"] },
+            { nama: "SK SYED SHEH", kat: "RENDAH", guru: ["NADZRAH BINTI MD YOB", "NORAZURA BT CHE PA", "ROIZAH BINTI ABDUL RASHID"] },
+            { nama: "SK TANJUNG PARI", kat: "RENDAH", guru: ["ANARUSNI BT JAMAN", "MOHD FAUZI BIN TAJERI", "ASMIDA BINTI AB WAHAB", "MOHD AZHAR BIN MD ISA"] },
+            { nama: "SK TAWAR", kat: "RENDAH", guru: ["NORIZAM BIN MD NOOR", "AHMAD SYAZNI BIN ABDULLAH", "NORAINI BINTI MOHD BANDONG", "SARINA BINTI AWANG @ MAT", "NUR NADHIRAH BINTI MOHAMAD SUKRI"] },
+            { nama: "SK TELOI KANAN", kat: "RENDAH", guru: ["AHMAD FAISAL BIN ABDULLAH", "MAZYANI BINTI HAMZAH", "MOHD AZHAR BIN ABDUL RAHMAN"] },
+            { nama: "SK TELOK TEDURI", kat: "RENDAH", guru: ["AMIRUDDIN BIN SALLEH", "DALILA BINTI MOHD NOOR"] },
+            { nama: "SK TEMBAK", kat: "RENDAH", guru: ["HASLINDA BINTI MD AKHIR", "NURUL ASYIKHIN BINTI MOHD HANAFIAH", "NOOR HAMIZAH BINTI SAAD", "SITI NURAISYAH BINTI ROSLI"] },
+            { nama: "SK TIAK", kat: "RENDAH", guru: ["BADROL BIN MD DAUD"] },
+            { nama: "SK TITI GANTONG", kat: "RENDAH", guru: ["MOHD NASRUN BIN ALI", "HAJJAH NOR'AINI BINTI JAAFAR"] },
+            { nama: "SK TUNKU PUAN HABSAH", kat: "RENDAH", guru: ["MOHD ZAINI BIN MOHD MOKHTAR", "SITI KHATIJAH BINTI OMAR"] },
+            { nama: "SK TUNKU PUTERA", kat: "RENDAH", guru: ["JASLI BIN YOM", "ALLIAS BIN ISMAIL", "HAMISAH BINTI HASHIM", "SAFIAH BINTI MOHAMMAD", "WAN ANUAR BIN WAN DAUD", "MOHD ZAMI BIN ABDUL WAHAB", "SAPINA BT. CHE ANI"] },
+            { nama: "SK ULU BAKAI", kat: "RENDAH", guru: ["SITI MAAYAH BINTI NAYAN @ AHMAD"] },
+            { nama: "SK ULU TAWAR", kat: "RENDAH", guru: ["NORHASIMAH BINTI JUNUS", "AHMAD RASHIDI B JALIL", "SHAMSYUL BIN HALIT", "WAN DAUD B.WAN ABU BAKAR"] },
 
-            // SEKOLAH RENDAH
-            { nama: "SJKC CHIN HWA", kat: "RENDAH", guru: [{nama: "LIEW WEI HWA", kelas: "Tahun 4, 5 & 6"}] },
-            { nama: "SJKC KAMPUNG LALANG", kat: "RENDAH", guru: [{nama: "TNAH GAIK NGOH", kelas: "Tahun 4, 5 & 6"}] },
-            { nama: "SJKC KUALA KETIL", kat: "RENDAH", guru: [{nama: "LOH PEI YING", kelas: "Tahun 4 & 5"}, {nama: "TAN VI NIE", kelas: "Tahun 6"}] },
-            { nama: "SK BADANG", kat: "RENDAH", guru: [{nama: "SHAHANUDDIN BIN WAHAB", kelas: "Tahun 5"}, {nama: "WAN MOHD AZHA B WAN ISMAIL", kelas: "Tahun 6"}, {nama: "NOR ZALINA BINTI ISMAIL", kelas: "Tahun 4"}] },
-            { nama: "SK BALING", kat: "RENDAH", guru: [{nama: "MOHD NADZRI BIN TAIB", kelas: "Tahun 6"}, {nama: "NOR ASHIMA BINTI OMAR", kelas: "Tahun 4"}] },
-            { nama: "SK KUALA KETIL", kat: "RENDAH", guru: [{nama: "MAZWIN BINTI MAT ZEN", kelas: "Tahun 6"}, {nama: "MOHD AZIZAN BIN ISA", kelas: "Tahun 5"}] }
+            // --- SEKOLAH MENENGAH (17) ---
+            { nama: "SMK BAKAI", kat: "MENENGAH", guru: ["MOHD SHAHIR B ISMAIL"] },
+            { nama: "SMK JERAI", kat: "MENENGAH", guru: ["ROSLINA BT AHMAD"] },
+            { nama: "SMK PARIT PANJANG", kat: "MENENGAH", guru: ["ZULKIFLI B MD NOOR"] },
+            { nama: "SMK TANJONG PUTERI", kat: "MENENGAH", guru: ["FARIDAH BT ZAKARIA"] },
+            { nama: "SMK BALING", kat: "MENENGAH", guru: ["MOHD SHAHIR B ISMAIL"] },
+            { nama: "SMK KUALA KETIL", kat: "MENENGAH", guru: ["ROSLINA BT AHMAD"] },
+            { nama: "SMK SIONG", kat: "MENENGAH", guru: ["ZULKIFLI B MD NOOR"] },
+            { nama: "SMK TELOI KANAN", kat: "MENENGAH", guru: ["FARIDAH BT ZAKARIA"] },
+            { nama: "SMK BONGOR", kat: "MENENGAH", guru: ["MOHD SHAHIR B ISMAIL"] },
+            { nama: "SMK KUALA PEGANG", kat: "MENENGAH", guru: ["ROSLINA BT AHMAD"] },
+            { nama: "SMK SYED ABU BAKAR", kat: "MENENGAH", guru: ["ZULKIFLI B MD NOOR"] },
+            { nama: "SMK TUNKU PUTERA", kat: "MENENGAH", guru: ["FARIDAH BT ZAKARIA"] },
+            { nama: "SMK KUPANG", kat: "MENENGAH", guru: ["FARIDAH BT ZAKARIA"] },
+            { nama: "MAKTAB MAHMUD BALING", kat: "MENENGAH", guru: ["MOHD SHAHIR B ISMAIL"] },
+            { nama: "SMA ANNAJAH", kat: "MENENGAH", guru: ["ROSLINA BT AHMAD"] },
+            { nama: "SEKOLAH MODEL KHAS BALING", kat: "MENENGAH", guru: ["ZULKIFLI B MD NOOR"] },
+            { nama: "SMKA BALING", kat: "MENENGAH", guru: ["FARIDAH BT ZAKARIA"] }
         ];
 
-        let currentCategoryView = 'MENENGAH';
+        let currentCategoryView = 'RENDAH';
 
         window.onload = function() {
             renderSchools();
@@ -381,10 +429,12 @@
 
         function switchSchoolCategory(kat) {
             currentCategoryView = kat;
+            document.getElementById('btn-cat-rendah').className = kat === 'RENDAH' ? 'py-3 px-6 border-b-2 border-emerald-800 text-emerald-800 flex items-center space-x-2' : 'py-3 px-6 border-b-2 border-transparent text-slate-500 hover:text-slate-800 flex items-center space-x-2';
+            document.getElementById('btn-cat-menengah').className = kat === 'MENENGAH' ? 'py-3 px-6 border-b-2 border-emerald-800 text-emerald-800 flex items-center space-x-2' : 'py-3 px-6 border-b-2 border-transparent text-slate-500 hover:text-slate-800 flex items-center space-x-2';
             renderSchools();
         }
 
-        // PAPARAN KAD SEKOLAH LENGKAP
+        // PAPARAN KAD SEKOLAH DENGAN SENARAI GURU KHAS
         function renderSchools() {
             const container = document.getElementById('schoolCardsContainer');
             if(!container) return;
@@ -395,9 +445,9 @@
                 let guruHtml = '';
                 if (s.guru && s.guru.length > 0) {
                     guruHtml = s.guru.map(g => `
-                        <div class="flex justify-between items-center py-1 border-b border-slate-100 last:border-none">
-                            <span class="font-bold text-slate-800 text-[11px]"><i class="fa-solid fa-user-tie text-emerald-700 mr-1.5"></i>${g.nama}</span>
-                            <span class="bg-emerald-100 text-emerald-800 text-[10px] font-extrabold px-2 py-0.5 rounded-md">${g.kelas}</span>
+                        <div class="py-1 border-b border-slate-100 last:border-none flex items-center">
+                            <i class="fa-solid fa-user-tie text-emerald-700 mr-2 text-[10px]"></i>
+                            <span class="font-bold text-slate-800 text-[11px]">${g}</span>
                         </div>
                     `).join('');
                 } else {
@@ -410,9 +460,9 @@
                             <span class="bg-emerald-100 text-emerald-800 font-extrabold px-2.5 py-1 rounded-full text-[10px]">${s.kat}</span>
                             <h4 class="font-black text-slate-900 text-sm my-2">${s.nama}</h4>
 
-                            <!-- 1. NAMA GURU & KELAS YANG DIAJAR -->
+                            <!-- GURU SEJARAH SEKOLAH -->
                             <div class="bg-slate-50 p-3 rounded-2xl border border-slate-100 my-3 space-y-1">
-                                <span class="font-bold text-slate-500 block text-[10px] uppercase mb-1">👨‍🏫 GURU SEJARAH & KELAS DIAJAR:</span>
+                                <span class="font-bold text-slate-500 block text-[10px] uppercase mb-1">👨‍🏫 SENARAI GURU SEJARAH:</span>
                                 ${guruHtml}
                             </div>
                         </div>
@@ -437,7 +487,6 @@
             });
         }
 
-        // FUNGSI MUAT TURUN BAHAN CONTOH
         function downloadSample(schoolName, materialType) {
             alert(`Memuat turun contoh [${materialType}] untuk ${schoolName}...`);
         }
