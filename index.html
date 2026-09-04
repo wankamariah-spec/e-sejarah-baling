@@ -158,7 +158,7 @@
                     <i class="fa-solid fa-house w-5"></i> <span>Dashboard</span>
                 </button>
                 <button onclick="switchTab('sekolah')" id="nav-sekolah" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition">
-                    <i class="fa-solid fa-school w-5 text-emerald-400"></i> <span>Sekolah</span>
+                    <i class="fa-solid fa-school w-5 text-emerald-400"></i> <span>Modul Sekolah</span>
                 </button>
                 <button onclick="switchTab('senarai-opr')" id="nav-senarai-opr" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition">
                     <i class="fa-solid fa-list-check w-5 text-amber-400"></i> <span>Senarai Program / PLC</span>
@@ -247,7 +247,7 @@
                         <p class="text-xs text-emerald-100/80 mt-1">Lengkapkan maklumat ringkas dan muat naik 4 keping gambar untuk menyusun One Page Report rasmi.</p>
                     </div>
                     <button onclick="switchTab('sekolah')" class="mt-6 bg-white text-emerald-950 font-extrabold text-xs px-5 py-3 rounded-xl shadow hover:bg-emerald-50 transition w-fit">
-                        <i class="fa-solid fa-plus mr-1"></i> Pilih Sekolah & Jana OPR
+                        <i class="fa-solid fa-plus mr-1"></i> Pilih Sekolah & Akses Butang
                     </button>
                 </div>
 
@@ -321,81 +321,63 @@
 
     </main>
 
+    <!-- MODAL POPUP UNTUK SENARAI GURU -->
+    <div id="guruModal" class="fixed inset-0 bg-slate-900/80 z-[110] hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 relative text-xs">
+            <button onclick="document.getElementById('guruModal').classList.add('hidden')" class="absolute right-5 top-5 text-slate-400 font-bold"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h3 id="guruModalSchoolName" class="font-black text-slate-900 text-sm mb-3">SENARAI GURU SEJARAH</h3>
+            <div id="guruModalList" class="space-y-2 bg-slate-50 p-3 rounded-2xl border border-slate-200"></div>
+        </div>
+    </div>
+
+    <!-- MODAL UPLOAD RPH / KAJIAN KES -->
+    <div id="uploadModal" class="fixed inset-0 bg-slate-900/80 z-[110] hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 relative text-xs">
+            <button onclick="document.getElementById('uploadModal').classList.add('hidden')" class="absolute right-5 top-5 text-slate-400 font-bold"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h3 id="uploadModalTitle" class="font-black text-slate-900 text-sm mb-2">MUAT NAIK BAHAN</h3>
+            <p id="uploadModalSchool" class="text-slate-500 mb-4 font-bold"></p>
+            <form onsubmit="handleUploadSubmit(event)" class="space-y-3">
+                <div>
+                    <label class="block font-bold mb-1">Tajuk Bahan</label>
+                    <input type="text" id="uploadTitle" required placeholder="Contoh: RPH Tingkatan 4 Bab 1" class="w-full p-2.5 border rounded-xl">
+                </div>
+                <div>
+                    <label class="block font-bold mb-1">Pilih Fail (PDF / Word / PPT)</label>
+                    <input type="file" required class="w-full text-xs">
+                </div>
+                <button type="submit" class="w-full bg-emerald-800 text-white font-bold py-2.5 rounded-xl hover:bg-emerald-900 mt-2">SIMPAN BAHAN</button>
+            </form>
+        </div>
+    </div>
+
     <script>
         const schoolDatabase = [
-            // SEKOLAH MENENGAH (17 SEKOLAH)
-            { nama: "SMK BAKAI", kat: "MENENGAH" },
-            { nama: "SMK JERAI", kat: "MENENGAH" },
-            { nama: "SMK PARIT PANJANG", kat: "MENENGAH" },
-            { nama: "SMK TANJONG PUTERI", kat: "MENENGAH" },
-            { nama: "SMK BALING", kat: "MENENGAH" },
-            { nama: "SMK KUALA KETIL", kat: "MENENGAH" },
-            { nama: "SMK SIONG", kat: "MENENGAH" },
-            { nama: "SMK TELOI KANAN", kat: "MENENGAH" },
-            { nama: "SMK BONGOR", kat: "MENENGAH" },
-            { nama: "SMK KUALA PEGANG", kat: "MENENGAH" },
-            { nama: "SMK SYED ABU BAKAR", kat: "MENENGAH" },
-            { nama: "SMK TUNKU PUTERA", kat: "MENENGAH" },
-            { nama: "SMK KUPANG", kat: "MENENGAH" },
-            { nama: "MAKTAB MAHMUD BALING", kat: "MENENGAH" },
-            { nama: "SMA ANNAJAH", kat: "MENENGAH" },
-            { nama: "SEKOLAH MODEL KHAS BALING", kat: "MENENGAH" },
-            { nama: "SMKA BALING", kat: "MENENGAH" },
+            // SEKOLAH MENENGAH
+            { nama: "SMK BAKAI", kat: "MENENGAH", guru: [{nama: "MOHD SHAHIR B ISMAIL", kelas: "Tingkatan 4 & 5"}] },
+            { nama: "SMK JERAI", kat: "MENENGAH", guru: [{nama: "ROSLINA BT AHMAD", kelas: "Tingkatan 1-3"}] },
+            { nama: "SMK PARIT PANJANG", kat: "MENENGAH", guru: [{nama: "ZULKIFLI B MD NOOR", kelas: "Tingkatan 5"}] },
+            { nama: "SMK TANJONG PUTERI", kat: "MENENGAH", guru: [{nama: "FARIDAH BT ZAKARIA", kelas: "Tingkatan 4"}] },
+            { nama: "SMK BALING", kat: "MENENGAH", guru: [{nama: "MOHD SHAHIR B ISMAIL", kelas: "Tingkatan 4 & 5"}] },
+            { nama: "SMK KUALA KETIL", kat: "MENENGAH", guru: [{nama: "ROSLINA BT AHMAD", kelas: "Tingkatan 1-3"}] },
+            { nama: "SMK SIONG", kat: "MENENGAH", guru: [{nama: "ZULKIFLI B MD NOOR", kelas: "Tingkatan 5"}] },
+            { nama: "SMK TELOI KANAN", kat: "MENENGAH", guru: [{nama: "FARIDAH BT ZAKARIA", kelas: "Tingkatan 4"}] },
+            { nama: "SMK BONGOR", kat: "MENENGAH", guru: [{nama: "MOHD SHAHIR B ISMAIL", kelas: "Tingkatan 4 & 5"}] },
+            { nama: "SMK KUALA PEGANG", kat: "MENENGAH", guru: [{nama: "ROSLINA BT AHMAD", kelas: "Tingkatan 1-3"}] },
+            { nama: "SMK SYED ABU BAKAR", kat: "MENENGAH", guru: [{nama: "ZULKIFLI B MD NOOR", kelas: "Tingkatan 5"}] },
+            { nama: "SMK TUNKU PUTERA", kat: "MENENGAH", guru: [{nama: "FARIDAH BT ZAKARIA", kelas: "Tingkatan 4"}] },
+            { nama: "SMK KUPANG", kat: "MENENGAH", guru: [{nama: "FARIDAH BT ZAKARIA", kelas: "Tingkatan 4"}] },
+            { nama: "MAKTAB MAHMUD BALING", kat: "MENENGAH", guru: [{nama: "MOHD SHAHIR B ISMAIL", kelas: "Tingkatan 4 & 5"}] },
+            { nama: "SMA ANNAJAH", kat: "MENENGAH", guru: [{nama: "ROSLINA BT AHMAD", kelas: "Tingkatan 1-3"}] },
+            { nama: "SEKOLAH MODEL KHAS BALING", kat: "MENENGAH", guru: [{nama: "ZULKIFLI B MD NOOR", kelas: "Tingkatan 5"}] },
+            { nama: "SMKA BALING", kat: "MENENGAH", guru: [{nama: "FARIDAH BT ZAKARIA", kelas: "Tingkatan 4"}] },
 
-            // SEKOLAH RENDAH (54 SEKOLAH)
-            { nama: "SJKC CHIN HWA", kat: "RENDAH" },
-            { nama: "SJKC KAMPUNG LALANG", kat: "RENDAH" },
-            { nama: "SJKC KUALA KETIL", kat: "RENDAH" },
-            { nama: "SJKC YEOK CHEE", kat: "RENDAH" },
-            { nama: "SJKT LADANG MALAKOFF", kat: "RENDAH" },
-            { nama: "SJKT LDG BATU PEKAKA", kat: "RENDAH" },
-            { nama: "SJKT LDG KIM SENG", kat: "RENDAH" },
-            { nama: "SJKT LDG KUPANG", kat: "RENDAH" },
-            { nama: "SJKT LDG PELAM", kat: "RENDAH" },
-            { nama: "SK ASAM JAWA/CAROK KELIAN", kat: "RENDAH" },
-            { nama: "SK BADANG", kat: "RENDAH" },
-            { nama: "SK BALING", kat: "RENDAH" },
-            { nama: "SK BATU PEKAKA", kat: "RENDAH" },
-            { nama: "SK BINJUL", kat: "RENDAH" },
-            { nama: "SK BINJUL DALAM", kat: "RENDAH" },
-            { nama: "SK DALAM WANG", kat: "RENDAH" },
-            { nama: "SK IBOI", kat: "RENDAH" },
-            { nama: "SK KAMPONG KEDA", kat: "RENDAH" },
-            { nama: "SK KAMPONG PADANG", kat: "RENDAH" },
-            { nama: "SK KAMPUNG BANDAR", kat: "RENDAH" },
-            { nama: "SK KAMPUNG SADEK", kat: "RENDAH" },
-            { nama: "SK KAMPUNG SELARONG", kat: "RENDAH" },
-            { nama: "SK KAMPUNG SERA", kat: "RENDAH" },
-            { nama: "SK KUALA KETIL", kat: "RENDAH" },
-            { nama: "SK KUALA KUANG", kat: "RENDAH" },
-            { nama: "SK KUALA KUPANG", kat: "RENDAH" },
-            { nama: "SK KUALA MERAH", kat: "RENDAH" },
-            { nama: "SK KUALA PEGANG", kat: "RENDAH" },
-            { nama: "SK KUALA SAMAK", kat: "RENDAH" },
-            { nama: "SK LANAI", kat: "RENDAH" },
-            { nama: "SK MALAU", kat: "RENDAH" },
-            { nama: "SK MOHD ARIFF ABDULLAH", kat: "RENDAH" },
-            { nama: "SK PAYA BESAR", kat: "RENDAH" },
-            { nama: "SK PENGHULU ABU BAKAR", kat: "RENDAH" },
-            { nama: "SK PULAI", kat: "RENDAH" },
-            { nama: "SK RAMBONG PULAI", kat: "RENDAH" },
-            { nama: "SK SEBERANG KETIL", kat: "RENDAH" },
-            { nama: "SK SERI BAYU", kat: "RENDAH" },
-            { nama: "SK SERI INAS", kat: "RENDAH" },
-            { nama: "SK SERI JEMERLI", kat: "RENDAH" },
-            { nama: "SK SIONG", kat: "RENDAH" },
-            { nama: "SK SYED SHEH", kat: "RENDAH" },
-            { nama: "SK TANJUNG PARI", kat: "RENDAH" },
-            { nama: "SK TAWAR", kat: "RENDAH" },
-            { nama: "SK TELOI KANAN", kat: "RENDAH" },
-            { nama: "SK TELOK TEDURI", kat: "RENDAH" },
-            { nama: "SK TEMBAK", kat: "RENDAH" },
-            { nama: "SK TIAK", kat: "RENDAH" },
-            { nama: "SK TITI GANTONG", kat: "RENDAH" },
-            { nama: "SK TUNKU PUAN HABSAH", kat: "RENDAH" },
-            { nama: "SK TUNKU PUTERA", kat: "RENDAH" },
-            { nama: "SK ULU BAKAI", kat: "RENDAH" },
-            { nama: "SK ULU TAWAR", kat: "RENDAH" }
+            // SEKOLAH RENDAH
+            { nama: "SJKC CHIN HWA", kat: "RENDAH", guru: [{nama: "LIEW WEI HWA", kelas: "Tahun 4-6"}] },
+            { nama: "SJKC KAMPUNG LALANG", kat: "RENDAH", guru: [{nama: "TNAH GAIK NGOH", kelas: "Tahun 4-6"}] },
+            { nama: "SJKC KUALA KETIL", kat: "RENDAH", guru: [{nama: "LOH PEI YING", kelas: "Tahun 4-5"}, {nama: "TAN VI NIE", kelas: "Tahun 6"}] },
+            { nama: "SK BADANG", kat: "RENDAH", guru: [{nama: "SHAHANUDDIN BIN WAHAB", kelas: "Tahun 5"}, {nama: "WAN MOHD AZHA B WAN ISMAIL", kelas: "Tahun 6"}, {nama: "NOR ZALINA BINTI ISMAIL", kelas: "Tahun 4"}] },
+            { nama: "SK BALING", kat: "RENDAH", guru: [{nama: "MOHD NADZRI BIN TAIB", kelas: "Tahun 6"}, {nama: "NOR ASHIMA BINTI OMAR", kelas: "Tahun 4"}] },
+            { nama: "SK KUALA KETIL", kat: "RENDAH", guru: [{nama: "MAZWIN BINTI MAT ZEN", kelas: "Tahun 6"}, {nama: "MOHD AZIZAN BIN ISA", kelas: "Tahun 5"}] }
         ];
 
         let currentCategoryView = 'MENENGAH';
@@ -431,6 +413,7 @@
             renderSchools();
         }
 
+        // PAPARAN KAD SEKOLAH DENGAN 5 BUTANG TIK
         function renderSchools() {
             const container = document.getElementById('schoolCardsContainer');
             if(!container) return;
@@ -444,12 +427,66 @@
                             <span class="bg-emerald-100 text-emerald-800 font-extrabold px-2.5 py-1 rounded-full text-[10px]">${s.kat}</span>
                             <h4 class="font-black text-slate-900 text-sm my-2">${s.nama}</h4>
                         </div>
-                        <button onclick="alert('Membuka borang OPR untuk ${s.nama}')" class="w-full bg-emerald-800 text-white font-extrabold py-2.5 rounded-xl hover:bg-emerald-900">
-                            + Tambah Program / PLC
-                        </button>
+                        
+                        <!-- 5 BUTANG UTAMA YANG DIMINTA -->
+                        <div class="space-y-2 border-t pt-3">
+                            <button onclick="showGuruModal('${s.nama}')" class="w-full bg-slate-800 text-white font-bold py-2 rounded-xl hover:bg-slate-900 text-[11px] flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-user-tie"></i> <span>1. NAMA GURU SEJARAH</span>
+                            </button>
+                            <button onclick="alert('Membuka Borang Program AI OPR untuk ${s.nama}')" class="w-full bg-emerald-800 text-white font-bold py-2 rounded-xl hover:bg-emerald-900 text-[11px] flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-pen-to-square"></i> <span>2. BORANG PROGRAM (AI OPR)</span>
+                            </button>
+                            <button onclick="alert('Membuka Program PLC AI OPR untuk ${s.nama}')" class="w-full bg-teal-700 text-white font-bold py-2 rounded-xl hover:bg-teal-800 text-[11px] flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-people-group"></i> <span>3. PROGRAM PLC (AI OPR)</span>
+                            </button>
+                            <button onclick="openUploadModal('${s.nama}', 'RPH')" class="w-full bg-blue-700 text-white font-bold py-2 rounded-xl hover:bg-blue-800 text-[11px] flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-file-arrow-up"></i> <span>4. MUAT NAIK CONTOH RPH</span>
+                            </button>
+                            <button onclick="openUploadModal('${s.nama}', 'KAJIAN KES')" class="w-full bg-amber-600 text-white font-bold py-2 rounded-xl hover:bg-amber-700 text-[11px] flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-magnifying-glass-doc"></i> <span>5. MUAT NAIK CONTOH KAJIAN KES</span>
+                            </button>
+                        </div>
                     </div>
                 `;
             });
+        }
+
+        // FUNGSI BUTANG 1: POPUP NAMA GURU
+        function showGuruModal(schoolName) {
+            const school = schoolDatabase.find(s => s.nama === schoolName);
+            document.getElementById('guruModalSchoolName').innerText = schoolName;
+            const container = document.getElementById('guruModalList');
+            container.innerHTML = '';
+
+            if (school && school.guru) {
+                school.guru.forEach(g => {
+                    container.innerHTML += `
+                        <div class="p-2 border-b border-slate-200 flex justify-between items-center">
+                            <div>
+                                <p class="font-bold text-slate-800">${g.nama}</p>
+                                <p class="text-[10px] text-slate-500">${g.kelas}</p>
+                            </div>
+                            <button onclick="alert('Muat turun profil guru: ${g.nama}')" class="text-emerald-800 font-bold"><i class="fa-solid fa-download"></i></button>
+                        </div>
+                    `;
+                });
+            } else {
+                container.innerHTML = '<p class="text-slate-400 italic">Tiada data guru dirakam.</p>';
+            }
+            document.getElementById('guruModal').classList.remove('hidden');
+        }
+
+        // FUNGSI BUTANG 4 & 5: POPUP MUAT NAIK
+        function openUploadModal(schoolName, type) {
+            document.getElementById('uploadModalTitle').innerText = `MUAT NAIK CONTOH ${type}`;
+            document.getElementById('uploadModalSchool').innerText = schoolName;
+            document.getElementById('uploadModal').classList.remove('hidden');
+        }
+
+        function handleUploadSubmit(e) {
+            e.preventDefault();
+            alert('Bahan berjaya dimuat naik dan disimpan!');
+            document.getElementById('uploadModal').classList.add('hidden');
         }
 
         function openExternalAnalysis() { window.open('https://sistem-analisis-item-demo.vercel.app', '_blank'); }
