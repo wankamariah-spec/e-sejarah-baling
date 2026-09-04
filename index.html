@@ -174,14 +174,14 @@
                 </button>
             </div>
 
-            <!-- CAPAIAN PANTAS MODUL PANITIA -->
+            <!-- CAPAIAN PANTAS MODUL PANITIA (LENGKAP DENGAN BUTANG PROGRAM KPM/JPN/PPD) -->
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
                 <h3 class="font-black text-slate-900 text-sm mb-4 flex items-center space-x-2">
                     <i class="fa-solid fa-bolt text-amber-500"></i>
                     <span>CAPAIAN PANTAS MODUL PANITIA</span>
                 </h3>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                     <button onclick="switchTab('bahan')" class="bg-blue-600 hover:bg-blue-700 text-white p-5 rounded-2xl shadow-md transition text-left flex flex-col justify-between group">
                         <div class="flex justify-between items-center mb-3">
                             <span class="text-2xl"><i class="fa-solid fa-folder-open"></i></span>
@@ -189,7 +189,7 @@
                         </div>
                         <div>
                             <span class="font-extrabold text-sm block">1. BAHAN MODUL</span>
-                            <span class="text-[10px] text-blue-100 block mt-0.5">RPH, DSKP, PBD, Kajian Kes & Item</span>
+                            <span class="text-[10px] text-blue-100 block mt-0.5">RPH, DSKP, PBD & Kajian Kes</span>
                         </div>
                     </button>
 
@@ -200,7 +200,7 @@
                         </div>
                         <div>
                             <span class="font-extrabold text-sm block">2. BANK SUMBER</span>
-                            <span class="text-[10px] text-amber-100 block mt-0.5">Modul KBAT, Percobaan Negeri, PdP</span>
+                            <span class="text-[10px] text-amber-100 block mt-0.5">Modul KBAT, Soalan & Infografik</span>
                         </div>
                     </button>
 
@@ -215,13 +215,25 @@
                         </div>
                     </button>
 
+                    <!-- BUTANG BAHARU: PROGRAM KPM / JPN / PPD -->
+                    <button onclick="switchTab('senarai-opr')" class="bg-rose-600 hover:bg-rose-700 text-white p-5 rounded-2xl shadow-md transition text-left flex flex-col justify-between group">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-2xl"><i class="fa-solid fa-award"></i></span>
+                            <i class="fa-solid fa-arrow-up-right-from-square opacity-60 group-hover:opacity-100 text-xs"></i>
+                        </div>
+                        <div>
+                            <span class="font-extrabold text-sm block">4. PROGRAM KPM / JPN / PPD</span>
+                            <span class="text-[10px] text-rose-100 block mt-0.5">Laporan & Aktiviti Rasmi Peringkat Tinggi</span>
+                        </div>
+                    </button>
+
                     <button onclick="switchTab('lain')" class="bg-teal-700 hover:bg-teal-800 text-white p-5 rounded-2xl shadow-md transition text-left flex flex-col justify-between group">
                         <div class="flex justify-between items-center mb-3">
                             <span class="text-2xl"><i class="fa-solid fa-ellipsis-vertical"></i></span>
                             <i class="fa-solid fa-arrow-up-right-from-square opacity-60 group-hover:opacity-100 text-xs"></i>
                         </div>
                         <div>
-                            <span class="font-extrabold text-sm block">4. LAIN-LAIN</span>
+                            <span class="font-extrabold text-sm block">5. LAIN-LAIN</span>
                             <span class="text-[10px] text-teal-100 block mt-0.5">Surat, Pekeliling & Dokumen</span>
                         </div>
                     </button>
@@ -271,7 +283,7 @@
                     </button>
                 </div>
 
-                <!-- SUB-BUTANG KATEGORI TERASING BAHAN -->
+                <!-- SUB-BUTANG KATEGORI TERASING -->
                 <div class="flex flex-wrap gap-2 font-extrabold text-xs border-b pb-4">
                     <button onclick="filterBahanCategory('RPH')" id="btn-bahan-RPH" class="px-3.5 py-2 bg-slate-900 text-white rounded-xl shadow-sm">📝 1. RPH</button>
                     <button onclick="filterBahanCategory('CONTOH_RPH')" id="btn-bahan-CONTOH_RPH" class="px-3.5 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-xl">📥 2. CONTOH RPH (AUTO-SYNC)</button>
@@ -284,18 +296,16 @@
                     <button onclick="filterBahanCategory('PBD')" id="btn-bahan-PBD" class="px-3.5 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-xl">📊 9. PBD</button>
                 </div>
 
-                <!-- TAJUK KATEGORI AKTIF -->
                 <div class="bg-slate-100 p-3 rounded-xl border border-slate-200 flex justify-between items-center">
                     <span id="activeCategoryTitleDisplay" class="font-extrabold text-xs text-slate-800 uppercase">KATEGORI: 📝 1. RPH</span>
                     <span id="activeCategoryCountBadge" class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">0 Bahan</span>
                 </div>
 
-                <!-- KONTENA SENARAI KE BAWAH -->
                 <div id="bahanListGrid" class="space-y-3"></div>
             </div>
         </section>
 
-        <!-- TAB BANK SUMBER (DISUSUN DENGAN 6 KATEGORI KHAS) -->
+        <!-- TAB BANK SUMBER -->
         <section id="tab-sumber" class="hidden space-y-6">
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b pb-4">
@@ -312,7 +322,6 @@
                     </button>
                 </div>
 
-                <!-- SUB-BUTANG KATEGORI BANK SUMBER -->
                 <div class="flex flex-wrap gap-2 font-extrabold text-xs border-b pb-4">
                     <button onclick="filterSumberCategory('KBAT')" id="btn-sumber-KBAT" class="px-3.5 py-2 bg-slate-900 text-white rounded-xl shadow-sm">🧠 1. KBAT</button>
                     <button onclick="filterSumberCategory('SOALAN_SPM')" id="btn-sumber-SOALAN_SPM" class="px-3.5 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-xl">📝 2. SOALAN PERCUBAAN NEGERI LAIN / SPM SEBENAR</button>
@@ -322,7 +331,6 @@
                     <button onclick="filterSumberCategory('BAHAN_PDP')" id="btn-sumber-BAHAN_PDP" class="px-3.5 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-xl">👨‍🏫 6. BAHAN PdP</button>
                 </div>
 
-                <!-- TAJUK KATEGORI AKTIF BANK SUMBER -->
                 <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 flex justify-between items-center">
                     <span id="activeSumberTitleDisplay" class="font-extrabold text-xs text-amber-900 uppercase">KATEGORI: 🧠 1. KBAT</span>
                     <span id="activeSumberCountBadge" class="bg-amber-200 text-amber-900 text-[10px] font-bold px-2.5 py-0.5 rounded-full">0 Bahan</span>
@@ -332,7 +340,7 @@
             </div>
         </section>
 
-        <!-- TAB LAIN-LAIN DOKUMEN (DISUSUN DENGAN 3 KATEGORI KHAS) -->
+        <!-- TAB LAIN-LAIN DOKUMEN -->
         <section id="tab-lain" class="hidden space-y-6">
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b pb-4">
@@ -349,14 +357,12 @@
                     </button>
                 </div>
 
-                <!-- SUB-BUTANG KATEGORI LAIN-LAIN -->
                 <div class="flex flex-wrap gap-2 font-extrabold text-xs border-b pb-4">
                     <button onclick="filterLainCategory('SURAT')" id="btn-lain-SURAT" class="px-3.5 py-2 bg-slate-900 text-white rounded-xl shadow-sm">📄 1. SURAT</button>
                     <button onclick="filterLainCategory('PEKELILING')" id="btn-lain-PEKELILING" class="px-3.5 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-xl">📜 2. PEKELILING</button>
                     <button onclick="filterLainCategory('DOKUMEN')" id="btn-lain-DOKUMEN" class="px-3.5 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-xl">📁 3. DOKUMEN</button>
                 </div>
 
-                <!-- TAJUK KATEGORI AKTIF LAIN-LAIN -->
                 <div class="bg-teal-50 p-3 rounded-xl border border-teal-200 flex justify-between items-center">
                     <span id="activeLainTitleDisplay" class="font-extrabold text-xs text-teal-900 uppercase">KATEGORI: 📄 1. SURAT</span>
                     <span id="activeLainCountBadge" class="bg-teal-200 text-teal-900 text-[10px] font-bold px-2.5 py-0.5 rounded-full">0 Dokumen</span>
@@ -387,7 +393,6 @@
                 <p id="docModalMeta" class="text-[10px] text-slate-500">Sumber • Tarikh</p>
             </div>
 
-            <!-- KONTENA PRATONTON DINAMIK (IFRAME / IMJ / TEKS) -->
             <div id="docViewerContainer" class="bg-slate-50 border border-slate-200 rounded-2xl flex-1 min-h-[350px] overflow-hidden flex flex-col justify-center items-center">
             </div>
 
@@ -411,7 +416,6 @@
                 <div>
                     <label class="block font-bold mb-1 text-slate-700">Kategori Dokumen</label>
                     <select id="uploadCategorySelect" class="w-full p-2.5 border border-slate-300 rounded-xl font-bold bg-slate-50 focus:outline-emerald-800">
-                        <!-- Populated dynamically via JS -->
                     </select>
                 </div>
                 <div>
@@ -440,7 +444,6 @@
         let currentActiveLainCat = 'SURAT';
         let currentViewingDocTitle = '';
 
-        // 1. DATABASE BAHAN MODUL
         let sampleBahanList = [
             { id: 1, tajuk: "DSKP Sejarah Tingkatan 1", kat: "DSKP", sumber: "BPK KPM", tarikh: "2026-01-01", fileUrl: null },
             { id: 2, tajuk: "DSKP Sejarah Tingkatan 2", kat: "DSKP", sumber: "BPK KPM", tarikh: "2026-01-01", fileUrl: null },
@@ -458,7 +461,6 @@
             { id: 14, tajuk: "Panduan Pelaksanaan & Rubrik Pentaksiran PBD Sejarah", kat: "PBD", sumber: "SISC+ PPD Baling", tarikh: "2026-01-10", fileUrl: null }
         ];
 
-        // 2. DATABASE BANK SUMBER (MENGIKUT 6 KATEGORI BARU)
         let sampleSumberList = [
             { id: 1, tajuk: "Koleksi Soalan KBAT Konstruk Menganalisis Kertas 2", kat: "KBAT", penyumbang: "JU SEJARAH BALING", tarikh: "2026-02-10", fileUrl: null },
             { id: 2, tajuk: "Soalan Percubaan SPM Sejarah 2025 Negeri Kedah & Terengganu", kat: "SOALAN_SPM", penyumbang: "SISC+ PPD BALING", tarikh: "2026-01-20", fileUrl: null },
@@ -468,7 +470,6 @@
             { id: 6, tajuk: "Slaid Interaktif Bahan PdP KSSM Tingkatan 3", kat: "BAHAN_PDP", penyumbang: "SMK BALING", tarikh: "2026-02-22", fileUrl: null }
         ];
 
-        // 3. DATABASE LAIN-LAIN DOKUMEN (MENGIKUT 3 KATEGORI BARU)
         let sampleLainList = [
             { id: 1, tajuk: "Surat Panggilan Mesyuarat Panitia Sejarah Daerah Bil 1/2026", kat: "SURAT", penyumbang: "PPD BALING", tarikh: "2026-01-05", fileUrl: null },
             { id: 2, tajuk: "Pekeliling Ikhtisas KPM: Format Mutiara Kertas Sejarah SPM", kat: "PEKELILING", penyumbang: "KPM / JPN KEDAH", tarikh: "2026-01-02", fileUrl: null },
@@ -1139,7 +1140,6 @@
             document.getElementById('uploadFileInput').value = '';
         }
 
-        // FUNGSI BUTANG 👁️ LIHAT DENGAN PRATONTON DINAMIK REALTIME
         function viewDocument(itemId, moduleType = 'BAHAN') {
             let item = null;
             if (moduleType === 'BAHAN') item = sampleBahanList.find(b => b.id == itemId);
