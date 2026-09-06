@@ -6,8 +6,7 @@
     <title>e-SEJARAH BALING - Ekosistem Digital Panitia</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <!-- Pustaka Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -38,109 +37,220 @@
                 <div id="schoolSelectWrapper">
                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Pilih Sekolah Anda</label>
                     <select id="loginSchool" class="w-full text-xs font-semibold p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-600 focus:outline-none">
-                        <option value="SEKOLAH MENENGAH KEBANGSAAN TUNKU PUTERA">SEKOLAH MENENGAH KEBANGSAAN TUNKU PUTERA</option>
-                        <option value="SEKOLAH MENENGAH KEBANGSAAN BALING">SEKOLAH MENENGAH KEBANGSAAN BALING</option>
-                        <option value="SK BALING">SK BALING</option>
-                        <option value="SEKOLAH KEBANGSAAN KUPANG">SEKOLAH KEBANGSAAN KUPANG</option>
+                        <optgroup label="🟢 SEKOLAH MENENGAH (16)">
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN TUNKU PUTERA">SEKOLAH MENENGAH KEBANGSAAN TUNKU PUTERA</option>
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN TELOI KANAN">SEKOLAH MENENGAH KEBANGSAAN TELOI KANAN</option>
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN TANJONG PUTERI">SEKOLAH MENENGAH KEBANGSAAN TANJONG PUTERI</option>
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN SYED ABU BAKAR">SEKOLAH MENENGAH KEBANGSAAN SYED ABU BAKAR</option>
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN SIONG">SEKOLAH MENENGAH KEBANGSAAN SIONG</option>
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN PARIT PANJANG">SEKOLAH MENENGAH KEBANGSAAN PARIT PANJANG</option>
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN KUALA PEGANG">SEKOLAH MENENGAH KEBANGSAAN KUALA PEGANG</option>
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN KUALA KETIL">SEKOLAH MENENGAH KEBANGSAAN KUALA KETIL</option>
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN JERAI">SEKOLAH MENENGAH KEBANGSAAN JERAI</option>
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN BONGOR">SEKOLAH MENENGAH KEBANGSAAN BONGOR</option>
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN BALING">SEKOLAH MENENGAH KEBANGSAAN BALING</option>
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN BAKAI">SEKOLAH MENENGAH KEBANGSAAN BAKAI</option>
+                            <option value="SEKOLAH MENENGAH KEBANGSAAN AGAMA BALING">SEKOLAH MENENGAH KEBANGSAAN AGAMA BALING</option>
+                            <option value="SEKOLAH MENENGAH AGAMA (ARAB) ANNAJAH">SEKOLAH MENENGAH AGAMA (ARAB) ANNAJAH</option>
+                            <option value="SEKOLAH MODEL KHAS BALING">SEKOLAH MODEL KHAS BALING</option>
+                            <option value="MAKTAB MAHMUD BALING">MAKTAB MAHMUD BALING</option>
+                        </optgroup>
+                        <optgroup label="🔵 SEKOLAH RENDAH (54)">
+                            <option value="SJKC CHIN HWA">SJKC CHIN HWA</option>
+                            <option value="SJKC KAMPUNG LALANG">SJKC KAMPUNG LALANG</option>
+                            <option value="SJKC KUALA KETIL">SJKC KUALA KETIL</option>
+                            <option value="SJKC YEOK CHEE">SJKC YEOK CHEE</option>
+                            <option value="SJKT LADANG MALAKOFF">SJKT LADANG MALAKOFF</option>
+                            <option value="SJKT LDG BATU PEKAKA">SJKT LDG BATU PEKAKA</option>
+                            <option value="SJKT LDG KIM SENG">SJKT LDG KIM SENG</option>
+                            <option value="SJKT LDG KUPANG">SJKT LDG KUPANG</option>
+                            <option value="SJKT LDG PELAM">SJKT LDG PELAM</option>
+                            <option value="SK ASAM JAWA/CAROK KELIAN">SK ASAM JAWA/CAROK KELIAN</option>
+                            <option value="SK BADANG">SK BADANG</option>
+                            <option value="SK BALING">SK BALING</option>
+                            <option value="SK BATU PEKAKA">SK BATU PEKAKA</option>
+                            <option value="SK BINJUL">SK BINJUL</option>
+                            <option value="SK BINJUL DALAM">SK BINJUL DALAM</option>
+                            <option value="SK DALAM WANG">SK DALAM WANG</option>
+                            <option value="SK IBOI">SK IBOI</option>
+                            <option value="SK KAMPONG KEDA">SK KAMPONG KEDA</option>
+                            <option value="SK KAMPONG PADANG">SK KAMPONG PADANG</option>
+                            <option value="SK KAMPUNG BANDAR">SK KAMPUNG BANDAR</option>
+                            <option value="SK KAMPUNG SADEK">SK KAMPUNG SADEK</option>
+                            <option value="SK KAMPUNG SELARONG">SK KAMPUNG SELARONG</option>
+                            <option value="SK KAMPUNG SERA">SK KAMPUNG SERA</option>
+                            <option value="SEKOLAH KEBANGSAAN KUPANG">SEKOLAH KEBANGSAAN KUPANG</option>
+                            <option value="SK KUALA KETIL">SK KUALA KETIL</option>
+                            <option value="SK KUALA KUANG">SK KUALA KUANG</option>
+                            <option value="SK KUALA MERAH">SK KUALA MERAH</option>
+                            <option value="SK KUALA PEGANG">SK KUALA PEGANG</option>
+                            <option value="SK KUALA SAMAK">SK KUALA SAMAK</option>
+                            <option value="SK LANAI">SK LANAI</option>
+                            <option value="SK MALAU">SK MALAU</option>
+                            <option value="SK MOHD ARIFF ABDULLAH">SK MOHD ARIFF ABDULLAH</option>
+                            <option value="SK PAYA BESAR">SK PAYA BESAR</option>
+                            <option value="SK PENGHULU ABU BAKAR">SK PENGHULU ABU BAKAR</option>
+                            <option value="SK PULAI">SK PULAI</option>
+                            <option value="SK RAMBONG PULAI">SK RAMBONG PULAI</option>
+                            <option value="SK SEBERANG KETIL">SK SEBERANG KETIL</option>
+                            <option value="SK SERI BAYU">SK SERI BAYU</option>
+                            <option value="SK SERI INAS">SK SERI INAS</option>
+                            <option value="SK SERI JEMERLI">SK SERI JEMERLI</option>
+                            <option value="SK SIONG">SK SIONG</option>
+                            <option value="SK SYED SHEH">SK SYED SHEH</option>
+                            <option value="SK TANJUNG PARI">SK TANJUNG PARI</option>
+                            <option value="SK TAWAR">SK TAWAR</option>
+                            <option value="SK TELOI KANAN">SK TELOI KANAN</option>
+                            <option value="SK TELOK TEDURI">SK TELOK TEDURI</option>
+                            <option value="SK TEMBAK">SK TEMBAK</option>
+                            <option value="SK TIAK">SK TIAK</option>
+                            <option value="SK TITI GANTONG">SK TITI GANTONG</option>
+                            <option value="SK TUNKU PUAN HABSAH">SK TUNKU PUAN HABSAH</option>
+                            <option value="SK TUNKU PUTERA">SK TUNKU PUTERA</option>
+                            <option value="SK ULU BAKAI">SK ULU BAKAI</option>
+                            <option value="SK ULU TAWAR">SK ULU TAWAR</option>
+                        </optgroup>
                     </select>
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Kata Laluan</label>
-                    <input type="password" id="loginPasswordInput" value="123456" required class="w-full text-xs p-3 border border-slate-200 rounded-xl">
+                    <input type="password" id="loginPasswordInput" value="123456" required class="w-full text-xs p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-600 focus:outline-none">
                 </div>
 
-                <button type="submit" class="w-full bg-emerald-800 text-white font-bold py-3.5 rounded-xl text-xs hover:bg-emerald-900 transition">
-                    LOG MASUK KE SISTEM ONLINE
+                <button type="submit" class="w-full bg-emerald-800 text-white font-bold py-3.5 rounded-xl text-xs hover:bg-emerald-900 transition shadow-lg shadow-emerald-900/20">
+                    LOG MASUK KE SISTEM
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- NAVIGASI TEPI -->
+    <!-- NAVIGASI TEPI (SIDEBAR) -->
     <aside id="sidebarMenu" class="w-full md:w-64 bg-slate-900 text-slate-300 p-5 flex-col justify-between shrink-0 hidden md:flex">
         <div>
-            <div class="flex items-center space-x-3 mb-8 px-2">
-                <div class="w-10 h-10 bg-emerald-600 text-amber-300 rounded-xl flex items-center justify-center text-lg font-black">
-                    <i class="fa-solid fa-landmark"></i>
+            <div class="flex items-center justify-between mb-8 px-2">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-emerald-600 text-amber-300 rounded-xl flex items-center justify-center text-lg font-black">
+                        <i class="fa-solid fa-landmark"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-sm text-white tracking-wide">e-SEJARAH BALING</h1>
+                        <p class="text-[10px] text-emerald-400 font-medium">Panitia Sejarah Daerah</p>
+                    </div>
                 </div>
+                <button onclick="toggleSidebar()" class="md:hidden text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+
+            <div class="bg-slate-800/60 rounded-xl p-3 border border-slate-700/50 mb-6 flex items-center justify-between">
                 <div>
-                    <h1 class="font-bold text-sm text-white">e-SEJARAH BALING</h1>
-                    <p class="text-[10px] text-emerald-400 font-medium">Sistem Awan Terhubung</p>
+                    <p id="userDisplayName" class="text-xs font-bold text-white">Nama Pengguna</p>
+                    <p id="userRoleBadge" class="text-[10px] text-emerald-400 font-semibold">Akses</p>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button onclick="logout()" title="Log Keluar" class="text-slate-400 hover:text-rose-400 text-xs"><i class="fa-solid fa-right-from-bracket"></i></button>
                 </div>
             </div>
 
             <nav class="space-y-1.5 text-xs font-medium">
-                <button onclick="switchTab('senarai-opr')" id="nav-senarai-opr" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl bg-emerald-800 text-white">
-                    <i class="fa-solid fa-list-check w-5"></i> <span>Senarai OPR (Live)</span>
+                <button onclick="switchTab('dashboard')" id="nav-dashboard" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl bg-emerald-800 text-white font-semibold">
+                    <i class="fa-solid fa-house w-5"></i> <span>Dashboard Utama</span>
+                </button>
+                <button onclick="switchTab('sekolah')" id="nav-sekolah" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition">
+                    <i class="fa-solid fa-school w-5 text-emerald-400"></i> <span>Pengurusan Sekolah</span>
+                </button>
+                <button onclick="switchTab('program')" id="nav-program" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition">
+                    <i class="fa-solid fa-award w-5 text-rose-400"></i> <span>Program KPM / JPN / PPD</span>
+                </button>
+                <button onclick="switchTab('senarai-opr')" id="nav-senarai-opr" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition">
+                    <i class="fa-solid fa-list-check w-5 text-rose-300"></i> <span>Senarai Program OPR</span>
+                </button>
+                <button onclick="switchTab('bahan')" id="nav-bahan" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition">
+                    <i class="fa-solid fa-folder-open w-5 text-blue-400"></i> <span>Modul Bahan Panitia</span>
+                </button>
+                <button onclick="switchTab('sumber')" id="nav-sumber" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition">
+                    <i class="fa-solid fa-book-bookmark w-5 text-amber-400"></i> <span>Bank Sumber</span>
                 </button>
             </nav>
         </div>
+
+        <div class="pt-6 border-t border-slate-800 text-[10px] text-slate-500 text-center">
+            &copy; 2026 Panitia Sejarah Daerah Baling.
+        </div>
     </aside>
 
-    <!-- RUANG KANDUNGAN -->
+    <!-- RUANG KANDUNGAN UTAMA -->
     <main class="flex-1 p-4 md:p-8 overflow-y-auto max-w-7xl mx-auto w-full">
-        <section id="tab-senarai-opr" class="space-y-6">
-            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
-                <div class="flex justify-between items-center border-b pb-4">
-                    <div>
-                        <h3 class="font-black text-slate-900 text-base">📋 LAPORAN OPR DAERAH (REALTIME)</h3>
-                        <p class="text-xs text-slate-500 mt-1">Satu cikgu isi, semua cikgu daerah Baling boleh terus nampak!</p>
-                    </div>
-                    <button onclick="openOprModal()" class="bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow">
-                        ➕ JANA OPR BAHARU
-                    </button>
-                </div>
 
-                <div id="oprRecordsContainer" class="space-y-4">
-                    <p class="text-xs text-slate-400 italic">Memuatkan data secara atas talian...</p>
+        <header class="flex justify-between items-center gap-4 mb-8 pb-4 border-b border-slate-200">
+            <div>
+                <h2 id="pageTitle" class="text-2xl font-extrabold text-slate-900">Dashboard Utama</h2>
+                <p id="pageSubtitle" class="text-xs text-slate-500 mt-0.5">Ekosistem Digital Panitia Sejarah Daerah Baling</p>
+            </div>
+            <button onclick="toggleSidebar()" class="md:hidden p-2.5 bg-white border border-slate-200 text-slate-800 rounded-xl shadow-sm">
+                <i class="fa-solid fa-bars text-lg"></i>
+            </button>
+        </header>
+
+        <!-- TAB DASHBOARD UTAMA -->
+        <section id="tab-dashboard" class="space-y-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                    <span class="text-xs font-bold text-slate-400 uppercase">Sekolah Rendah</span>
+                    <span id="countSR" class="text-3xl font-extrabold text-emerald-700 block mt-1">54</span>
+                </div>
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                    <span class="text-xs font-bold text-slate-400 uppercase">Sekolah Menengah</span>
+                    <span id="countSM" class="text-3xl font-extrabold text-blue-700 block mt-1">16</span>
                 </div>
             </div>
         </section>
+
+        <!-- TAB MODUL SEKOLAH -->
+        <section id="tab-sekolah" class="hidden space-y-6">
+            <div id="schoolCardsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <!-- TAB MODUL BAHAN PANITIA -->
+        <section id="tab-bahan" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+                <div class="flex justify-between items-center border-b pb-4">
+                    <h3 class="font-black text-slate-900 text-base">MODUL BAHAN PANITIA SEJARAH DAERAH</h3>
+                    <button onclick="triggerCategoryUpload()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow">➕ MUAT NAIK BAHAN</button>
+                </div>
+                <div id="bahanListGrid" class="space-y-3"></div>
+            </div>
+        </section>
+
+        <!-- TAB SENARAI PROGRAM OPR -->
+        <section id="tab-senarai-opr" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+                <div class="flex justify-between items-center border-b pb-4">
+                    <h3 class="font-black text-slate-900 text-base">📋 SENARAI PROGRAM & DOKUMENTASI OPR DAERAH</h3>
+                    <button onclick="openOprModal()" class="bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow">➕ JANA OPR BAHARU</button>
+                </div>
+                <div id="oprRecordsContainer" class="space-y-4"></div>
+            </div>
+        </section>
+
     </main>
 
-    <!-- MODAL BORANG OPR -->
-    <div id="oprModal" class="fixed inset-0 bg-slate-900/80 z-[120] hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-xl w-full p-6 relative text-xs space-y-4 shadow-2xl">
-            <button onclick="closeOprModal()" class="absolute right-5 top-5 text-slate-400 font-bold"><i class="fa-solid fa-xmark text-lg"></i></button>
-            <h3 class="font-extrabold text-slate-900 text-base">Tambah Laporan OPR Online</h3>
-
-            <form onsubmit="handleOprSubmit(event)" class="space-y-3">
-                <div>
-                    <label class="block font-bold text-slate-800 mb-1">Nama Program *</label>
-                    <input type="text" id="oprNamaProgram" required class="w-full p-2.5 border rounded-xl">
-                </div>
-                <div>
-                    <label class="block font-bold text-slate-800 mb-1">Tarikh & Tempat *</label>
-                    <div class="grid grid-cols-2 gap-2">
-                        <input type="date" id="oprTarikh" required class="p-2.5 border rounded-xl">
-                        <input type="text" id="oprTempat" placeholder="Lokasi" required class="p-2.5 border rounded-xl">
-                    </div>
-                </div>
-                <div>
-                    <label class="block font-bold text-slate-800 mb-1">Pelaporan Ringkas *</label>
-                    <textarea id="oprPelaporan" rows="3" required class="w-full p-2.5 border rounded-xl"></textarea>
-                </div>
-                <button type="submit" id="btnSubmitOpr" class="w-full bg-emerald-800 text-white font-bold py-3 rounded-xl hover:bg-emerald-900">
-                    SIMPAN KE AWAN (KONGSI KEPADA SEMUA GURU)
-                </button>
-            </form>
-        </div>
-    </div>
-
     <script>
-        // TETAPAN SUPABASE PROJEK ANDA
-        const SUPABASE_URL = "https://lluwzqaklkmuzgepkkza.supabase.co";
-        
-        // Klik butang copy pada 'Publishable key' di skrin anda dan gantikan di bawah:
-        const SUPABASE_ANON_KEY = "SALIN_DAN_PASTE_PUBLISHABLE_KEY_DI_SINI";
+        let currentUser = {
+            role: 'KETUA_PANITIA',
+            sekolah: 'SEKOLAH MENENGAH KEBANGSAAN TUNKU PUTERA'
+        };
 
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        let sampleOprList = JSON.parse(localStorage.getItem('sampleOprList')) || [
+            { id: 1, nama: "Bengkel Pemantapan Pedagogi Sejarah", sekolah: "PPD BALING", tarikh: "2026-02-15", tempat: "Dewan PPD Baling", pelaporan: "Selesai" }
+        ];
 
-        let currentUser = { role: 'KETUA_PANITIA', sekolah: 'SK BALING' };
+        let sampleBahanList = JSON.parse(localStorage.getItem('sampleBahanList')) || [
+            { id: 1, tajuk: "DSKP Sejarah Tingkatan 1", kat: "DSKP", sumber: "BPK KPM", tarikh: "2026-01-01" }
+        ];
 
         window.onload = function() {
-            loadOprRecordsRealtime();
+            renderBahanList();
+            renderOprList();
         };
 
         function handleLogin(e) {
@@ -148,83 +258,72 @@
             const role = document.getElementById('loginRole').value;
             currentUser.role = role;
             currentUser.sekolah = role === 'KETUA_PANITIA' ? document.getElementById('loginSchool').value : 'ADMIN DAERAH';
+            document.getElementById('userDisplayName').innerText = currentUser.sekolah;
+            document.getElementById('userRoleBadge').innerText = role === 'ADMIN' ? 'Admin' : 'Ketua Panitia';
             document.getElementById('loginModal').classList.add('hidden');
-            loadOprRecordsRealtime();
+            renderBahanList();
+            renderOprList();
         }
 
-        // FUNGSI MEMBACA DATA DARI AWAN
-        async function loadOprRecordsRealtime() {
-            const container = document.getElementById('oprRecordsContainer');
-            
-            const { data, error } = await supabase
-                .from('opr_records')
-                .select('*')
-                .order('id', { ascending: false });
+        function logout() {
+            document.getElementById('loginModal').classList.remove('hidden');
+        }
 
-            if (error) {
-                container.innerHTML = `<p class="text-xs text-rose-500">Ralat memuatkan data. Sila semak sambungan internet.</p>`;
-                return;
-            }
+        function switchTab(tabId) {
+            ['dashboard', 'sekolah', 'program', 'bahan', 'sumber', 'senarai-opr'].forEach(t => {
+                const el = document.getElementById('tab-' + t);
+                if (el) el.classList.add('hidden');
+            });
+            const target = document.getElementById('tab-' + tabId);
+            if (target) target.classList.remove('hidden');
+        }
 
-            if (!data || data.length === 0) {
-                container.innerHTML = `<p class="text-xs text-slate-400 italic">Tiada rekod OPR dijumpai. Sila klik 'JANA OPR BAHARU'.</p>`;
-                return;
-            }
-
-            container.innerHTML = data.map(item => `
-                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex justify-between items-center">
+        function renderBahanList() {
+            const container = document.getElementById('bahanListGrid');
+            if(!container) return;
+            container.innerHTML = sampleBahanList.map((item, index) => `
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs flex justify-between items-center">
                     <div>
-                        <span class="text-[10px] font-bold bg-rose-100 text-rose-800 px-2 py-0.5 rounded-full">${item.tarikh}</span>
-                        <h4 class="font-bold text-slate-900 text-xs mt-1">${item.nama_program}</h4>
-                        <p class="text-[10px] text-slate-500">${item.sekolah} • ${item.tempat}</p>
-                        <p class="text-xs text-slate-600 mt-1 italic">"${item.pelaporan}"</p>
+                        <h4 class="font-bold text-slate-900 text-sm">${item.tajuk}</h4>
+                        <p class="text-[10px] text-slate-500">${item.sumber} • ${item.tarikh}</p>
                     </div>
-                    ${currentUser.role === 'ADMIN' ? `<button onclick="deleteOprRecord(${item.id})" class="bg-rose-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-lg">Padam</button>` : ''}
+                    ${currentUser.role === 'ADMIN' ? `<button onclick="deleteBahan(${item.id})" class="bg-rose-600 text-white font-bold py-1.5 px-3 rounded-xl text-[10px]">Padam</button>` : ''}
                 </div>
             `).join('');
         }
 
-        // FUNGSI MENYIMPAN DATA KE AWAN
-        async function handleOprSubmit(e) {
-            e.preventDefault();
-            const btn = document.getElementById('btnSubmitOpr');
-            btn.innerText = "Menyimpan ke Awan...";
-            btn.disabled = true;
-
-            const newRecord = {
-                nama_program: document.getElementById('oprNamaProgram').value,
-                tarikh: document.getElementById('oprTarikh').value,
-                tempat: document.getElementById('oprTempat').value,
-                pelaporan: document.getElementById('oprPelaporan').value,
-                sekolah: currentUser.sekolah
-            };
-
-            const { error } = await supabase.from('opr_records').insert([newRecord]);
-
-            if (error) {
-                alert("Gagal menyimpan data: " + error.message);
-            } else {
-                alert("Laporan OPR berjaya disimpan! Semua guru kini boleh melihat laporan ini.");
-                closeOprModal();
-                loadOprRecordsRealtime();
-            }
-
-            btn.innerText = "SIMPAN KE AWAN (KONGSI KEPADA SEMUA GURU)";
-            btn.disabled = false;
-        }
-
-        async function deleteOprRecord(id) {
-            if(confirm("Adakah anda pasti untuk memadam rekod OPR ini?")) {
-                await supabase.from('opr_records').delete().eq('id', id);
-                loadOprRecordsRealtime();
+        function deleteBahan(id) {
+            if(confirm('Adakah anda pasti untuk memadam bahan ini?')) {
+                sampleBahanList = sampleBahanList.filter(b => b.id != id);
+                localStorage.setItem('sampleBahanList', JSON.stringify(sampleBahanList));
+                renderBahanList();
             }
         }
 
-        function openOprModal() { document.getElementById('oprModal').classList.remove('hidden'); }
-        function closeOprModal() { document.getElementById('oprModal').classList.add('hidden'); }
-        function toggleSchoolSelectField() {
-            document.getElementById('schoolSelectWrapper').style.display = document.getElementById('loginRole').value === 'ADMIN' ? 'none' : 'block';
+        function renderOprList() {
+            const container = document.getElementById('oprRecordsContainer');
+            if(!container) return;
+            container.innerHTML = sampleOprList.map((item) => `
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex justify-between items-center">
+                    <div>
+                        <h4 class="font-extrabold text-slate-900 text-sm">${item.nama}</h4>
+                        <p class="text-xs text-slate-500">${item.sekolah} • ${item.tempat}</p>
+                    </div>
+                    ${currentUser.role === 'ADMIN' ? `<button onclick="deleteOpr(${item.id})" class="bg-rose-600 text-white font-bold px-3 py-1.5 rounded-xl text-xs">Padam</button>` : ''}
+                </div>
+            `).join('');
         }
+
+        function deleteOpr(id) {
+            if(confirm('Adakah anda pasti untuk memadam OPR ini?')) {
+                sampleOprList = sampleOprList.filter(o => o.id != id);
+                localStorage.setItem('sampleOprList', JSON.stringify(sampleOprList));
+                renderOprList();
+            }
+        }
+
+        function toggleSidebar() { document.getElementById('sidebarMenu').classList.toggle('hidden'); }
+        function toggleSchoolSelectField() { document.getElementById('schoolSelectWrapper').style.display = document.getElementById('loginRole').value === 'ADMIN' ? 'none' : 'block'; }
     </script>
 </body>
 </html>
