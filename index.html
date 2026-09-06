@@ -125,7 +125,7 @@
         </div>
     </div>
 
-    <!-- NAVIGASI TEPI (SIDEBAR) -->
+    <!-- NAVIGASI TEPI (SIDEBAR ASAL) -->
     <aside id="sidebarMenu" class="w-full md:w-64 bg-slate-900 text-slate-300 p-5 flex-col justify-between shrink-0 hidden md:flex">
         <div>
             <div class="flex items-center justify-between mb-8 px-2">
@@ -138,16 +138,12 @@
                         <p class="text-[10px] text-emerald-400 font-medium">Panitia Sejarah Daerah</p>
                     </div>
                 </div>
-                <button onclick="toggleSidebar()" class="md:hidden text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
 
             <div class="bg-slate-800/60 rounded-xl p-3 border border-slate-700/50 mb-6 flex items-center justify-between">
                 <div>
-                    <p id="userDisplayName" class="text-xs font-bold text-white">Nama Pengguna</p>
-                    <p id="userRoleBadge" class="text-[10px] text-emerald-400 font-semibold">Akses</p>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <button onclick="logout()" title="Log Keluar" class="text-slate-400 hover:text-rose-400 text-xs"><i class="fa-solid fa-right-from-bracket"></i></button>
+                    <p id="userDisplayName" class="text-xs font-bold text-white">SISC+ / PPD Baling</p>
+                    <p id="userRoleBadge" class="text-[10px] text-emerald-400 font-semibold">Admin Daerah</p>
                 </div>
             </div>
 
@@ -158,11 +154,11 @@
                 <button onclick="switchTab('sekolah')" id="nav-sekolah" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition">
                     <i class="fa-solid fa-school w-5 text-emerald-400"></i> <span>Pengurusan Sekolah</span>
                 </button>
+                <button onclick="switchTab('program')" id="nav-program" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition">
+                    <i class="fa-solid fa-award w-5 text-rose-400"></i> <span>Program KPM / JPN / PPD</span>
+                </button>
                 <button onclick="switchTab('senarai-opr')" id="nav-senarai-opr" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition">
                     <i class="fa-solid fa-list-check w-5 text-rose-300"></i> <span>Senarai Program OPR</span>
-                </button>
-                <button onclick="switchTab('bahan')" id="nav-bahan" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition">
-                    <i class="fa-solid fa-folder-open w-5 text-blue-400"></i> <span>Modul Bahan Panitia</span>
                 </button>
             </nav>
         </div>
@@ -178,8 +174,9 @@
             </div>
         </header>
 
-        <!-- TAB DASHBOARD UTAMA -->
+        <!-- TAB DASHBOARD UTAMA (ASAL) -->
         <section id="tab-dashboard" class="space-y-6">
+            <!-- Stat KPI Card -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
                     <span class="text-xs font-bold text-slate-400 uppercase">Sekolah Rendah</span>
@@ -200,6 +197,83 @@
                     <span class="text-xs font-bold text-slate-400 uppercase">Guru Sejarah SR</span>
                     <span id="countGuruSR" class="text-3xl font-extrabold text-amber-600 block mt-1">2</span>
                     <span class="text-[10px] text-slate-400 block mt-1">Terdaftar</span>
+                </div>
+            </div>
+
+            <!-- Banner Utama Hijau -->
+            <div class="bg-gradient-to-r from-emerald-900 to-teal-800 text-white p-6 rounded-3xl shadow-xl flex flex-col justify-between">
+                <div>
+                    <span class="bg-amber-400 text-slate-950 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase">EKOSISTEM DIGITAL</span>
+                    <h3 class="text-xl font-black mt-3">Pengurusan & Dokumentasi Sekolah</h3>
+                    <p class="text-xs text-emerald-100/80 mt-1">Sistem penjanaan laporan OPR automatik (AI) serta pusat pengurusan bahan RPH, Kajian Kes, dan Bank Soalan.</p>
+                </div>
+                <button onclick="switchTab('sekolah')" class="mt-6 bg-white text-emerald-950 font-extrabold text-xs px-5 py-3 rounded-xl shadow hover:bg-emerald-50 transition w-fit">
+                    <i class="fa-solid fa-arrow-right mr-1"></i> Buka Modul Pengurusan Sekolah
+                </button>
+            </div>
+
+            <!-- Capaian Pantas Modul Panitia (5 Butang Gambar Asal) -->
+            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+                <h3 class="font-black text-slate-900 text-sm mb-4 flex items-center space-x-2">
+                    <i class="fa-solid fa-bolt text-amber-500"></i>
+                    <span>CAPAIAN PANTAS MODUL PANITIA</span>
+                </h3>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                    <button onclick="switchTab('program')" class="bg-rose-600 hover:bg-rose-700 text-white p-5 rounded-2xl shadow-md transition text-left flex flex-col justify-between group">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-2xl"><i class="fa-solid fa-award"></i></span>
+                            <i class="fa-solid fa-arrow-up-right-from-square opacity-60 group-hover:opacity-100 text-xs"></i>
+                        </div>
+                        <div>
+                            <span class="font-extrabold text-sm block">1. PROGRAM KPM/JPN/PPD</span>
+                            <span class="text-[10px] text-rose-100 block mt-0.5">Laporan & Aktiviti KPM</span>
+                        </div>
+                    </button>
+
+                    <button onclick="switchTab('bahan')" class="bg-blue-600 hover:bg-blue-700 text-white p-5 rounded-2xl shadow-md transition text-left flex flex-col justify-between group">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-2xl"><i class="fa-solid fa-folder-open"></i></span>
+                            <i class="fa-solid fa-arrow-up-right-from-square opacity-60 group-hover:opacity-100 text-xs"></i>
+                        </div>
+                        <div>
+                            <span class="font-extrabold text-sm block">2. BAHAN MODUL</span>
+                            <span class="text-[10px] text-blue-100 block mt-0.5">RPH, DSKP & Kajian Kes</span>
+                        </div>
+                    </button>
+
+                    <button onclick="switchTab('sumber')" class="bg-amber-600 hover:bg-amber-700 text-white p-5 rounded-2xl shadow-md transition text-left flex flex-col justify-between group">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-2xl"><i class="fa-solid fa-book-bookmark"></i></span>
+                            <i class="fa-solid fa-arrow-up-right-from-square opacity-60 group-hover:opacity-100 text-xs"></i>
+                        </div>
+                        <div>
+                            <span class="font-extrabold text-sm block">3. BANK SUMBER</span>
+                            <span class="text-[10px] text-amber-100 block mt-0.5">Modul KBAT & Soalan</span>
+                        </div>
+                    </button>
+
+                    <button onclick="openExternalAnalysis()" class="bg-indigo-600 hover:bg-indigo-700 text-white p-5 rounded-2xl shadow-md transition text-left flex flex-col justify-between group">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-2xl"><i class="fa-solid fa-link"></i></span>
+                            <i class="fa-solid fa-arrow-up-right-from-square opacity-60 group-hover:opacity-100 text-xs"></i>
+                        </div>
+                        <div>
+                            <span class="font-extrabold text-sm block">4. ANALISIS ITEM</span>
+                            <span class="text-[10px] text-indigo-100 block mt-0.5">e-Analisis Sejarah</span>
+                        </div>
+                    </button>
+
+                    <button onclick="switchTab('lain')" class="bg-teal-700 hover:bg-teal-800 text-white p-5 rounded-2xl shadow-md transition text-left flex flex-col justify-between group">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-2xl"><i class="fa-solid fa-ellipsis-vertical"></i></span>
+                            <i class="fa-solid fa-arrow-up-right-from-square opacity-60 group-hover:opacity-100 text-xs"></i>
+                        </div>
+                        <div>
+                            <span class="font-extrabold text-sm block">5. LAIN-LAIN</span>
+                            <span class="text-[10px] text-teal-100 block mt-0.5">Surat & Dokumen Panitia</span>
+                        </div>
+                    </button>
                 </div>
             </div>
         </section>
@@ -231,25 +305,42 @@
         let currentUser = { role: 'ADMIN', sekolah: 'ADMIN DAERAH' };
         let currentCategoryView = 'MENENGAH';
 
-        // PANGKALAN DATA SEBENAR: 16 SEKOLAH MENENGAH & 54 SEKOLAH RENDAH
+        // DATABASE NAMA SEKOLAH & SENARAI GURU LENGKAP
         const schoolDatabase = [
             // --- 16 SEKOLAH MENENGAH ---
-            { nama: "SEKOLAH MENENGAH KEBANGSAAN TUNKU PUTERA", kat: "MENENGAH", guru: [{ nama: "ANITA BINTI ABU BAKAR", kelas: "T3" }, { nama: "MOHD. ISHAK BIN MD. ISA", kelas: "T2" }] },
-            { nama: "SEKOLAH MENENGAH KEBANGSAAN TELOI KANAN", kat: "MENENGAH", guru: [{ nama: "NOR AZIRA BINTI ISMAIL", kelas: "T1-T5" }] },
-            { nama: "SEKOLAH MENENGAH KEBANGSAAN TANJONG PUTERI", kat: "MENENGAH", guru: [{ nama: "GURU SEJARAH SMK TANJONG PUTERI", kelas: "KSSM" }] },
-            { nama: "SEKOLAH MENENGAH KEBANGSAAN SYED ABU BAKAR", kat: "MENENGAH", guru: [{ nama: "GURU SEJARAH SMK SYED ABU BAKAR", kelas: "KSSM" }] },
-            { nama: "SEKOLAH MENENGAH KEBANGSAAN SIONG", kat: "MENENGAH", guru: [{ nama: "GURU SEJARAH SMK SIONG", kelas: "KSSM" }] },
-            { nama: "SEKOLAH MENENGAH KEBANGSAAN PARIT PANJANG", kat: "MENENGAH", guru: [{ nama: "GURU SEJARAH SMK PARIT PANJANG", kelas: "KSSM" }] },
-            { nama: "SEKOLAH MENENGAH KEBANGSAAN KUALA PEGANG", kat: "MENENGAH", guru: [{ nama: "GURU SEJARAH SMK KUALA PEGANG", kelas: "KSSM" }] },
-            { nama: "SEKOLAH MENENGAH KEBANGSAAN KUALA KETIL", kat: "MENENGAH", guru: [{ nama: "GURU SEJARAH SMK KUALA KETIL", kelas: "KSSM" }] },
-            { nama: "SEKOLAH MENENGAH KEBANGSAAN JERAI", kat: "MENENGAH", guru: [{ nama: "GURU SEJARAH SMK JERAI", kelas: "KSSM" }] },
-            { nama: "SEKOLAH MENENGAH KEBANGSAAN BONGOR", kat: "MENENGAH", guru: [{ nama: "GURU SEJARAH SMK BONGOR", kelas: "KSSM" }] },
-            { nama: "SEKOLAH MENENGAH KEBANGSAAN BALING", kat: "MENENGAH", guru: [{ nama: "GURU SEJARAH SMK BALING", kelas: "KSSM" }] },
-            { nama: "SEKOLAH MENENGAH KEBANGSAAN BAKAI", kat: "MENENGAH", guru: [{ nama: "GURU SEJARAH SMK BAKAI", kelas: "KSSM" }] },
-            { nama: "SEKOLAH MENENGAH KEBANGSAAN AGAMA BALING", kat: "MENENGAH", guru: [{ nama: "GURU SEJARAH SMKA BALING", kelas: "KSSM" }] },
-            { nama: "SEKOLAH MENENGAH AGAMA (ARAB) ANNAJAH", kat: "MENENGAH", guru: [{ nama: "GURU SEJARAH SMA ANNAJAH", kelas: "KSSM" }] },
-            { nama: "SEKOLAH MODEL KHAS BALING", kat: "MENENGAH", guru: [{ nama: "GURU SEJARAH MODEL KHAS BALING", kelas: "KSSM" }] },
-            { nama: "MAKTAB MAHMUD BALING", kat: "MENENGAH", guru: [{ nama: "GURU SEJARAH MAKTAB MAHMUD", kelas: "KSSM" }] },
+            { 
+                nama: "SEKOLAH MENENGAH KEBANGSAAN TUNKU PUTERA", 
+                kat: "MENENGAH", 
+                guru: [
+                    { nama: "ANITA BINTI ABU BAKAR", kelas: "T3" },
+                    { nama: "MOHD. ISHAK BIN MD. ISA", kelas: "T2" },
+                    { nama: "ATIQAH AQILAH BINTI ZULBAHAR", kelas: "T1 & T4" },
+                    { nama: "MUHAMMAD HAZRIN BIN HALIM", kelas: "T1 & T3" },
+                    { nama: "MARYANI BINTI ABDUL WAHAB", kelas: "T1, T2, T4, T5" }
+                ] 
+            },
+            { 
+                nama: "SEKOLAH MENENGAH KEBANGSAAN TELOI KANAN", 
+                kat: "MENENGAH", 
+                guru: [
+                    { nama: "NOR AZIRA BINTI ISMAIL", kelas: "T1, T2, T4, T5" },
+                    { nama: "NOR AZILA BINTI ABDUL TALIB", kelas: "T1, T3, T4, T5" }
+                ] 
+            },
+            { nama: "SEKOLAH MENENGAH KEBANGSAAN TANJONG PUTERI", kat: "MENENGAH", guru: [{ nama: "GURU PANITIA SEJARAH", kelas: "T1-T5" }] },
+            { nama: "SEKOLAH MENENGAH KEBANGSAAN SYED ABU BAKAR", kat: "MENENGAH", guru: [{ nama: "GURU PANITIA SEJARAH", kelas: "T1-T5" }] },
+            { nama: "SEKOLAH MENENGAH KEBANGSAAN SIONG", kat: "MENENGAH", guru: [{ nama: "GURU PANITIA SEJARAH", kelas: "T1-T5" }] },
+            { nama: "SEKOLAH MENENGAH KEBANGSAAN PARIT PANJANG", kat: "MENENGAH", guru: [{ nama: "GURU PANITIA SEJARAH", kelas: "T1-T5" }] },
+            { nama: "SEKOLAH MENENGAH KEBANGSAAN KUALA PEGANG", kat: "MENENGAH", guru: [{ nama: "GURU PANITIA SEJARAH", kelas: "T1-T5" }] },
+            { nama: "SEKOLAH MENENGAH KEBANGSAAN KUALA KETIL", kat: "MENENGAH", guru: [{ nama: "GURU PANITIA SEJARAH", kelas: "T1-T5" }] },
+            { nama: "SEKOLAH MENENGAH KEBANGSAAN JERAI", kat: "MENENGAH", guru: [{ nama: "GURU PANITIA SEJARAH", kelas: "T1-T5" }] },
+            { nama: "SEKOLAH MENENGAH KEBANGSAAN BONGOR", kat: "MENENGAH", guru: [{ nama: "GURU PANITIA SEJARAH", kelas: "T1-T5" }] },
+            { nama: "SEKOLAH MENENGAH KEBANGSAAN BALING", kat: "MENENGAH", guru: [{ nama: "GURU PANITIA SEJARAH", kelas: "T1-T5" }] },
+            { nama: "SEKOLAH MENENGAH KEBANGSAAN BAKAI", kat: "MENENGAH", guru: [{ nama: "GURU PANITIA SEJARAH", kelas: "T1-T5" }] },
+            { nama: "SEKOLAH MENENGAH KEBANGSAAN AGAMA BALING", kat: "MENENGAH", guru: [{ nama: "GURU PANITIA SEJARAH", kelas: "T1-T5" }] },
+            { nama: "SEKOLAH MENENGAH AGAMA (ARAB) ANNAJAH", kat: "MENENGAH", guru: [{ nama: "GURU PANITIA SEJARAH", kelas: "T1-T5" }] },
+            { nama: "SEKOLAH MODEL KHAS BALING", kat: "MENENGAH", guru: [{ nama: "GURU PANITIA SEJARAH", kelas: "T1-T5" }] },
+            { nama: "MAKTAB MAHMUD BALING", kat: "MENENGAH", guru: [{ nama: "GURU PANITIA SEJARAH", kelas: "T1-T5" }] },
 
             // --- 54 SEKOLAH RENDAH ---
             { nama: "SJKC CHIN HWA", kat: "RENDAH", guru: [{ nama: "GURU SEJARAH SJKC CHIN HWA", kelas: "KSSR" }] },
@@ -313,6 +404,8 @@
 
         function switchSchoolCategory(kat) {
             currentCategoryView = kat;
+            document.getElementById('btn-cat-rendah').className = kat === 'RENDAH' ? 'py-3 px-6 border-b-2 border-emerald-800 text-emerald-800 flex items-center space-x-2' : 'py-3 px-6 border-b-2 border-transparent text-slate-500 hover:text-slate-800 flex items-center space-x-2';
+            document.getElementById('btn-cat-menengah').className = kat === 'MENENGAH' ? 'py-3 px-6 border-b-2 border-emerald-800 text-emerald-800 flex items-center space-x-2' : 'py-3 px-6 border-b-2 border-transparent text-slate-500 hover:text-slate-800 flex items-center space-x-2';
             renderSchools();
         }
 
@@ -340,7 +433,8 @@
                         <div>
                             <span class="bg-emerald-100 text-emerald-800 font-extrabold px-2.5 py-1 rounded-full text-[10px]">${s.kat}</span>
                             <h4 class="font-black text-slate-900 text-sm my-2">${s.nama}</h4>
-                            <div class="bg-slate-50 p-3 rounded-2xl border border-slate-100 my-3">
+                            <div class="bg-slate-50 p-3 rounded-2xl border border-slate-100 my-3 space-y-1">
+                                <span class="font-bold text-slate-500 block text-[10px] uppercase mb-1">👨‍🏫 GURU SEJARAH (${s.guru.length} Orang):</span>
                                 ${guruHtml}
                             </div>
                         </div>
@@ -362,6 +456,10 @@
         function switchTab(tabId) {
             document.getElementById('tab-dashboard').classList.toggle('hidden', tabId !== 'dashboard');
             document.getElementById('tab-sekolah').classList.toggle('hidden', tabId !== 'sekolah');
+        }
+
+        function openExternalAnalysis() {
+            window.open('https://e-analisis-sejarah-baling.netlify.app', '_blank');
         }
     </script>
 </body>
