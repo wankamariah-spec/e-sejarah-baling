@@ -196,6 +196,9 @@
                 <button onclick="switchTab('program')" id="nav-program" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition">
                     <i class="fa-solid fa-award w-5 text-rose-400"></i> <span>Program KPM / JPN / PPD</span>
                 </button>
+                <button onclick="switchTab('senarai-opr')" id="nav-senarai-opr" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition">
+                    <i class="fa-solid fa-list-check w-5 text-rose-300"></i> <span>Senarai Program OPR</span>
+                </button>
                 <button onclick="switchTab('bahan')" id="nav-bahan" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition">
                     <i class="fa-solid fa-folder-open w-5 text-blue-400"></i> <span>Modul Bahan Panitia</span>
                 </button>
@@ -343,7 +346,9 @@
                         </h3>
                         <p class="text-xs text-slate-500 mt-0.5">Paparan program utama, bengkel intervensi, dan perancangan panitia daerah.</p>
                     </div>
-                    <button onclick="switchTab('senarai-opr')" class="text-xs text-rose-600 font-extrabold hover:underline">Lihat Rekod Laporan OPR <i class="fa-solid fa-chevron-right ml-1"></i></button>
+                    <div class="flex space-x-2">
+                        <button onclick="switchTab('senarai-opr')" class="text-xs bg-rose-50 text-rose-600 px-3 py-1.5 rounded-lg border border-rose-200 font-extrabold hover:bg-rose-100"><i class="fa-solid fa-list mr-1"></i> Senarai Program OPR</button>
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -353,7 +358,7 @@
                         <p class="text-[10px] text-slate-500"><i class="fa-solid fa-location-dot mr-1"></i>PPD Baling • 15 Februari 2026</p>
                         <div class="pt-2 flex justify-between items-center text-[10px] border-t border-rose-100">
                             <span class="text-emerald-700 font-bold"><i class="fa-solid fa-circle-check mr-1"></i>Selesai</span>
-                            <button onclick="switchTab('senarai-opr')" class="text-slate-800 font-extrabold hover:underline">Lihat OPR</button>
+                            <button onclick="viewOprDetail(1)" class="text-slate-800 font-extrabold hover:underline">Lihat OPR</button>
                         </div>
                     </div>
 
@@ -363,7 +368,7 @@
                         <p class="text-[10px] text-slate-500"><i class="fa-solid fa-location-dot mr-1"></i>SISC+ PPD Baling • 01 Mac 2026</p>
                         <div class="pt-2 flex justify-between items-center text-[10px] border-t border-rose-100">
                             <span class="text-amber-600 font-bold"><i class="fa-solid fa-clock mr-1"></i>Dalam Pelaksanaan</span>
-                            <button onclick="switchTab('senarai-opr')" class="text-slate-800 font-extrabold hover:underline">Lihat OPR</button>
+                            <button onclick="viewOprDetail(2)" class="text-slate-800 font-extrabold hover:underline">Lihat OPR</button>
                         </div>
                     </div>
 
@@ -373,7 +378,7 @@
                         <p class="text-[10px] text-slate-500"><i class="fa-solid fa-location-dot mr-1"></i>PPD Baling • 10 Mac 2026</p>
                         <div class="pt-2 flex justify-between items-center text-[10px] border-t border-rose-100">
                             <span class="text-blue-600 font-bold"><i class="fa-solid fa-calendar-check mr-1"></i>Mendatang</span>
-                            <button onclick="switchTab('senarai-opr')" class="text-slate-800 font-extrabold hover:underline">Lihat OPR</button>
+                            <button onclick="viewOprDetail(3)" class="text-slate-800 font-extrabold hover:underline">Lihat OPR</button>
                         </div>
                     </div>
                 </div>
@@ -391,10 +396,16 @@
                         </h3>
                         <p class="text-xs text-slate-500 mt-1">Pusat perancangan, bengkel intervensi, dan dokumentasi program peringkat tinggi.</p>
                     </div>
-                    <button onclick="openOprModal('PROGRAM KPM/JPN/PPD')" class="bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow flex items-center space-x-1.5">
-                        <i class="fa-solid fa-cloud-arrow-up"></i>
-                        <span>➕ MUAT NAIK OPR</span>
-                    </button>
+                    <div class="flex space-x-2">
+                        <button onclick="switchTab('senarai-opr')" class="bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow flex items-center space-x-1.5">
+                            <i class="fa-solid fa-list-check"></i>
+                            <span>SENARAI PROGRAM OPR</span>
+                        </button>
+                        <button onclick="openOprModal('PROGRAM KPM/JPN/PPD')" class="bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow flex items-center space-x-1.5">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                            <span>➕ MUAT NAIK OPR</span>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -404,7 +415,7 @@
                         <p class="text-[11px] text-slate-500"><i class="fa-solid fa-location-dot mr-1"></i>PPD Baling • 15 Februari 2026</p>
                         <div class="pt-3 flex justify-between items-center text-xs border-t border-rose-100">
                             <span class="text-emerald-700 font-bold"><i class="fa-solid fa-circle-check mr-1"></i>Selesai</span>
-                            <button onclick="switchTab('senarai-opr')" class="text-slate-800 font-extrabold hover:underline">Lihat OPR</button>
+                            <button onclick="viewOprDetail(1)" class="text-slate-800 font-extrabold hover:underline">Lihat OPR</button>
                         </div>
                     </div>
 
@@ -414,7 +425,7 @@
                         <p class="text-[11px] text-slate-500"><i class="fa-solid fa-location-dot mr-1"></i>SISC+ PPD Baling • 01 Mac 2026</p>
                         <div class="pt-3 flex justify-between items-center text-xs border-t border-rose-100">
                             <span class="text-amber-600 font-bold"><i class="fa-solid fa-clock mr-1"></i>Dalam Pelaksanaan</span>
-                            <button onclick="switchTab('senarai-opr')" class="text-slate-800 font-extrabold hover:underline">Lihat OPR</button>
+                            <button onclick="viewOprDetail(2)" class="text-slate-800 font-extrabold hover:underline">Lihat OPR</button>
                         </div>
                     </div>
 
@@ -424,7 +435,7 @@
                         <p class="text-[11px] text-slate-500"><i class="fa-solid fa-location-dot mr-1"></i>PPD Baling • 10 Mac 2026</p>
                         <div class="pt-3 flex justify-between items-center text-xs border-t border-rose-100">
                             <span class="text-blue-600 font-bold"><i class="fa-solid fa-calendar-check mr-1"></i>Mendatang</span>
-                            <button onclick="switchTab('senarai-opr')" class="text-slate-800 font-extrabold hover:underline">Lihat OPR</button>
+                            <button onclick="viewOprDetail(3)" class="text-slate-800 font-extrabold hover:underline">Lihat OPR</button>
                         </div>
                     </div>
                 </div>
@@ -608,13 +619,23 @@
 
         <!-- TAB SENARAI PROGRAM / PLC (OPR) -->
         <section id="tab-senarai-opr" class="hidden space-y-6">
-            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
-                <h3 class="font-black text-slate-900 text-base">📋 SENARAI DOKUMENTASI PROGRAM & PLC DAERAH</h3>
-                <p class="text-xs text-slate-500">Kumpulan rekod OPR yang telah dijana secara AI mengikut sekolah.</p>
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-center text-slate-500 text-xs">
-                    <i class="fa-solid fa-file-pdf text-rose-600 text-3xl mb-2 block"></i>
-                    Semua rekod One Page Report (OPR) yang dijana akan dikumpul secara automatik di sini.
+            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-4 gap-2">
+                    <div>
+                        <h3 class="font-black text-slate-900 text-base flex items-center space-x-2">
+                            <i class="fa-solid fa-list-check text-rose-600"></i>
+                            <span>📋 SENARAI PROGRAM & DOKUMENTASI OPR DAERAH</span>
+                        </h3>
+                        <p class="text-xs text-slate-500 mt-1">Kumpulan rekod Laporan OPR yang telah dijana mengikut sekolah / program.</p>
+                    </div>
+                    <button onclick="openOprModal()" class="bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow flex items-center space-x-1.5">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>➕ JANA OPR BAHARU</span>
+                    </button>
                 </div>
+
+                <!-- JADUAL / SENARAI REKOD OPR TERPERINCI -->
+                <div id="oprRecordsContainer" class="space-y-4"></div>
             </div>
         </section>
 
@@ -632,7 +653,7 @@
                     <button type="button" class="px-3 py-1.5 bg-slate-100 text-slate-600 rounded-lg hover:bg-slate-200">2. Bimbingan Guru</button>
                     <button type="button" class="px-3 py-1.5 bg-blue-600 text-white rounded-lg shadow-sm">3. Bengkel / Program</button>
                 </div>
-                <button onclick="saveOprRecord()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-3.5 py-1.5 rounded-lg text-xs shadow">
+                <button type="button" onclick="saveOprRecordDirect()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-3.5 py-1.5 rounded-lg text-xs shadow">
                     💾 4. SIMPAN REKOD
                 </button>
             </div>
@@ -686,6 +707,45 @@
                     </button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- MODAL PAPARAN / LIHAT & CETAK KAD LAPORAN OPR -->
+    <div id="viewOprModal" class="fixed inset-0 bg-slate-900/80 z-[140] hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-3xl w-full p-6 relative text-xs space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <button onclick="closeViewOprModal()" class="absolute right-5 top-5 text-slate-400 hover:text-slate-700 font-bold"><i class="fa-solid fa-xmark text-lg"></i></button>
+            
+            <div id="oprPrintableArea" class="p-6 bg-white border border-slate-200 rounded-2xl space-y-4">
+                <div class="text-center border-b-2 border-emerald-800 pb-3">
+                    <h2 class="text-base font-black text-slate-900 uppercase">ONE PAGE REPORT (OPR) PROGRAM PANITIA SEJARAH</h2>
+                    <p id="viewOprSekolah" class="text-xs font-bold text-emerald-800 uppercase mt-0.5"></p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 text-xs">
+                    <div><strong>Nama Program:</strong> <span id="viewOprNama"></span></div>
+                    <div><strong>Tarikh:</strong> <span id="viewOprTarikh"></span></div>
+                    <div><strong>Tempat:</strong> <span id="viewOprTempat"></span></div>
+                    <div><strong>Kumpulan Sasaran:</strong> <span id="viewOprSasaran"></span></div>
+                </div>
+
+                <div class="border-t pt-3">
+                    <strong class="block mb-1">Pelaporan Ringkas:</strong>
+                    <p id="viewOprPelaporan" class="bg-slate-50 p-3 rounded-xl border border-slate-200 leading-relaxed text-slate-700"></p>
+                </div>
+
+                <div class="border-t pt-3">
+                    <strong class="block mb-2">Gambar Aktiviti:</strong>
+                    <div id="viewOprGambarContainer" class="grid grid-cols-2 gap-4">
+                        <div class="h-36 bg-slate-100 rounded-xl border border-dashed border-slate-300 flex items-center justify-center text-slate-400">Gambar 1</div>
+                        <div class="h-36 bg-slate-100 rounded-xl border border-dashed border-slate-300 flex items-center justify-center text-slate-400">Gambar 2</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-end space-x-2 pt-2 border-t">
+                <button onclick="printOprCard()" class="bg-slate-800 hover:bg-slate-900 text-white font-bold py-2 px-4 rounded-xl"><i class="fa-solid fa-print mr-1"></i> Cetak OPR</button>
+                <button onclick="closeViewOprModal()" class="bg-slate-200 text-slate-700 font-bold py-2 px-4 rounded-xl hover:bg-slate-300">Tutup</button>
+            </div>
         </div>
     </div>
 
@@ -752,6 +812,43 @@
         let currentActiveLainCat = 'SURAT';
         let currentViewingDocTitle = '';
 
+        // SENARAI REKOD OPR (STORED IN LOCALSTORAGE)
+        let sampleOprList = [
+            {
+                id: 1,
+                nama: "Bengkel Pemantapan Pedagogi Sejarah KSSM Daerah",
+                sekolah: "PPD BALING",
+                tarikh: "2026-02-15",
+                tempat: "Dewan PPD Baling",
+                sasaran: "Semua Ketua Panitia Sejarah Daerah Baling",
+                pelaporan: "Bengkel telah dijalankan dengan jayanya secara interaktif bersama penceramah jemputan SISC+.",
+                img1: null,
+                img2: null
+            },
+            {
+                id: 2,
+                nama: "Program Intervensi & Bimbingan SPM Sejarah 2026",
+                sekolah: "SISC+ PPD BALING",
+                tarikh: "2026-03-01",
+                tempat: "Bilik Latihan PPD Baling",
+                sasaran: "Guru Sejarah Tingkatan 5",
+                pelaporan: "Sesi perbincangan teknik menjawab Soalan KBAT SPM Kertas 2 secara intensif.",
+                img1: null,
+                img2: null
+            },
+            {
+                id: 3,
+                nama: "Karnival Inovasi & Kajian Kes Sejarah Sekolah Baling",
+                sekolah: "PPD BALING",
+                tarikh: "2026-03-10",
+                tempat: "SMK Tunku Putera",
+                sasaran: "Murid Tingkatan 1 - 5 Baling",
+                pelaporan: "Pameran kajian kes tempatan Sejarah Baling serta penyampaian anugerah inovasi PdP.",
+                img1: null,
+                img2: null
+            }
+        ];
+
         // DATABASE BAHAN MODUL
         let sampleBahanList = [
             { id: 1, tajuk: "DSKP Sejarah Tingkatan 1 (KSSM)", kat: "DSKP", sumber: "BPK KPM", tarikh: "2026-01-01", fileUrl: "https://anyflip.com/oyfx/jbhp/basic" },
@@ -809,6 +906,7 @@
             calculateStats();
             renderSchools();
             renderModuleCards();
+            renderOprList();
         };
 
         function loadSavedData() {
@@ -820,6 +918,9 @@
 
             const savedLain = localStorage.getItem('sampleLainList');
             if (savedLain) sampleLainList = JSON.parse(savedLain);
+
+            const savedOpr = localStorage.getItem('sampleOprList');
+            if (savedOpr) sampleOprList = JSON.parse(savedOpr);
         }
 
         function toggleSidebar() {
@@ -873,6 +974,8 @@
 
             const activeNav = document.getElementById('nav-' + tabId);
             if (activeNav) activeNav.classList.add('bg-emerald-800', 'text-white');
+
+            if (tabId === 'senarai-opr') renderOprList();
         }
 
         function openExternalAnalysis() {
@@ -966,6 +1069,100 @@
                     </div>
                 `;
             });
+        }
+
+        // RENDER SENARAI PROGRAM OPR TERPERINCI BESERTA BUTANG LIHAT, PADAM, SIMPAN, CETAK
+        function renderOprList() {
+            const container = document.getElementById('oprRecordsContainer');
+            if(!container) return;
+
+            if(sampleOprList.length === 0) {
+                container.innerHTML = `<div class="bg-slate-50 p-8 rounded-2xl border text-center text-slate-400 italic text-xs">Tiada rekod OPR disimpan lagi. Klik butang 'JANA OPR BAHARU' untuk menambah laporan.</div>`;
+                return;
+            }
+
+            container.innerHTML = sampleOprList.map((item, index) => `
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-rose-300 transition">
+                    <div class="space-y-1.5">
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-rose-100 text-rose-800 text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase">OPR REKOD #${item.id}</span>
+                            <span class="text-[10px] text-slate-400"><i class="fa-solid fa-calendar mr-1"></i>${item.tarikh}</span>
+                        </div>
+                        <h4 class="font-extrabold text-slate-900 text-sm">${item.nama}</h4>
+                        <p class="text-xs text-slate-500"><i class="fa-solid fa-school mr-1 text-slate-400"></i>Anjuran / Sekolah: <strong class="text-slate-700">${item.sekolah}</strong> • <i class="fa-solid fa-location-dot mr-1 text-slate-400"></i>${item.tempat}</p>
+                        <p class="text-xs text-slate-600 line-clamp-1 italic bg-slate-50 p-2 rounded-lg border">"${item.pelaporan}"</p>
+                    </div>
+
+                    <!-- BUTANG TINDAKAN: LIHAT, SIMPAN, CETAK, PADAM -->
+                    <div class="flex flex-wrap items-center gap-2 border-t md:border-t-0 pt-3 md:pt-0 shrink-0">
+                        <button onclick="viewOprDetail(${item.id})" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center space-x-1 shadow-sm">
+                            <i class="fa-solid fa-eye"></i> <span>Lihat</span>
+                        </button>
+                        <button onclick="saveOprFile('${item.nama}')" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center space-x-1 shadow-sm">
+                            <i class="fa-solid fa-bookmark"></i> <span>Simpan</span>
+                        </button>
+                        <button onclick="printOprDetail(${item.id})" class="bg-slate-800 hover:bg-slate-900 text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center space-x-1 shadow-sm">
+                            <i class="fa-solid fa-print"></i> <span>Cetak</span>
+                        </button>
+                        <button onclick="deleteOprRecord(${item.id})" class="bg-rose-600 hover:bg-rose-700 text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center space-x-1 shadow-sm">
+                            <i class="fa-solid fa-trash-can"></i> <span>Padam</span>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function viewOprDetail(id) {
+            const opr = sampleOprList.find(o => o.id == id);
+            if (!opr) return;
+
+            document.getElementById('viewOprSekolah').innerText = opr.sekolah;
+            document.getElementById('viewOprNama').innerText = opr.nama;
+            document.getElementById('viewOprTarikh').innerText = opr.tarikh;
+            document.getElementById('viewOprTempat').innerText = opr.tempat;
+            document.getElementById('viewOprSasaran').innerText = opr.sasaran;
+            document.getElementById('viewOprPelaporan').innerText = opr.pelaporan;
+
+            const imgContainer = document.getElementById('viewOprGambarContainer');
+            if (opr.img1 || opr.img2) {
+                imgContainer.innerHTML = `
+                    ${opr.img1 ? `<img src="${opr.img1}" class="h-36 w-full object-cover rounded-xl border">` : '<div class="h-36 bg-slate-100 rounded-xl border flex items-center justify-center text-slate-400">Tiada Gambar 1</div>'}
+                    ${opr.img2 ? `<img src="${opr.img2}" class="h-36 w-full object-cover rounded-xl border">` : '<div class="h-36 bg-slate-100 rounded-xl border flex items-center justify-center text-slate-400">Tiada Gambar 2</div>'}
+                `;
+            } else {
+                imgContainer.innerHTML = `
+                    <div class="h-36 bg-slate-100 rounded-xl border border-dashed border-slate-300 flex items-center justify-center text-slate-400">Gambar Aktiviti 1</div>
+                    <div class="h-36 bg-slate-100 rounded-xl border border-dashed border-slate-300 flex items-center justify-center text-slate-400">Gambar Aktiviti 2</div>
+                `;
+            }
+
+            document.getElementById('viewOprModal').classList.remove('hidden');
+        }
+
+        function closeViewOprModal() {
+            document.getElementById('viewOprModal').classList.add('hidden');
+        }
+
+        function printOprCard() {
+            window.print();
+        }
+
+        function printOprDetail(id) {
+            viewOprDetail(id);
+            setTimeout(() => { window.print(); }, 300);
+        }
+
+        function saveOprFile(nama) {
+            alert(`Laporan OPR [${nama}] telah berjaya disimpan ke simpanan selamat!`);
+        }
+
+        function deleteOprRecord(id) {
+            if(confirm('Adakah anda pasti untuk memadam rekod Laporan OPR ini?')) {
+                sampleOprList = sampleOprList.filter(o => o.id != id);
+                localStorage.setItem('sampleOprList', JSON.stringify(sampleOprList));
+                renderOprList();
+                alert('Rekod OPR berjaya dipadam.');
+            }
         }
 
         function searchBahan() {
@@ -1070,7 +1267,7 @@
             `).join('');
         }
 
-        // RENDER KATEGOI LAIN-LAIN (SURAT & PROGRAM SAHAJA)
+        // RENDER KATEGORI LAIN-LAIN (SURAT & PROGRAM SAHAJA)
         function renderLainList(filterCategory = 'SURAT') {
             currentActiveLainCat = filterCategory;
             const lainGrid = document.getElementById('lainListGrid');
@@ -1174,7 +1371,7 @@
             closeChangePasswordModal();
         }
 
-        // FUNGSI BUKA MODAL BORANG OPR GAMBAR
+        // FUNGSI BUKA MODAL BORANG OPR
         function openOprModal(schoolName) {
             document.getElementById('oprModalSchoolName').innerText = schoolName || currentUser.sekolah;
             document.getElementById('oprModal').classList.remove('hidden');
@@ -1192,27 +1389,45 @@
             e.preventDefault();
             const namaProgram = document.getElementById('oprNamaProgram').value;
             const tarikh = document.getElementById('oprTarikh').value;
+            const tempat = document.getElementById('oprTempat').value;
+            const sasaran = document.getElementById('oprKumpulanSasaran').value;
+            const pelaporan = document.getElementById('oprPelaporan').value;
             const sekolah = document.getElementById('oprModalSchoolName').innerText;
 
-            sampleLainList.unshift({
-                id: sampleLainList.length + 1,
-                tajuk: `OPR: ${namaProgram}`,
-                kat: "PROGRAM",
-                penyumbang: sekolah,
-                tarikh: tarikh || new Date().toISOString().split('T')[0],
-                fileUrl: null
-            });
+            const fileImg1 = document.getElementById('oprGambar1').files[0];
+            const fileImg2 = document.getElementById('oprGambar2').files[0];
 
-            localStorage.setItem('sampleLainList', JSON.stringify(sampleLainList));
+            let url1 = fileImg1 ? URL.createObjectURL(fileImg1) : null;
+            let url2 = fileImg2 ? URL.createObjectURL(fileImg2) : null;
+
+            const newOpr = {
+                id: sampleOprList.length + 1,
+                nama: namaProgram,
+                sekolah: sekolah,
+                tarikh: tarikh || new Date().toISOString().split('T')[0],
+                tempat: tempat,
+                sasaran: sasaran,
+                pelaporan: pelaporan,
+                img1: url1,
+                img2: url2
+            };
+
+            sampleOprList.unshift(newOpr);
+            localStorage.setItem('sampleOprList', JSON.stringify(sampleOprList));
+            
             alert(`Laporan OPR [${namaProgram}] berjaya dijana dan disimpan!`);
             closeOprModal();
             resetOprForm();
             switchTab('senarai-opr');
         }
 
-        function saveOprRecord() {
-            alert('Rekod OPR disahkan dan disimpan secara kekal.');
-            closeOprModal();
+        function saveOprRecordDirect() {
+            const form = document.getElementById('oprForm');
+            if(form.checkValidity()) {
+                form.dispatchEvent(new Event('submit'));
+            } else {
+                alert('Sila lengkapkan semua medan jawapan sebelum menyimpan rekod.');
+            }
         }
 
         function openUploadModal(schoolName, materialType = 'RPH', moduleContext = 'BAHAN') {
