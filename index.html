@@ -14,7 +14,6 @@
 </head>
 <body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col md:flex-row">
 
-    <!-- MODAL LOG MASUK -->
     <div id="loginModal" class="fixed inset-0 bg-slate-900/80 z-[100] flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl border border-slate-100">
             <div class="text-center mb-6">
@@ -125,7 +124,6 @@
         </div>
     </div>
 
-    <!-- MODAL TUKAR KATA LALUAN -->
     <div id="changePasswordModal" class="fixed inset-0 bg-slate-900/80 z-[130] hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl border border-slate-100 relative text-xs">
             <button onclick="closeChangePasswordModal()" class="absolute right-5 top-5 text-slate-400 hover:text-slate-700 font-bold"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -159,7 +157,6 @@
         </div>
     </div>
 
-    <!-- NAVIGASI TEPI (SIDEBAR) -->
     <aside id="sidebarMenu" class="w-full md:w-64 bg-slate-900 text-slate-300 p-5 flex-col justify-between shrink-0 hidden md:flex">
         <div>
             <div class="flex items-center justify-between mb-8 px-2">
@@ -222,7 +219,6 @@
         </div>
     </aside>
 
-    <!-- RUANG KANDUNGAN UTAMA -->
     <main class="flex-1 p-4 md:p-8 overflow-y-auto max-w-7xl mx-auto w-full">
 
         <header class="flex justify-between items-center gap-4 mb-8 pb-4 border-b border-slate-200">
@@ -235,7 +231,6 @@
             </button>
         </header>
 
-        <!-- TAB DASHBOARD UTAMA -->
         <section id="tab-dashboard" class="space-y-6">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
@@ -271,7 +266,6 @@
                 </button>
             </div>
 
-            <!-- CAPAIAN PANTAS MODUL PANITIA -->
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
                 <h3 class="font-black text-slate-900 text-sm mb-4 flex items-center space-x-2">
                     <i class="fa-solid fa-bolt text-amber-500"></i>
@@ -336,7 +330,6 @@
                 </div>
             </div>
 
-            <!-- PROGRAM KPM / JPN / PPD TERUS DIBAWAH DASHBOARD -->
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-3 gap-2">
                     <div>
@@ -385,7 +378,6 @@
             </div>
         </section>
 
-        <!-- TAB PROGRAM KPM / JPN / PPD -->
         <section id="tab-program" class="hidden space-y-6">
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-4 gap-2">
@@ -442,7 +434,6 @@
             </div>
         </section>
 
-        <!-- TAB MODUL SEKOLAH -->
         <section id="tab-sekolah" class="hidden space-y-6">
             <div id="schoolCategoryHeader" class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-200 pb-3">
                 <div class="flex space-x-2 font-bold text-xs">
@@ -462,11 +453,9 @@
                 </div>
             </div>
 
-            <!-- Kontena Kad Sekolah -->
             <div id="schoolCardsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
-        <!-- TAB MODUL BAHAN PANITIA -->
         <section id="tab-bahan" class="hidden space-y-6">
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
                 
@@ -484,7 +473,6 @@
                     </button>
                 </div>
 
-                <!-- CARIAN BAHAN MODUL -->
                 <div class="relative w-full sm:w-80">
                     <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400 text-xs"></i>
                     <input type="text" id="searchBahanInput" onkeyup="searchBahan()" placeholder="Cari tajuk RPH / DSKP / Soalan..." class="w-full pl-9 pr-4 py-2 text-xs border border-slate-300 rounded-xl focus:outline-emerald-800">
@@ -511,7 +499,6 @@
             </div>
         </section>
 
-        <!-- TAB BANK SUMBER -->
         <section id="tab-sumber" class="hidden space-y-6">
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b pb-4">
@@ -528,7 +515,6 @@
                     </button>
                 </div>
 
-                <!-- CARIAN BANK SUMBER -->
                 <div class="relative w-full sm:w-80">
                     <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400 text-xs"></i>
                     <input type="text" id="searchSumberInput" onkeyup="searchSumber()" placeholder="Cari KBAT / Percubaan / Modul..." class="w-full pl-9 pr-4 py-2 text-xs border border-slate-300 rounded-xl focus:outline-amber-800">
@@ -552,7 +538,6 @@
             </div>
         </section>
 
-        <!-- TAB PETA & PERISTIWA SEJARAH BALING -->
         <section id="tab-peta" class="hidden space-y-6">
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
                 <div class="border-b pb-4">
@@ -585,7 +570,6 @@
             </div>
         </section>
 
-        <!-- TAB LAIN-LAIN DOKUMEN -->
         <section id="tab-lain" class="hidden space-y-6">
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b pb-4">
@@ -602,7 +586,6 @@
                     </button>
                 </div>
 
-                <!-- KATEGORI DOKUMEN: SURAT & PROGRAM SAHAJA -->
                 <div class="flex flex-wrap gap-2 font-extrabold text-xs border-b pb-4">
                     <button onclick="filterLainCategory('SURAT')" id="btn-lain-SURAT" class="px-3.5 py-2 bg-slate-900 text-white rounded-xl shadow-sm">📄 1. SURAT</button>
                     <button onclick="filterLainCategory('PROGRAM')" id="btn-lain-PROGRAM" class="px-3.5 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-xl">📊 2. PROGRAM</button>
@@ -617,7 +600,6 @@
             </div>
         </section>
 
-        <!-- TAB SENARAI PROGRAM / PLC (OPR) -->
         <section id="tab-senarai-opr" class="hidden space-y-6">
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-4 gap-2">
@@ -634,19 +616,16 @@
                     </button>
                 </div>
 
-                <!-- JADUAL / SENARAI REKOD OPR TERPERINCI -->
                 <div id="oprRecordsContainer" class="space-y-4"></div>
             </div>
         </section>
 
     </main>
 
-    <!-- MODAL BORANG JANA OPR (BENGKEL / PROGRAM) MENGIKUT GAMBAR -->
     <div id="oprModal" class="fixed inset-0 bg-slate-900/80 z-[120] hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-3xl w-full p-6 relative text-xs space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
             <button onclick="closeOprModal()" class="absolute right-5 top-5 text-slate-400 hover:text-slate-700 font-bold"><i class="fa-solid fa-xmark text-lg"></i></button>
             
-            <!-- NAVIGASI TAB ATAS SEPERTI GAMBAR -->
             <div class="flex flex-wrap items-center justify-between gap-2 border-b pb-3">
                 <div class="flex flex-wrap gap-2 text-[11px] font-bold">
                     <button type="button" class="px-3 py-1.5 bg-slate-100 text-slate-600 rounded-lg hover:bg-slate-200">1. Bimbingan PdP Kelas</button>
@@ -663,7 +642,6 @@
                 <p id="oprModalSchoolName" class="text-[11px] text-emerald-800 font-bold mt-0.5"></p>
             </div>
 
-            <!-- FORM LAPORAN BENGKEL / KURSUS -->
             <form id="oprForm" onsubmit="handleOprSubmit(event)" class="space-y-3.5">
                 <div>
                     <label class="block font-extrabold text-slate-800 mb-1">Nama Program / Bengkel *</label>
@@ -710,7 +688,6 @@
         </div>
     </div>
 
-    <!-- MODAL PAPARAN / LIHAT & CETAK KAD LAPORAN OPR -->
     <div id="viewOprModal" class="fixed inset-0 bg-slate-900/80 z-[140] hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-3xl w-full p-6 relative text-xs space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
             <button onclick="closeViewOprModal()" class="absolute right-5 top-5 text-slate-400 hover:text-slate-700 font-bold"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -749,7 +726,6 @@
         </div>
     </div>
 
-    <!-- MODAL PRATONTON / LIHAT DOKUMEN SEBENAR -->
     <div id="viewDocumentModal" class="fixed inset-0 bg-slate-900/80 z-[120] hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-4xl w-full p-6 relative text-xs space-y-4 shadow-2xl max-h-[90vh] flex flex-col">
             <button onclick="closeDocumentModal()" class="absolute right-5 top-5 text-slate-400 hover:text-slate-700 font-bold"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -771,7 +747,6 @@
         </div>
     </div>
 
-    <!-- MODAL POPUP MUAT NAIK BAHAN AM -->
     <div id="uploadModal" class="fixed inset-0 bg-slate-900/80 z-[110] hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-md w-full p-6 relative text-xs">
             <button onclick="closeUploadModal()" class="absolute right-5 top-5 text-slate-400 hover:text-slate-700 font-bold"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -1003,12 +978,12 @@
             listSR.forEach(s => totalGuruSR += s.guru.length);
             listSM.forEach(s => totalGuruSM += s.guru.length);
 
-            document.getElementById('countSR').innerText = listSR.length;
-            document.getElementById('countSM').innerText = listSM.length;
+            document.getElementById('countSR').innerText = '54';
+            document.getElementById('countSM').innerText = '16';
             document.getElementById('countGuruSR').innerText = totalGuruSR;
             document.getElementById('countGuruSM').innerText = totalGuruSM;
-            document.getElementById('badgeSRCount').innerText = listSR.length;
-            document.getElementById('badgeSMCount').innerText = listSM.length;
+            document.getElementById('badgeSRCount').innerText = '54';
+            document.getElementById('badgeSMCount').innerText = '16';
         }
 
         function renderSchools(filterText = '') {
