@@ -949,6 +949,7 @@
 
             document.getElementById('loginModal').classList.add('hidden');
             renderSchools();
+            renderOprList(); // KEMASKINI PAPARAN OPR SUPAYA PADAM MENGIKUT PERANAN LOGIN
         }
 
         function logout() { 
@@ -1071,7 +1072,8 @@
             });
         }
 
-        // RENDER SENARAI PROGRAM OPR TERPERINCI BESERTA BUTANG LIHAT, PADAM, SIMPAN, CETAK
+        // RENDER SENARAI PROGRAM OPR TERPERINCI
+        // BUTANG PADAM HANYA KELUAR JIKA PERANAN LOGIN IALAH ADMIN
         function renderOprList() {
             const container = document.getElementById('oprRecordsContainer');
             if(!container) return;
@@ -1081,35 +1083,41 @@
                 return;
             }
 
-            container.innerHTML = sampleOprList.map((item, index) => `
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-rose-300 transition">
-                    <div class="space-y-1.5">
-                        <div class="flex items-center space-x-2">
-                            <span class="bg-rose-100 text-rose-800 text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase">OPR REKOD #${item.id}</span>
-                            <span class="text-[10px] text-slate-400"><i class="fa-solid fa-calendar mr-1"></i>${item.tarikh}</span>
-                        </div>
-                        <h4 class="font-extrabold text-slate-900 text-sm">${item.nama}</h4>
-                        <p class="text-xs text-slate-500"><i class="fa-solid fa-school mr-1 text-slate-400"></i>Anjuran / Sekolah: <strong class="text-slate-700">${item.sekolah}</strong> • <i class="fa-solid fa-location-dot mr-1 text-slate-400"></i>${item.tempat}</p>
-                        <p class="text-xs text-slate-600 line-clamp-1 italic bg-slate-50 p-2 rounded-lg border">"${item.pelaporan}"</p>
-                    </div>
+            container.innerHTML = sampleOprList.map((item, index) => {
+                const deleteBtnHtml = (currentUser.role === 'ADMIN') ? `
+                    <button onclick="deleteOprRecord(${item.id})" class="bg-rose-600 hover:bg-rose-700 text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center space-x-1 shadow-sm">
+                        <i class="fa-solid fa-trash-can"></i> <span>Padam</span>
+                    </button>
+                ` : '';
 
-                    <!-- BUTANG TINDAKAN: LIHAT, SIMPAN, CETAK, PADAM -->
-                    <div class="flex flex-wrap items-center gap-2 border-t md:border-t-0 pt-3 md:pt-0 shrink-0">
-                        <button onclick="viewOprDetail(${item.id})" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center space-x-1 shadow-sm">
-                            <i class="fa-solid fa-eye"></i> <span>Lihat</span>
-                        </button>
-                        <button onclick="saveOprFile('${item.nama}')" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center space-x-1 shadow-sm">
-                            <i class="fa-solid fa-bookmark"></i> <span>Simpan</span>
-                        </button>
-                        <button onclick="printOprDetail(${item.id})" class="bg-slate-800 hover:bg-slate-900 text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center space-x-1 shadow-sm">
-                            <i class="fa-solid fa-print"></i> <span>Cetak</span>
-                        </button>
-                        <button onclick="deleteOprRecord(${item.id})" class="bg-rose-600 hover:bg-rose-700 text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center space-x-1 shadow-sm">
-                            <i class="fa-solid fa-trash-can"></i> <span>Padam</span>
-                        </button>
+                return `
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-rose-300 transition">
+                        <div class="space-y-1.5">
+                            <div class="flex items-center space-x-2">
+                                <span class="bg-rose-100 text-rose-800 text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase">OPR REKOD #${item.id}</span>
+                                <span class="text-[10px] text-slate-400"><i class="fa-solid fa-calendar mr-1"></i>${item.tarikh}</span>
+                            </div>
+                            <h4 class="font-extrabold text-slate-900 text-sm">${item.nama}</h4>
+                            <p class="text-xs text-slate-500"><i class="fa-solid fa-school mr-1 text-slate-400"></i>Anjuran / Sekolah: <strong class="text-slate-700">${item.sekolah}</strong> • <i class="fa-solid fa-location-dot mr-1 text-slate-400"></i>${item.tempat}</p>
+                            <p class="text-xs text-slate-600 line-clamp-1 italic bg-slate-50 p-2 rounded-lg border">"${item.pelaporan}"</p>
+                        </div>
+
+                        <!-- BUTANG TINDAKAN: LIHAT, SIMPAN, CETAK, PADAM (KHAS ADMIN) -->
+                        <div class="flex flex-wrap items-center gap-2 border-t md:border-t-0 pt-3 md:pt-0 shrink-0">
+                            <button onclick="viewOprDetail(${item.id})" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center space-x-1 shadow-sm">
+                                <i class="fa-solid fa-eye"></i> <span>Lihat</span>
+                            </button>
+                            <button onclick="saveOprFile('${item.nama}')" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center space-x-1 shadow-sm">
+                                <i class="fa-solid fa-bookmark"></i> <span>Simpan</span>
+                            </button>
+                            <button onclick="printOprDetail(${item.id})" class="bg-slate-800 hover:bg-slate-900 text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center space-x-1 shadow-sm">
+                                <i class="fa-solid fa-print"></i> <span>Cetak</span>
+                            </button>
+                            ${deleteBtnHtml}
+                        </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         function viewOprDetail(id) {
@@ -1157,6 +1165,11 @@
         }
 
         function deleteOprRecord(id) {
+            if(currentUser.role !== 'ADMIN') {
+                alert('Tindakan tidak dibenarkan. Fungsi padat rekod hanya dibuka untuk Admin Daerah sahaja.');
+                return;
+            }
+
             if(confirm('Adakah anda pasti untuk memadam rekod Laporan OPR ini?')) {
                 sampleOprList = sampleOprList.filter(o => o.id != id);
                 localStorage.setItem('sampleOprList', JSON.stringify(sampleOprList));
@@ -1197,30 +1210,53 @@
                 return;
             }
 
-            bahanGrid.innerHTML = list.map((item, index) => `
-                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm hover:border-blue-300 transition">
-                    <div class="flex items-start space-x-3">
-                        <span class="w-6 h-6 rounded-lg bg-emerald-800 text-white font-extrabold flex items-center justify-center shrink-0 text-[11px]">${index + 1}</span>
-                        <div>
-                            <span class="bg-blue-100 text-blue-800 font-extrabold px-2 py-0.5 rounded-full text-[9px] uppercase">${item.kat.replace('_', ' ')}</span>
-                            <h4 class="font-bold text-slate-900 text-sm mt-1">${item.tajuk}</h4>
-                            <p class="text-[10px] text-slate-500 mt-0.5"><i class="fa-solid fa-database mr-1 text-slate-400"></i>${item.sumber} • ${item.tarikh}</p>
+            bahanGrid.innerHTML = list.map((item, index) => {
+                const deleteBtnHtml = (currentUser.role === 'ADMIN') ? `
+                    <button onclick="deleteBahanRecord(${item.id})" class="bg-rose-600 hover:bg-rose-700 text-white font-bold py-1.5 px-2.5 rounded-xl text-[10px] flex items-center space-x-1 shadow-sm">
+                        <i class="fa-solid fa-trash-can"></i> <span>Padam</span>
+                    </button>
+                ` : '';
+
+                return `
+                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm hover:border-blue-300 transition">
+                        <div class="flex items-start space-x-3">
+                            <span class="w-6 h-6 rounded-lg bg-emerald-800 text-white font-extrabold flex items-center justify-center shrink-0 text-[11px]">${index + 1}</span>
+                            <div>
+                                <span class="bg-blue-100 text-blue-800 font-extrabold px-2 py-0.5 rounded-full text-[9px] uppercase">${item.kat.replace('_', ' ')}</span>
+                                <h4 class="font-bold text-slate-900 text-sm mt-1">${item.tajuk}</h4>
+                                <p class="text-[10px] text-slate-500 mt-0.5"><i class="fa-solid fa-database mr-1 text-slate-400"></i>${item.sumber} • ${item.tarikh}</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-1.5 shrink-0 border-t md:border-t-0 pt-2 md:pt-0">
+                            <button onclick="viewDocument('${item.id}', 'BAHAN')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-1.5 px-2.5 rounded-xl text-[10px] flex items-center space-x-1 shadow-sm">
+                                <i class="fa-solid fa-eye"></i> <span>Lihat</span>
+                            </button>
+                            <button onclick="downloadFile('${item.tajuk}', '${item.fileUrl}')" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-1.5 px-2.5 rounded-xl text-[10px] flex items-center space-x-1 shadow-sm">
+                                <i class="fa-solid fa-download"></i> <span>Muat Turun</span>
+                            </button>
+                            <button onclick="saveItem('${item.tajuk}')" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-1.5 px-2.5 rounded-xl text-[10px] flex items-center space-x-1 shadow-sm">
+                                <i class="fa-solid fa-bookmark"></i> <span>Simpan</span>
+                            </button>
+                            ${deleteBtnHtml}
                         </div>
                     </div>
+                `;
+            }).join('');
+        }
 
-                    <div class="flex items-center space-x-1.5 shrink-0 border-t md:border-t-0 pt-2 md:pt-0">
-                        <button onclick="viewDocument('${item.id}', 'BAHAN')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-1.5 px-2.5 rounded-xl text-[10px] flex items-center space-x-1 shadow-sm">
-                            <i class="fa-solid fa-eye"></i> <span>Lihat</span>
-                        </button>
-                        <button onclick="downloadFile('${item.tajuk}', '${item.fileUrl}')" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-1.5 px-2.5 rounded-xl text-[10px] flex items-center space-x-1 shadow-sm">
-                            <i class="fa-solid fa-download"></i> <span>Muat Turun</span>
-                        </button>
-                        <button onclick="saveItem('${item.tajuk}')" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-1.5 px-2.5 rounded-xl text-[10px] flex items-center space-x-1 shadow-sm">
-                            <i class="fa-solid fa-bookmark"></i> <span>Simpan</span>
-                        </button>
-                    </div>
-                </div>
-            `).join('');
+        function deleteBahanRecord(id) {
+            if(currentUser.role !== 'ADMIN') {
+                alert('Tindakan tidak dibenarkan. Fungsi padam bahan hanya dibuka untuk Admin Daerah sahaja.');
+                return;
+            }
+
+            if(confirm('Adakah anda pasti untuk memadam bahan ini?')) {
+                sampleBahanList = sampleBahanList.filter(b => b.id != id);
+                localStorage.setItem('sampleBahanList', JSON.stringify(sampleBahanList));
+                renderBahanList(currentActiveBahanCat);
+                alert('Bahan berjaya dipadam.');
+            }
         }
 
         function renderSumberList(filterCategory = 'KBAT', searchQuery = '') {
@@ -1245,26 +1281,49 @@
                 return;
             }
 
-            sumberGrid.innerHTML = list.map((item, index) => `
-                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm hover:border-amber-300 transition">
-                    <div class="flex items-start space-x-3">
-                        <span class="w-6 h-6 rounded-lg bg-amber-600 text-white font-extrabold flex items-center justify-center shrink-0 text-[11px]">${index + 1}</span>
-                        <div>
-                            <span class="bg-amber-100 text-amber-800 font-extrabold px-2 py-0.5 rounded-full text-[9px] uppercase">${item.kat.replace('_', ' ')}</span>
-                            <h4 class="font-bold text-slate-900 text-sm mt-1">${item.tajuk}</h4>
-                            <p class="text-[10px] text-slate-500 mt-0.5"><i class="fa-solid fa-user-gear mr-1"></i>${item.penyumbang} • ${item.tarikh}</p>
+            sumberGrid.innerHTML = list.map((item, index) => {
+                const deleteBtnHtml = (currentUser.role === 'ADMIN') ? `
+                    <button onclick="deleteSumberRecord(${item.id})" class="bg-rose-600 hover:bg-rose-700 text-white font-bold py-1.5 px-2.5 rounded-xl text-[10px] flex items-center space-x-1 shadow-sm">
+                        <i class="fa-solid fa-trash-can"></i> <span>Padam</span>
+                    </button>
+                ` : '';
+
+                return `
+                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm hover:border-amber-300 transition">
+                        <div class="flex items-start space-x-3">
+                            <span class="w-6 h-6 rounded-lg bg-amber-600 text-white font-extrabold flex items-center justify-center shrink-0 text-[11px]">${index + 1}</span>
+                            <div>
+                                <span class="bg-amber-100 text-amber-800 font-extrabold px-2 py-0.5 rounded-full text-[9px] uppercase">${item.kat.replace('_', ' ')}</span>
+                                <h4 class="font-bold text-slate-900 text-sm mt-1">${item.tajuk}</h4>
+                                <p class="text-[10px] text-slate-500 mt-0.5"><i class="fa-solid fa-user-gear mr-1"></i>${item.penyumbang} • ${item.tarikh}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-1.5 shrink-0 border-t md:border-t-0 pt-2 md:pt-0">
+                            <button onclick="viewDocument('${item.id}', 'SUMBER')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-1.5 px-2.5 rounded-xl text-[10px] flex items-center space-x-1 shadow-sm">
+                                <i class="fa-solid fa-eye"></i> <span>Lihat</span>
+                            </button>
+                            <button onclick="downloadFile('${item.tajuk}', '${item.fileUrl}')" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-1.5 px-2.5 rounded-xl text-[10px] flex items-center space-x-1">
+                                <i class="fa-solid fa-download"></i> <span>Muat Turun</span>
+                            </button>
+                            ${deleteBtnHtml}
                         </div>
                     </div>
-                    <div class="flex items-center space-x-1.5 shrink-0 border-t md:border-t-0 pt-2 md:pt-0">
-                        <button onclick="viewDocument('${item.id}', 'SUMBER')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-1.5 px-2.5 rounded-xl text-[10px] flex items-center space-x-1 shadow-sm">
-                            <i class="fa-solid fa-eye"></i> <span>Lihat</span>
-                        </button>
-                        <button onclick="downloadFile('${item.tajuk}', '${item.fileUrl}')" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-1.5 px-2.5 rounded-xl text-[10px] flex items-center space-x-1">
-                            <i class="fa-solid fa-download"></i> <span>Muat Turun</span>
-                        </button>
-                    </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
+        }
+
+        function deleteSumberRecord(id) {
+            if(currentUser.role !== 'ADMIN') {
+                alert('Tindakan tidak dibenarkan. Fungsi padam sumber hanya dibuka untuk Admin Daerah sahaja.');
+                return;
+            }
+
+            if(confirm('Adakah anda pasti untuk memadam sumber ini?')) {
+                sampleSumberList = sampleSumberList.filter(s => s.id != id);
+                localStorage.setItem('sampleSumberList', JSON.stringify(sampleSumberList));
+                renderSumberList(currentActiveSumberCat);
+                alert('Sumber berjaya dipadam.');
+            }
         }
 
         // RENDER KATEGORI LAIN-LAIN (SURAT & PROGRAM SAHAJA)
@@ -1286,23 +1345,46 @@
                 return;
             }
 
-            lainGrid.innerHTML = list.map((item, index) => `
-                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm hover:border-teal-300 transition">
-                    <div class="flex items-start space-x-3">
-                        <span class="w-6 h-6 rounded-lg bg-teal-700 text-white font-extrabold flex items-center justify-center shrink-0 text-[11px]">${index + 1}</span>
-                        <div>
-                            <span class="bg-teal-100 text-teal-800 font-extrabold px-2 py-0.5 rounded-full text-[9px] uppercase">${item.kat}</span>
-                            <h4 class="font-bold text-slate-900 text-sm mt-1">${item.tajuk}</h4>
-                            <p class="text-[10px] text-slate-500 mt-0.5"><i class="fa-solid fa-file-signature mr-1"></i>${item.penyumbang} • ${item.tarikh}</p>
+            lainGrid.innerHTML = list.map((item, index) => {
+                const deleteBtnHtml = (currentUser.role === 'ADMIN') ? `
+                    <button onclick="deleteLainRecord(${item.id})" class="bg-rose-600 hover:bg-rose-700 text-white font-bold py-1.5 px-2.5 rounded-xl text-[10px] flex items-center space-x-1 shadow-sm">
+                        <i class="fa-solid fa-trash-can"></i> <span>Padam</span>
+                    </button>
+                ` : '';
+
+                return `
+                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm hover:border-teal-300 transition">
+                        <div class="flex items-start space-x-3">
+                            <span class="w-6 h-6 rounded-lg bg-teal-700 text-white font-extrabold flex items-center justify-center shrink-0 text-[11px]">${index + 1}</span>
+                            <div>
+                                <span class="bg-teal-100 text-teal-800 font-extrabold px-2 py-0.5 rounded-full text-[9px] uppercase">${item.kat}</span>
+                                <h4 class="font-bold text-slate-900 text-sm mt-1">${item.tajuk}</h4>
+                                <p class="text-[10px] text-slate-500 mt-0.5"><i class="fa-solid fa-file-signature mr-1"></i>${item.penyumbang} • ${item.tarikh}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-1.5 shrink-0 border-t md:border-t-0 pt-2 md:pt-0">
+                            <button onclick="viewDocument('${item.id}', 'LAIN')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-1.5 px-2.5 rounded-xl text-[10px] flex items-center space-x-1 shadow-sm">
+                                <i class="fa-solid fa-eye"></i> <span>Lihat</span>
+                            </button>
+                            ${deleteBtnHtml}
                         </div>
                     </div>
-                    <div class="flex items-center space-x-1.5 shrink-0 border-t md:border-t-0 pt-2 md:pt-0">
-                        <button onclick="viewDocument('${item.id}', 'LAIN')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-1.5 px-2.5 rounded-xl text-[10px] flex items-center space-x-1 shadow-sm">
-                            <i class="fa-solid fa-eye"></i> <span>Lihat</span>
-                        </button>
-                    </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
+        }
+
+        function deleteLainRecord(id) {
+            if(currentUser.role !== 'ADMIN') {
+                alert('Tindakan tidak dibenarkan. Fungsi padam dokumen hanya dibuka untuk Admin Daerah sahaja.');
+                return;
+            }
+
+            if(confirm('Adakah anda pasti untuk memadam dokumen ini?')) {
+                sampleLainList = sampleLainList.filter(l => l.id != id);
+                localStorage.setItem('sampleLainList', JSON.stringify(sampleLainList));
+                renderLainList(currentActiveLainCat);
+                alert('Dokumen berjaya dipadam.');
+            }
         }
 
         function filterBahanCategory(cat) { renderBahanList(cat); }
