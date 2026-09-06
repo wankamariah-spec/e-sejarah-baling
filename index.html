@@ -949,7 +949,10 @@
 
             document.getElementById('loginModal').classList.add('hidden');
             renderSchools();
-            renderOprList(); // KEMASKINI PAPARAN OPR SUPAYA PADAM MENGIKUT PERANAN LOGIN
+            renderOprList();
+            renderBahanList(currentActiveBahanCat);
+            renderSumberList(currentActiveSumberCat);
+            renderLainList(currentActiveLainCat);
         }
 
         function logout() { 
@@ -977,6 +980,7 @@
             if (activeNav) activeNav.classList.add('bg-emerald-800', 'text-white');
 
             if (tabId === 'senarai-opr') renderOprList();
+            if (tabId === 'bahan') renderBahanList(currentActiveBahanCat);
         }
 
         function openExternalAnalysis() {
@@ -1073,7 +1077,6 @@
         }
 
         // RENDER SENARAI PROGRAM OPR TERPERINCI
-        // BUTANG PADAM HANYA KELUAR JIKA PERANAN LOGIN IALAH ADMIN
         function renderOprList() {
             const container = document.getElementById('oprRecordsContainer');
             if(!container) return;
@@ -1102,7 +1105,6 @@
                             <p class="text-xs text-slate-600 line-clamp-1 italic bg-slate-50 p-2 rounded-lg border">"${item.pelaporan}"</p>
                         </div>
 
-                        <!-- BUTANG TINDAKAN: LIHAT, SIMPAN, CETAK, PADAM (KHAS ADMIN) -->
                         <div class="flex flex-wrap items-center gap-2 border-t md:border-t-0 pt-3 md:pt-0 shrink-0">
                             <button onclick="viewOprDetail(${item.id})" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center space-x-1 shadow-sm">
                                 <i class="fa-solid fa-eye"></i> <span>Lihat</span>
@@ -1166,7 +1168,7 @@
 
         function deleteOprRecord(id) {
             if(currentUser.role !== 'ADMIN') {
-                alert('Tindakan tidak dibenarkan. Fungsi padat rekod hanya dibuka untuk Admin Daerah sahaja.');
+                alert('Tindakan tidak dibenarkan. Fungsi padam rekod hanya dibuka untuk Admin Daerah sahaja.');
                 return;
             }
 
@@ -1188,6 +1190,7 @@
             renderSumberList(currentActiveSumberCat, query);
         }
 
+        // RENDER BAHAN PANITIA (LENGKAP DENGAN BUTANG PADAM UNTUK ADMIN)
         function renderBahanList(filterCategory = 'RPH', searchQuery = '') {
             currentActiveBahanCat = filterCategory;
             const bahanGrid = document.getElementById('bahanListGrid');
@@ -1245,13 +1248,14 @@
             }).join('');
         }
 
+        // FUNGSI MEMADAM REKOD BAHAN MODUL
         function deleteBahanRecord(id) {
             if(currentUser.role !== 'ADMIN') {
                 alert('Tindakan tidak dibenarkan. Fungsi padam bahan hanya dibuka untuk Admin Daerah sahaja.');
                 return;
             }
 
-            if(confirm('Adakah anda pasti untuk memadam bahan ini?')) {
+            if(confirm('Adakah anda pasti untuk memadam bahan modul ini?')) {
                 sampleBahanList = sampleBahanList.filter(b => b.id != id);
                 localStorage.setItem('sampleBahanList', JSON.stringify(sampleBahanList));
                 renderBahanList(currentActiveBahanCat);
@@ -1326,7 +1330,6 @@
             }
         }
 
-        // RENDER KATEGORI LAIN-LAIN (SURAT & PROGRAM SAHAJA)
         function renderLainList(filterCategory = 'SURAT') {
             currentActiveLainCat = filterCategory;
             const lainGrid = document.getElementById('lainListGrid');
@@ -1387,8 +1390,39 @@
             }
         }
 
-        function filterBahanCategory(cat) { renderBahanList(cat); }
-        function filterSumberCategory(cat) { renderSumberList(cat); }
+        function filterBahanCategory(cat) {
+            const categories = ['RPH', 'CONTOH_RPH', 'ITEM', 'KAJIAN', 'PLC', 'TERBEZA', 'AMALAN', 'DSKP', 'PBD'];
+            categories.forEach(c => {
+                const btn = document.getElementById('btn-bahan-' + c);
+                if (btn) {
+                    btn.className = (c === cat) ? 'px-3.5 py-2 bg-slate-900 text-white rounded-xl shadow-sm font-extrabold' : 'px-3.5 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-xl font-extrabold';
+                }
+            });
+
+            const uploadBtnText = document.getElementById('btnUploadCurrentCatText');
+            if (uploadBtnText) {
+                uploadBtnText.innerText = `➕ MUAT NAIK BAHAN [${cat.replace('_', ' ')}]`;
+            }
+
+            renderBahanList(cat);
+        }
+
+        function filterSumberCategory(cat) {
+            const categories = ['KBAT', 'SOALAN_SPM', 'MODUL', 'LATIHAN', 'INFOGRAFIK', 'BAHAN_PDP'];
+            categories.forEach(c => {
+                const btn = document.getElementById('btn-sumber-' + c);
+                if (btn) {
+                    btn.className = (c === cat) ? 'px-3.5 py-2 bg-slate-900 text-white rounded-xl shadow-sm font-extrabold' : 'px-3.5 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-xl font-extrabold';
+                }
+            });
+
+            const uploadBtnText = document.getElementById('btnUploadCurrentSumberText');
+            if (uploadBtnText) {
+                uploadBtnText.innerText = `➕ MUAT NAIK SUMBER [${cat.replace('_', ' ')}]`;
+            }
+
+            renderSumberList(cat);
+        }
         
         function filterLainCategory(cat) {
             ['SURAT', 'PROGRAM'].forEach(c => {
@@ -1453,7 +1487,6 @@
             closeChangePasswordModal();
         }
 
-        // FUNGSI BUKA MODAL BORANG OPR
         function openOprModal(schoolName) {
             document.getElementById('oprModalSchoolName').innerText = schoolName || currentUser.sekolah;
             document.getElementById('oprModal').classList.remove('hidden');
@@ -1525,12 +1558,20 @@
                     <option value="CONTOH_RPH">2. CONTOH RPH</option>
                     <option value="ITEM">3. PEREALISASIAN ITEM / CONTOH SOALAN</option>
                     <option value="KAJIAN">4. KAJIAN KES / CONTOH KAJIAN KES</option>
+                    <option value="PLC">5. PLC</option>
+                    <option value="TERBEZA">6. PENDEKATAN TERBEZA</option>
+                    <option value="AMALAN">7. AMALAN TERBAIK</option>
+                    <option value="DSKP">8. DSKP</option>
+                    <option value="PBD">9. PBD</option>
                 `;
             } else if (moduleContext === 'SUMBER') {
                 select.innerHTML = `
                     <option value="KBAT">1. KBAT</option>
                     <option value="SOALAN_SPM">2. SOALAN PERCUBAAN NEGERI LAIN / SPM SEBENAR</option>
                     <option value="MODUL">3. MODUL</option>
+                    <option value="LATIHAN">4. LATIHAN</option>
+                    <option value="INFOGRAFIK">5. INFOGRAFIK</option>
+                    <option value="BAHAN_PDP">6. BAHAN PdP</option>
                 `;
             } else {
                 select.innerHTML = `
@@ -1540,7 +1581,7 @@
             }
 
             select.value = materialType;
-            document.getElementById('uploadModalTitle').innerText = `MUAT NAIK [${materialType}]`;
+            document.getElementById('uploadModalTitle').innerText = `MUAT NAIK [${materialType.replace('_', ' ')}]`;
             document.getElementById('uploadModal').classList.remove('hidden');
         }
 
@@ -1596,7 +1637,7 @@
 
             currentViewingDocTitle = item.tajuk;
             document.getElementById('docModalTitle').innerText = item.tajuk;
-            document.getElementById('docModalCategoryBadge').innerText = (item.kat || item.jenis || 'DOKUMEN');
+            document.getElementById('docModalCategoryBadge').innerText = (item.kat || item.jenis || 'DOKUMEN').replace('_', ' ');
             document.getElementById('docModalMeta').innerText = `${item.sumber || item.penyumbang} • ${item.tarikh}`;
 
             const container = document.getElementById('docViewerContainer');
@@ -1611,7 +1652,7 @@
                             <p class="text-[10px] text-slate-500 uppercase">DOKUMEN PANITIA SEJARAH DAERAH BALING</p>
                         </div>
                         <div class="space-y-2 text-[11px] text-slate-700 leading-relaxed">
-                            <p><strong>Kategori Dokumen:</strong> ${(item.kat || item.jenis || '')}</p>
+                            <p><strong>Kategori Dokumen:</strong> ${(item.kat || item.jenis || '').replace('_', ' ')}</p>
                             <p><strong>Peringkat Akses:</strong> Kebenaran Rasmi Guru & Panitia Daerah Baling</p>
                             <p><strong>Nota Ringkas:</strong> Dokumen rasmi ini mengandungi panduan pengajaran, modul, soalan atau DSKP untuk kegunaan sekolah-sekolah di Daerah Baling.</p>
                         </div>
